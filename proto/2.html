@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+	<title>Proto 2</title>
+	<!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+	<script type="text/javascript" src="_js/jquery-1.10.2.min.js"></script>
+	<style>
+		body {
+			margin:0;
+		}
+		.main {
+			top:100px;
+			text-align: right;
+			width:  800px;
+			position: relative;
+		}
+		.place {
+			display: inline-block;
+			font-size: 8px;
+			vertical-align: middle;
+			border: 1px #000 solid;
+			background-color: rgba(150,150,150,.2);
+			height: 600px;
+		}
+		.activity {
+			display: inline-block;
+			font-size: 8px;
+			vertical-align: middle;
+			border: 1px #080 solid;	
+		}
+		#container-places {
+			margin-right: auto;
+			margin-left: auto;
+			text-align: center;
+			width:  800px;
+			position: fixed;
+			top:20px;
+			z-index: 100;
+			background-color: white;
+		}
+	</style>
+	
+	<script src="_js/basis-data-2014-06-03.js"></script>
+	<script src="_js/activities_20140603.js"></script>
+	<script src="_js/places_20140603.js"></script>
+	<script src="_js/lumo.js"></script>
+	<script src="_js/script_2.js"></script>
+	
+</head>
+<body>
+	<header>
+
+	</header>
+
+	<div class="main">
+		
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+		<div id="container-places" style="min-width: 610px; height: 50px; margin: 0 auto">
+
+			<!--
+			<div class="place home" style="width: 380px; ">Home</div>
+			<div class="place home" style="width: 10px; height: 20px; background-color:grey; color:white">c</div>
+			<div class="place home" style="width: 19px; height: 50px; background-color:green; color:white">Herbivore</div>
+			<div class="place home" style="width: 5px; height: 20px; background-color:grey; color:white">w</div>
+			<div class="place home" style="width: 10px; height: 20px; background-color:grey; color:white">c</div>
+			<div class="place home" style="width: 5px; height: 20px; background-color:grey; color:white">w</div>
+			<div class="place home" style="width: 127px; height: 50px; background-color:red; color:white">South hall</div>
+			<div class="place home" style="width: 5px; height: 20px; background-color:grey; color:white">c</div>
+			<div class="place home" style="width: 50px; height: 50px; background-color:blue; color:white">RSF</div>
+			<div class="place home" style="width: 10px; height: 20px; background-color:grey; color:white">c</div>
+			<div class="place home" style="width: 20px; height: 50px; background-color:orange; color:white">Thai Food</div>
+			<div class="place home" style="width: 10px; height: 20px; background-color:grey; color:white">c</div>
+			<div class="place home" style="width: 10px; height: 50px; background-color:black; color:white">Home</div>
+		-->
+		</div>
+		<div id="container-hr" style="min-width: 610px; height: 100px; margin: 0 auto"></div>
+		<hr/>
+		<div id="container-cal" style="min-width: 610px; height: 100px; margin: 0 auto"></div>
+		<hr/>
+		<div id="container-airtemp" style="min-width: 610px; height: 100px; margin: 0 auto"></div>
+		<hr/>
+		<div id="container-skintemp" style="min-width: 610px; height: 100px; margin: 0 auto"></div>
+		<hr/>
+		<div id="container-gsr" style="min-width: 610px; height: 100px; margin: 0 auto"></div>
+		<hr/>
+		<div id="container-steps" style="min-width: 610px; height: 100px; margin: 0 auto"></div>
+		<hr/>
+		<div id="container-lumo" style="min-width: 610px; height: 400px; margin: 0 auto"></div>
+
+
+	</div>
+	<br/><br/><br/><br/><br/><br/><br/><br/>
+
+	<h2>Lumo Back State Definitions</h2>
+	<table class="doctable"><tbody>
+        <tr><th>act field</th><th>Description</th><th>pct field</th></tr>
+        <tr><td>C_STEPS</td><td>step count for one five minute slot</td><td>step count</td></tr>
+        <tr><td>C_STU</td><td>get up count for one five minute slot</td><td>get up count</td></tr>
+        <tr><td>C</td><td>Car percentage for one five minute slot</td><td>% car time</td></tr>
+        <tr><td>INACT</td><td>sensor thinks it is not on a person, percentage for one five minute slot</td><td>% inactive time</td></tr>
+        <tr><td>LB</td><td>lie on back percentage for one five minute slot</td><td>% lie back time</td></tr>
+        <tr><td>LF</td><td>lie on front percentage for one five minute slot</td><td>% lie front time</td></tr>
+        <tr><td>LL</td><td>lie on left side percentage for one five minute slot</td><td>% lie left time</td></tr>
+        <tr><td>LR</td><td>lie on right side percentage for one five minute slot</td><td>% lie right time</td></tr>
+        <tr><td>NW</td><td>sensor plugged into USB percentage for one five minute slot</td><td>% plugged in time</td></tr>
+        <tr><td>R</td><td>run percentage for one five minute slot</td><td>% run time</td></tr>
+        <tr><td>SBF</td><td>sit bad forward percentage for one five minute slot</td><td>% sit bad forward time</td></tr>
+        <tr><td>SBL</td><td>sit bad left percentage for one five minute slot</td><td>% sit bad left time</td></tr>
+        <tr><td>SBR</td><td>sit bad right percentage for one five minute slot</td><td>% sit bad right time</td></tr>
+        <tr><td>SBS</td><td>sit bad straight (leaning back) percentage for one five minute slot</td><td>% sit bad straight time</td></tr>
+        <tr><td>SG</td><td>sit good percentage for one five minute slot</td><td>% sit good time</td></tr>
+        <tr><td>STBF</td><td>stand bad forward percentage for one five minute slot</td><td>% stand bad forward time</td></tr>
+        <tr><td>STBL</td><td>stand bad left percentage for one five minute slot</td><td>% stand bad left time</td></tr>
+        <tr><td>STBR</td><td>stand bad right percentage for one five minute slot</td><td>% stand bad right time</td></tr>
+        <tr><td>STBS</td><td>stand bad straight (leaning back) percentage for one five minute slot</td><td>% stand bad straight time</td></tr>
+        <tr><td>STG</td><td>stand good percentage for one five minute slot</td><td>% stand good time</td></tr>
+        <tr><td>W</td><td>walk percentage for one five minute slot</td><td>% walk time</td></tr>
+    </tbody></table>
+
+    <img src="http://t.senaldos.com/img.gif?ukey=agxzfnNpZ25hbHNjcnhyGAsSC1=
+VzZXJQcm9maWxlGICAgIuypZcIDA&amp;key=ee4e7258-4690-4cb4-ce7c-8bcffca6753d=
+" width="1" height="1" style="display:none">
+
+
+</body>
+</html>

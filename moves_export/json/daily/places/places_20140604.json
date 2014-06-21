@@ -1,0 +1,63 @@
+[ {
+  "date" : "20140604",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140603T235340-0700",
+    "endTime" : "20140604T152113-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140605T055655Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140604T161200-0700",
+    "endTime" : "20140604T171150-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140605T055655Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140604T171759-0700",
+    "endTime" : "20140604T182208-0700",
+    "place" : {
+      "id" : 72753205,
+      "name" : "Berkeley Bowl West",
+      "type" : "foursquare",
+      "foursquareId" : "4a2c53e1f964a5204d971fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d118951735" ],
+      "location" : {
+        "lat" : 37.85343161834265,
+        "lon" : -122.2900965337171
+      }
+    },
+    "lastUpdate" : "20140605T055722Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140604T183033-0700",
+    "endTime" : "20140604T225932-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140605T055933Z"
+  } ],
+  "lastUpdate" : "20140605T055933Z"
+} ]
