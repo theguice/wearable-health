@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+// This example creates a 2-pixel-wide red polyline showing
+// the path of William Kingsford Smith's first trans-Pacific flight between
+// Oakland, CA, and Brisbane, Australia.
+
+function initialize() {
+  var mapOptions = {
+    zoom: 3,
+    center: new google.maps.LatLng(0, -180),
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var flightPlanCoordinates = [
+    new google.maps.LatLng(37.8651493645, -122.282029798   ), 
+    new google.maps.LatLng(37.864008159,  -122.2814186174  ), 
+    new google.maps.LatLng(37.8641344498, -122.2806015218  ), 
+    new google.maps.LatLng(37.8642366524, -122.2798163871  ), 
+    new google.maps.LatLng(37.8643636167, -122.2791230993 ), 
+    new google.maps.LatLng(37.8644364082, -122.2786686399 )
+  ];
+  var flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+  flightPath.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
+
+
+<!-- , new google.maps.LatLng(-122.277188596, 37.8647113941), new google.maps.LatLng(-122.276050885, 37.8648444469), new google.maps.LatLng(-122.2751149961, 37.8649707985), new google.maps.LatLng(-122.2740327598, 37.8650605838), new google.maps.LatLng(-122.273173833, 37.8651366349), new google.maps.LatLng(-122.2724947371, 37.8652075142), new google.maps.LatLng(-122.27251049, 37.8652172458), new google.maps.LatLng(-122.2723829519, 37.8652250879), new google.maps.LatLng(-122.2715550362, 37.8653227462), new google.maps.LatLng(-122.2707628927, 37.8653281423), new google.maps.LatLng(-122.2700190561, 37.8655224978), new google.maps.LatLng(-122.2674117807, 37.8652061428) -->

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+div {
+  display: inline-block;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.title {
+  font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+</style>
+<body>
+<div class="heartrate"></div>
+<div class="steps"></div>
+<div class="time"></div>
+
+<form name="bar_filters" class="filter_options">
+  <input class="filter_button" name="bar_filter" type="radio" value="all">All</input><br>
+  <input class="filter_button" name="bar_filter" type="radio" value="weekends">Weekends</input><br>
+  <input class="filter_button" name="bar_filter" type="radio" value="weekdays">Weekdays</input><br>
+</form>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script> <!-- adapted from http://bl.ocks.org/mbostock/7555321 -->
+
+var margin = {top: 120, right: 60, bottom: 20, left: 60},
+    width = 300 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1, .3);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(8);
+
+var svg = d3.select("div.heartrate").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.json("dash1-bars.php?heartrate=1", function(error, data) {
+
+  //console.log(data);
+  x.domain(data.map(function(d) { return d.name; }));
+  //y.domain([0, d3.max(data, function(d) { return d.value; })]);
+  y.domain([0, 200]);
+
+  svg.append("text")
+      .attr("class", "title")
+      .attr("x", x(data[0].name))
+      .attr("y", -26)
+      .text("Heartrate");
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.name); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); });
+});
+var svg2 = d3.select("div.steps").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+d3.json("dash1-bars.php?steps=1", function(error, data) {
+  
+  //console.log(data);
+  x.domain(data.map(function(d) { return d.name; }));
+  y.domain([0, d3.max(data, function(d) { return 15000; })]);
+  
+  svg2.append("text")
+      .attr("class", "title")
+      .attr("x", x(data[0].name))
+      .attr("y", -26)
+      .text("Steps");
+
+  svg2.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  svg2.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.name); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value*1440); })
+      .attr("height", function(d) { return 8000; });
+});
+
+function redraw_steps(jsonstr) {
+  d3.json("dash1-bars.php?steps=1&days=weekdays", function(error, data) {
+
+    svg2.data(data);
+    
+  });
+}
+
+
+d3.selectAll(".filter_button").on("change", function() {
+  var type = this.value;
+  console.log(type);
+  //redraw_steps(svg2, "dash1-bars.php?steps=1&days="+type);
+
+
+  // I *think* "inline" is the default.
+  //display = this.checked ? "inline" : "none";
+
+  /*
+  svg.selectAll(".symbol")
+    .filter(function(d) { return d.properties.type === type; })
+    .attr("display", display);
+  */
+});
+
+</script>
