@@ -1,0 +1,157 @@
+{
+  "type" : "FeatureCollection",
+  "features" : [ {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140615T231238-0700",
+      "endTime" : "20140616T001431-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140617T021359Z",
+      "date" : "20140616"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140616T014531-0700",
+      "endTime" : "20140616T015306-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140617T021359Z",
+      "date" : "20140616"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.1285669556, 37.4640609873 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140616T163004-0700",
+      "endTime" : "20140616T180807-0700",
+      "place" : {
+        "id" : 73056560,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.4640609873,
+          "lon" : -122.1285669556
+        }
+      },
+      "lastUpdate" : "20140617T092655Z",
+      "date" : "20140616"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2650438724, 37.8675405347 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140616T191243-0700",
+      "endTime" : "20140616T191508-0700",
+      "place" : {
+        "id" : 76934583,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.8675405347,
+          "lon" : -122.2650438724
+        }
+      },
+      "lastUpdate" : "20140617T092655Z",
+      "date" : "20140616"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.262618027927, 37.8686826907337 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140616T191851-0700",
+      "endTime" : "20140616T210327-0700",
+      "place" : {
+        "id" : 72458029,
+        "name" : "Recreational Sports Facility (RSF)",
+        "type" : "foursquare",
+        "foursquareId" : "4a68deb9f964a52028cb1fe3",
+        "foursquareCategoryIds" : [ "4bf58dd8d48988d1b2941735" ],
+        "location" : {
+          "lat" : 37.8686826907337,
+          "lon" : -122.262618027927
+        }
+      },
+      "lastUpdate" : "20140617T092702Z",
+      "date" : "20140616"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2731595893, 37.8717346586 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140616T211537-0700",
+      "endTime" : "20140616T213631-0700",
+      "place" : {
+        "id" : 76998232,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.8717346586,
+          "lon" : -122.2731595893
+        }
+      },
+      "lastUpdate" : "20140617T092708Z",
+      "date" : "20140616"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140616T213950-0700",
+      "endTime" : "20140617T151152-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140618T065202Z",
+      "date" : "20140616"
+    }
+  } ]
+}
