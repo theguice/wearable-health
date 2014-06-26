@@ -9,7 +9,7 @@ import time
 
 #Server Connection to MySQL:
 import MySQLdb
-conn = MySQLdb.connect(host= "ischool.berkeley.edu",
+conn = MySQLdb.connect(host= "localhost",
                   user="shaun",
                   passwd="ischool",
                   db="shaun")
@@ -23,7 +23,7 @@ def main():
 	        with open(cur_dir + '/' + file) as data_file:
 	    		data = json.load(data_file)
 	    	if data['bodystates']:
-	    		#print "importing: ", file
+	    		print "importing: ", file
 	    		json_to_db(data, 1)
 	    		#print data['starttime']
 	    		#print time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(data['starttime']))
@@ -44,7 +44,7 @@ def json_to_db(d, user_id):
 			date_human = str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(d['starttime'] + (i * 60))))
 			date_epoch = str(d['starttime'] + (i * 60))
 		sql = "INSERT INTO `wh_d_basis` (`u_id`,`date_epoch`,`date_human`,`air_temp`,`calories`,`gsr`,`heartrate`,`skin_temp`,`steps`) VALUES (" + str(user_id) + ",'" + date_epoch + "','" + date_human + "'," + values + ")";
-		print sql
+		#print sql
 		try:
 		   x.execute(sql)
 		   conn.commit()

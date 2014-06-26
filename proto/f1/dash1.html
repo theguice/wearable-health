@@ -2,7 +2,13 @@
 <meta charset="utf-8">
 <style>
 
-div {
+body {
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+}
+
+div, .filter_button {
   display: inline-block;
 }
 
@@ -41,13 +47,13 @@ div {
 <div class="gsr"></div>
 <div class="skin_temp"></div>
 <div class="time"></div>
-
+<br/>
 <form name="bar_filters" class="filter_options">
-  <input class="filter_button" name="bar_filter" type="radio" value="all">All</input><br>
-  <input class="filter_button" name="bar_filter" type="radio" value="weekends">Weekends</input><br>
-  <input class="filter_button" name="bar_filter" type="radio" value="weekdays">Weekdays</input><br>
+  <input class="filter_button" name="bar_filter" type="radio" value="all">All</input>
+  <input class="filter_button" name="bar_filter" type="radio" value="weekends">Weekends</input>
+  <input class="filter_button" name="bar_filter" type="radio" value="weekdays">Weekdays</input>
 </form>
-
+<br/>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script> <!-- adapted from http://bl.ocks.org/mbostock/7555321 -->
 
