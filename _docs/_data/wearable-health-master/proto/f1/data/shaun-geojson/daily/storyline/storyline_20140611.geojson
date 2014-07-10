@@ -1,0 +1,208 @@
+{
+  "type" : "FeatureCollection",
+  "features" : [ {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140610T204244-0700",
+      "endTime" : "20140611T102437-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140611T203209Z",
+      "date" : "20140611"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "MultiLineString",
+      "coordinates" : [ [ [ -122.282029798, 37.8651493645 ], [ -122.2815713446, 37.8678424081 ], [ -122.2817145439, 37.869050032 ], [ -122.2817688221, 37.8701594564 ], [ -122.2807928549, 37.8704616891 ], [ -122.2790461271, 37.8708398001 ], [ -122.2779764885, 37.8709720181 ], [ -122.2765691137, 37.8711742119 ], [ -122.2749254975, 37.8713471702 ], [ -122.2738045904, 37.871521169 ], [ -122.2728495446, 37.8716938901 ], [ -122.2717409844, 37.871746678 ], [ -122.2689435039, 37.8720034637 ], [ -122.2679070754, 37.872139834 ], [ -122.2668030532, 37.8722809111 ], [ -122.2662233125, 37.8725024689 ], [ -122.2659209896, 37.8724599315 ], [ -122.2647296386, 37.8720221536 ], [ -122.262590129, 37.8726775187 ], [ -122.2616796369, 37.872709738 ], [ -122.2606546596, 37.8732605704 ], [ -122.2596324051, 37.8733551104 ], [ -122.2583994269, 37.8748152837 ] ] ]
+    },
+    "properties" : {
+      "type" : "move",
+      "startTime" : "20140611T102437-0700",
+      "endTime" : "20140611T103400-0700",
+      "activities" : [ {
+        "activity" : "cycling",
+        "group" : "cycling",
+        "manual" : false,
+        "startTime" : "20140611T102437-0700",
+        "endTime" : "20140611T103400-0700",
+        "duration" : 563.0,
+        "distance" : 3035.0
+      } ],
+      "lastUpdate" : "20140611T203209Z",
+      "date" : "20140611"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2583994269371, 37.87481528371463 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140611T103400-0700",
+      "endTime" : "20140611T132516-0700",
+      "place" : {
+        "id" : 73323513,
+        "name" : "Sutardja Dai Hall - CITRIS Building",
+        "type" : "foursquare",
+        "foursquareId" : "4a68c693f964a520fcca1fe3",
+        "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+        "location" : {
+          "lat" : 37.87481528371463,
+          "lon" : -122.2583994269371
+        }
+      },
+      "activities" : [ {
+        "activity" : "walking",
+        "group" : "walking",
+        "manual" : false,
+        "startTime" : "20140611T103400-0700",
+        "endTime" : "20140611T103854-0700",
+        "duration" : 294.0,
+        "distance" : 373.0,
+        "steps" : 497
+      } ],
+      "lastUpdate" : "20140612T014753Z",
+      "date" : "20140611"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "MultiLineString",
+      "coordinates" : [ [ [ -122.2583994269, 37.8748152837 ], [ -122.2584125748, 37.8713575202 ] ] ]
+    },
+    "properties" : {
+      "type" : "move",
+      "startTime" : "20140611T132516-0700",
+      "endTime" : "20140611T133140-0700",
+      "activities" : [ {
+        "activity" : "walking",
+        "group" : "walking",
+        "manual" : false,
+        "startTime" : "20140611T132516-0700",
+        "endTime" : "20140611T133140-0700",
+        "duration" : 384.0,
+        "distance" : 442.0,
+        "steps" : 513
+      } ],
+      "lastUpdate" : "20140612T014753Z",
+      "date" : "20140611"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2584125748343, 37.87135752021174 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140611T133140-0700",
+      "endTime" : "20140611T184516-0700",
+      "place" : {
+        "id" : 72412230,
+        "name" : "School of Information",
+        "type" : "foursquare",
+        "foursquareId" : "4f184661e4b0b34551aaa7cb",
+        "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+        "location" : {
+          "lat" : 37.87135752021174,
+          "lon" : -122.2584125748343
+        }
+      },
+      "activities" : [ {
+        "activity" : "walking",
+        "group" : "walking",
+        "manual" : false,
+        "startTime" : "20140611T133258-0700",
+        "endTime" : "20140611T133328-0700",
+        "duration" : 30.0,
+        "distance" : 20.0,
+        "steps" : 41
+      } ],
+      "lastUpdate" : "20140613T005602Z",
+      "date" : "20140611"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "MultiLineString",
+      "coordinates" : [ [ [ -122.2584125748, 37.8713575202 ], [ -122.2594752189, 37.8702301087 ], [ -122.2595790533, 37.8701479747 ], [ -122.259844497, 37.8700015319 ], [ -122.2600927042, 37.8699402964 ], [ -122.2602265281, 37.8698766034 ], [ -122.2616413688, 37.8685460666 ], [ -122.2620557809, 37.8684375277 ], [ -122.2623006795, 37.8685144959 ], [ -122.2626180279, 37.8686826907 ] ] ]
+    },
+    "properties" : {
+      "type" : "move",
+      "startTime" : "20140611T184516-0700",
+      "endTime" : "20140611T185454-0700",
+      "activities" : [ {
+        "activity" : "walking",
+        "group" : "walking",
+        "manual" : false,
+        "startTime" : "20140611T184516-0700",
+        "endTime" : "20140611T185454-0700",
+        "duration" : 578.0,
+        "distance" : 580.0,
+        "steps" : 827
+      } ],
+      "lastUpdate" : "20140613T005602Z",
+      "date" : "20140611"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.262618027927, 37.8686826907337 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140611T185455-0700",
+      "endTime" : "20140611T190341-0700",
+      "place" : {
+        "id" : 72458029,
+        "name" : "Recreational Sports Facility (RSF)",
+        "type" : "foursquare",
+        "foursquareId" : "4a68deb9f964a52028cb1fe3",
+        "foursquareCategoryIds" : [ "4bf58dd8d48988d1b2941735" ],
+        "location" : {
+          "lat" : 37.8686826907337,
+          "lon" : -122.262618027927
+        }
+      },
+      "lastUpdate" : "20140613T005602Z",
+      "date" : "20140611"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140611T223527-0700",
+      "endTime" : "20140611T224720-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140613T005602Z",
+      "date" : "20140611"
+    }
+  } ]
+}

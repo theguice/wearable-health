@@ -1,0 +1,181 @@
+{
+  "type" : "FeatureCollection",
+  "features" : [ {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140604T183033-0700",
+      "endTime" : "20140605T103641-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140605T184840Z",
+      "date" : "20140605"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2584125748343, 37.87135752021174 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140605T105001-0700",
+      "endTime" : "20140605T105936-0700",
+      "place" : {
+        "id" : 72412230,
+        "name" : "School of Information",
+        "type" : "foursquare",
+        "foursquareId" : "4f184661e4b0b34551aaa7cb",
+        "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+        "location" : {
+          "lat" : 37.87135752021174,
+          "lon" : -122.2584125748343
+        }
+      },
+      "lastUpdate" : "20140605T184840Z",
+      "date" : "20140605"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2587579188, 37.8746003862 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140605T110323-0700",
+      "endTime" : "20140605T123446-0700",
+      "place" : {
+        "id" : 72958759,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.8746003862,
+          "lon" : -122.2587579188
+        }
+      },
+      "lastUpdate" : "20140605T211901Z",
+      "date" : "20140605"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2584125748343, 37.87135752021174 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140605T124040-0700",
+      "endTime" : "20140605T140925-0700",
+      "place" : {
+        "id" : 72412230,
+        "name" : "School of Information",
+        "type" : "foursquare",
+        "foursquareId" : "4f184661e4b0b34551aaa7cb",
+        "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+        "location" : {
+          "lat" : 37.87135752021174,
+          "lon" : -122.2584125748343
+        }
+      },
+      "lastUpdate" : "20140606T011125Z",
+      "date" : "20140605"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140605T141730-0700",
+      "endTime" : "20140605T155629-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140606T011135Z",
+      "date" : "20140605"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.1285669556, 37.4640609873 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140605T170506-0700",
+      "endTime" : "20140605T181106-0700",
+      "place" : {
+        "id" : 73056560,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.4640609873,
+          "lon" : -122.1285669556
+        }
+      },
+      "lastUpdate" : "20140606T065035Z",
+      "date" : "20140605"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140605T192432-0700",
+      "endTime" : "20140605T213359-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140606T065039Z",
+      "date" : "20140605"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2929270405, 37.870812308 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140605T215331-0700",
+      "endTime" : "20140606T003642-0700",
+      "place" : {
+        "id" : 73109797,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.870812308,
+          "lon" : -122.2929270405
+        }
+      },
+      "lastUpdate" : "20140606T155212Z",
+      "date" : "20140605"
+    }
+  } ]
+}

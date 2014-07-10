@@ -1,0 +1,156 @@
+{
+  "type" : "FeatureCollection",
+  "features" : [ {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140624T000422-0700",
+      "endTime" : "20140624T084247-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140624T201714Z",
+      "date" : "20140624"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2583994269371, 37.87481528371463 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140624T090420-0700",
+      "endTime" : "20140624T105116-0700",
+      "place" : {
+        "id" : 73323513,
+        "name" : "Sutardja Dai Hall - CITRIS Building",
+        "type" : "foursquare",
+        "foursquareId" : "4a68c693f964a520fcca1fe3",
+        "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+        "location" : {
+          "lat" : 37.87481528371463,
+          "lon" : -122.2583994269371
+        }
+      },
+      "lastUpdate" : "20140624T201717Z",
+      "date" : "20140624"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.258653389, 37.8729939627 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140624T105435-0700",
+      "endTime" : "20140624T121338-0700",
+      "place" : {
+        "id" : 79528940,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.8729939627,
+          "lon" : -122.258653389
+        }
+      },
+      "lastUpdate" : "20140624T201720Z",
+      "date" : "20140624"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.2687092934, 37.8736376027 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140624T121906-0700",
+      "endTime" : "20140624T130933-0700",
+      "place" : {
+        "id" : 79599502,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.8736376027,
+          "lon" : -122.2687092934
+        }
+      },
+      "lastUpdate" : "20140625T025438Z",
+      "date" : "20140624"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.282029798, 37.8651493645 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140624T131651-0700",
+      "endTime" : "20140624T195429-0700",
+      "place" : {
+        "id" : 72187887,
+        "name" : "Home",
+        "type" : "home",
+        "location" : {
+          "lat" : 37.8651493645,
+          "lon" : -122.282029798
+        }
+      },
+      "lastUpdate" : "20140625T093500Z",
+      "date" : "20140624"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.0791090625, 37.4032050638 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140624T204410-0700",
+      "endTime" : "20140624T210540-0700",
+      "place" : {
+        "id" : 79647501,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.4032050638,
+          "lon" : -122.0791090625
+        }
+      },
+      "lastUpdate" : "20140625T093502Z",
+      "date" : "20140624"
+    }
+  }, {
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ -122.0854525385, 37.4033396014 ]
+    },
+    "properties" : {
+      "type" : "place",
+      "startTime" : "20140624T211501-0700",
+      "endTime" : "20140625T000120-0700",
+      "place" : {
+        "id" : 75869123,
+        "type" : "unknown",
+        "location" : {
+          "lat" : 37.4033396014,
+          "lon" : -122.0854525385
+        }
+      },
+      "lastUpdate" : "20140625T093513Z",
+      "date" : "20140624"
+    }
+  } ]
+}
