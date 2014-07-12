@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title></title>
+    <link href="http://trifacta.github.com/vega/css/vega.css" rel="stylesheet">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://trifacta.github.com/vega/vega.js"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+  </body>
+  <script type="text/javascript">
+
+  function parse(spec) {
+    vg.parse.spec(spec, function(chart) {
+      var view = chart({ el:"#vis" });
+      view.viewport(null)
+          .renderer("svg")
+          .update();
+    });
+  }
+  parse("data/stocks_shade.json");
+  </script>
+  </html>

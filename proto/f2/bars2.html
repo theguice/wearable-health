@@ -1,0 +1,134 @@
+<html>
+<head>
+    
+    <style>
+        body {
+            background-color: #e3e3e3;
+            position: relative;
+        }
+        svg {
+            background-color: #fff;
+            
+        }
+        text {
+            font-family: Verdana;
+            font-size: 10;
+        }
+        text.title {
+            font-size: 20;
+        }
+        .top_bar {
+            background-color: #fff;
+        }
+        
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js"></script>    
+    
+
+</head>
+<body>
+    
+<!-- 
+base: 200
+x0: y=150
+y0: x=50
+-->
+<svg width="200" height="300">
+    
+    <text class="title" x="0" y="20">Average Heart Rate</text>
+    
+    <!-- upper limit -->
+    <line x1="30" y1="60" x2="50" y2="60" stroke="#bfbfbf" stroke-width="1" stroke-opacity=".3" />
+    <!-- upper goal -->
+    <line x1="30" y1="90" x2="50" y2="90" stroke="#bfbfbf" stroke-width="1" stroke-opacity=".3" />
+    <!-- lower goal -->
+    <line x1="30" y1="120" x2="50" y2="120" stroke="#bfbfbf" stroke-width="1" stroke-opacity=".3"  />
+    <!-- lower limit -->
+    <line x1="30" y1="149" x2="50" y2="149" stroke="#bfbfbf" stroke-width="1" stroke-opacity=".3" />
+    
+    <text x="20" y="150">0</text>
+    <text x="15" y="123">40</text>
+    <text x="15" y="93">80</text>
+    <text x="10" y="63">120</text>
+    
+    <!--healthy range-->
+    <rect x="30" y="90" width="20" height="30" fill="yellow" style="fill-opacity: 0.2"; />
+    
+    <!-- series 1 -->
+    <rect x="50" y="80" width="80" height="70" fill="#95ce95" />
+    <!-- series 2 
+    <rect x="100" y="50" width="50" height="100" fill="#6aac6a" /> -->
+    <!-- Weekend -->
+    <ellipse cx="90" cy="70" rx="10" ry="3" fill="#222" />
+    <!-- Weekday -->
+    <polygon fill="#222"
+     points="80,100
+             90,93
+             100,100" />
+
+</svg>
+    
+<svg width="150" height="150">    
+    // SVG Path Heart Shape
+    <path d="
+            M 75 40
+            C 75 37 70 25 50 25
+            C 20 25 20 62.5 20 62.5
+            C 20,80,40,102,75,120
+            C 110 102 130 80 130 62.5
+            C 130 62.5 130 25 100 25
+            C 85 25 75 37 75 40"
+            stroke="red" stroke-width="2" fill="none" />
+    
+</svg>
+    
+<div class="top_bar" id="top_hr"></div>
+
+    <script>
+        
+        /*
+        var barValues = [
+            { "name": "heartrate", "value":"55.318", "lower_limit":"0", "upper_limit": "160", "lower_goal": "40", "upper_goal": "80"}];
+                
+        var svgContainer = d3.select("div#top_hr").append("svg")
+                                            .attr("width", 200)
+                                            .attr("height", 200);
+        
+        var rects = svgContainer.selectAll("rect")
+                                  .data(jsonCircles)
+                                  .enter()
+                                  .append("rect")
+                                .attr("x", function (d) { return d.x_axis; })
+                                .attr("y", function (d) { return d.y_axis; })
+                                .attr("w", function (d) { return d.radius; })
+                                .attr("h", function (d) { return d.radius; })
+                                .style("fill", function(d) { return d.color; });
+
+
+            
+        var jsonCircles = [
+          { "x_axis": 30, "y_axis": 30, "radius": 20, "color" : "green" },
+          { "x_axis": 70, "y_axis": 70, "radius": 20, "color" : "purple"},
+          { "x_axis": 110, "y_axis": 100, "radius": 20, "color" : "red"}];
+        
+        console.log(jsonCircles);
+
+        var svgContainer = d3.select("div#top_hr").append("svg")
+                                            .attr("width", 300)
+                                            .attr("height", 300);
+
+        var circles = svgContainer.selectAll("circle")
+                                  .data(jsonCircles)
+                                  .enter()
+                                  .append("circle")
+                                .attr("cx", function (d) { return d.x_axis; })
+                               .attr("cy", function (d) { return d.y_axis; })
+                               .attr("r", function (d) { return d.radius; })
+                               .style("fill", function(d) { return d.color; });
+                               */
+    </script>
+    
+</body>
+</html>
+
+<!-- [{"name":"heartrate","value":"55.31807641342756"}] -->
