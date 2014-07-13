@@ -1,18 +1,16 @@
 #!/usr/bin/python
 
-
 import os
 import json
 from pprint import pprint
 import time
 
-
 #Server Connection to MySQL:
 import MySQLdb
-conn = MySQLdb.connect(host= "localhost",
-                  user="shaun",
-                  passwd="ischool",
-                  db="shaun")
+conn = MySQLdb.connect(host=   "localhost",
+                       user=   "shaun",
+                       passwd= "ischool",
+                       db=     "shaun")
 x = conn.cursor()
 
 

@@ -92,6 +92,7 @@ function runCommandLine()
     $settings = array();
     $settings['basis_username'] = (!defined(BASIS_USERNAME)) ? '' : BASIS_USERNAME;
     $settings['basis_password'] = (!defined(BASIS_PASSWORD)) ? '' : BASIS_PASSWORD;
+    date_default_timezone_set('America/Los_Angeles');
     $settings['basis_export_date'] = date('Y-m-d', strtotime('now', time()));
     $settings['basis_export_format'] = (!defined(BASIS_EXPORT_FORMAT)) ? 'json' : BASIS_EXPORT_FORMAT;
 
