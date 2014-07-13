@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Control Panel</title>
+    <style type="text/css">
+        h1 {
+            color: #f00;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="../assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1 class="text-error">CONFIDENTIAL</h1>
+    <h2>Research Project Control Panel</h2>
+    
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>User ID</th>
+            <th>Begin Date</th>
+            <th>Last Synced</th>
+            <th>Basis</th>
+            <th>Lumo</th>
+            <th>Moves</th>
+        </tr>
+        <tr>
+            <td>Shaun</td>
+            <td>1</td>
+            <td>2014-06-03</td>
+            <td><button class="btn btn-small btn-primary" type="button">Sync</button></td>
+        </tr>
+        <tr>
+            <td>Suhaib</td>
+            <td>2</td>
+            <td>2014-06-21</td>
+            <td><button class="btn btn-small btn-primary" type="button">Sync</button></td>
+        </tr>
+    </table>
+    <ol>
+        <li>populate table from user_table</li>
+        <li>initiate basis server-side download from client "sync" button</li>
+        <li>update client dashboard with latest timestamp of basis data</li>
+    </ol>
+</body>
+</html>
