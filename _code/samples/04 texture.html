@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <script src="http://threejs.org/build/three.min.js"></script>
+    <style>
+    body {
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- page content -->
+<script type="text/javascript">
+// Shared objects we'll instantiate later.
+var container, camera, scene, renderer, sphere, origin = new THREE.Vector3(0,0,0);
+var intensity = 0xffffff;
+var mouseX, mouseY;
+
+// Initialise
+init();
+
+// Then animate the scene.
+animate();
+
+function init() {
+    // Create a new scene
+    scene = new THREE.Scene();
+
+    // Create a new camera, don't worry about the details of this for now.
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+    // Move the camera to (0, 0, 600) 
+    camera.position.set(0, 0, 1000);
+    // Point the camera towards the origin
+    camera.lookAt(origin);
+    // Add the camera to the scene
+    scene.add(camera);
+
+    // Create a new directional light, full intensity
+    // Try setting it to 0x888888 and see what happens!
+    light = new THREE.DirectionalLight(intensity);
+    // The light direction is given by a vector, we're going to manipulate
+    // the position at runtime by moving the mouse.
+    light.position.set(0, 1, 1).normalize();
+    // Add the light to the scene, try removing it!
+    scene.add(light);
+    
+    // Create a new geometry object, here we're using a built in sphere generator
+    var geometry = new THREE.SphereGeometry(150, 32, 32);
+    // Use a lambert purple material
+    var material = new THREE.MeshLambertMaterial({color: 0xff00ff});
+    
+    // Create the mesh from the geometry and material
+    sphere = new THREE.Mesh(geometry, material);
+    // Add the sphere to the scene
+    scene.add(sphere);
+
+    // Create two more spheres and reposition them
+    // Wireframe and basic red material
+    material = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+    sphere = new THREE.Mesh(geometry, material);
+    sphere.position.x = -325;
+    scene.add(sphere);
+    
+    material = new THREE.MeshLambertMaterial({color: 0x000ff, wireframe: true, opacity: 0.2});
+    sphere = new THREE.Mesh(geometry, material);
+    sphere.position.x = 325;
+    scene.add(sphere);
+
+    // Create a new WebGL renderer
+    renderer = new THREE.WebGLRenderer();
+    // Set the window size
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // three.js creates a canvas element for us, we need to append it to the dom.
+    document.body.appendChild(renderer.domElement);
+    
+    // Track the mouse position, relative to the middle of the screen
+    document.addEventListener( 'mousemove', function(e) {
+        mouseX = e.clientX - window.innerWidth / 2;
+        mouseY = window.innerHeight / 2 - e.clientY;
+    }, false ); 
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    render();
+}
+
+function render() {
+    // Update the scene, for the current camera position
+    renderer.render(scene, camera);
+}
+
+
+
+</script>
+  </body>
+</html>

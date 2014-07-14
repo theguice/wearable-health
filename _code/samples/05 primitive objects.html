@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <script src="http://threejs.org/build/three.min.js"></script>
+    <style>
+    body {
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- page content -->
+<script type="text/javascript">
+// Shared objects we'll instantiate later.
+var container, camera, scene, renderer, torus, origin = new THREE.Vector3(0,0,0);
+
+// Angle counter for the animation loop
+var t = 0; 
+
+// Initialise
+init();
+
+// Then animate the scene.
+animate();
+
+function init() {
+    // Create a new scene
+    scene = new THREE.Scene();
+
+    // Create a new camera, don't worry about the details of this for now.
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+    // Move the camera to (0, 0, 600) 
+    camera.position.set(0, 0, 600);
+    // Point the camera towards the origin
+    camera.lookAt(origin);
+    // Add the camera to the scene
+    scene.add(camera);
+
+    // Create a new directional light, full intensity
+    // Try setting it to 0x888888 and see what happens!
+    var light = new THREE.DirectionalLight(0xffffff);
+    // The light direction is given by a vector, we put the tail
+    // at (0, 1, 1) with the head pointing at the origin. 
+    // This has the effect of lighting the object from 'above' and 'in-front'
+    // Try playing with these values!
+    light.position.set(0, 1, 1).normalize();
+    // Add the light to the scene, try removing it!
+    scene.add(light);
+    
+    // Create a new geometry object, here we're using a built in torus generator
+    var geometry = new THREE.TorusGeometry(200, 75, 20, 30, 0);
+    // Use a flat shaded material, try using Basic!
+    var material = new THREE.MeshLambertMaterial({color: 0xff0000});
+    
+    // Create the mesh from the geometry and material
+    torus = new THREE.Mesh(geometry, material);
+    // Add the cube to the scene
+    scene.add(torus);
+    
+    // Create a new WebGL renderer
+    renderer = new THREE.WebGLRenderer();
+    // Set the window size
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // three.js creates a canvas element for us, we need to append it to the dom.
+    document.body.appendChild(renderer.domElement);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    render();
+}
+
+function render() {
+    // Increase the angle
+    t += 0.05;
+    
+    // Try changing these!
+    // Angles are in radians, see the article.
+//    torus.rotation.y = t;
+    torus.rotation.x = t / 2;
+
+    // Update the scene, for the current camera position
+    renderer.render(scene, camera);
+}
+
+
+
+</script>
+  </body>
+</html>
