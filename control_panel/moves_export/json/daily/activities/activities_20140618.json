@@ -1,0 +1,89 @@
+[ {
+  "date" : "20140618",
+  "summary" : [ {
+    "activity" : "walking",
+    "group" : "walking",
+    "duration" : 670.0,
+    "distance" : 613.0,
+    "steps" : 904
+  }, {
+    "activity" : "transport",
+    "group" : "transport",
+    "duration" : 579.0,
+    "distance" : 2296.0
+  }, {
+    "activity" : "cycling",
+    "group" : "cycling",
+    "duration" : 362.0,
+    "distance" : 2487.0
+  } ],
+  "segments" : [ {
+    "type" : "move",
+    "startTime" : "20140618T180556-0700",
+    "endTime" : "20140618T181814-0700",
+    "activities" : [ {
+      "activity" : "transport",
+      "group" : "transport",
+      "manual" : false,
+      "startTime" : "20140618T180556-0700",
+      "endTime" : "20140618T181535-0700",
+      "duration" : 579.0,
+      "distance" : 2296.0
+    }, {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140618T181535-0700",
+      "endTime" : "20140618T181814-0700",
+      "duration" : 159.0,
+      "distance" : 138.0,
+      "steps" : 236
+    } ],
+    "lastUpdate" : "20140619T050419Z"
+  }, {
+    "type" : "move",
+    "startTime" : "20140618T211405-0700",
+    "endTime" : "20140618T211656-0700",
+    "activities" : [ {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140618T211405-0700",
+      "endTime" : "20140618T211655-0700",
+      "duration" : 170.0,
+      "distance" : 196.0,
+      "steps" : 227
+    } ],
+    "lastUpdate" : "20140619T050421Z"
+  }, {
+    "type" : "move",
+    "startTime" : "20140618T212204-0700",
+    "endTime" : "20140618T212746-0700",
+    "activities" : [ {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140618T212204-0700",
+      "endTime" : "20140618T212745-0700",
+      "duration" : 341.0,
+      "distance" : 279.0,
+      "steps" : 441
+    } ],
+    "lastUpdate" : "20140619T050421Z"
+  }, {
+    "type" : "move",
+    "startTime" : "20140618T215720-0700",
+    "endTime" : "20140618T220322-0700",
+    "activities" : [ {
+      "activity" : "cycling",
+      "group" : "cycling",
+      "manual" : false,
+      "startTime" : "20140618T215720-0700",
+      "endTime" : "20140618T220322-0700",
+      "duration" : 362.0,
+      "distance" : 2487.0
+    } ],
+    "lastUpdate" : "20140619T163152Z"
+  } ],
+  "lastUpdate" : "20140619T215052Z"
+} ]

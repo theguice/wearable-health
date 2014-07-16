@@ -1,0 +1,150 @@
+[ {
+  "date" : "20140609",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140608T203709-0700",
+    "endTime" : "20140609T083255-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140609T194254Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T085405-0700",
+    "endTime" : "20140609T123714-0700",
+    "place" : {
+      "id" : 74484878,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.8742685131,
+        "lon" : -122.2586981009
+      }
+    },
+    "lastUpdate" : "20140610T003714Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T124239-0700",
+    "endTime" : "20140609T143454-0700",
+    "place" : {
+      "id" : 72412230,
+      "name" : "School of Information",
+      "type" : "foursquare",
+      "foursquareId" : "4f184661e4b0b34551aaa7cb",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+      "location" : {
+        "lat" : 37.87135752021174,
+        "lon" : -122.2584125748343
+      }
+    },
+    "lastUpdate" : "20140610T003716Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T144702-0700",
+    "endTime" : "20140609T154215-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140610T003720Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T163816-0700",
+    "endTime" : "20140609T173422-0700",
+    "place" : {
+      "id" : 74821146,
+      "name" : "Ravenswood Child Development Center",
+      "type" : "foursquare",
+      "foursquareId" : "4db87b111e7206c23d0924b2",
+      "location" : {
+        "lat" : 37.46093,
+        "lon" : -122.1331
+      }
+    },
+    "lastUpdate" : "20140610T213638Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T173732-0700",
+    "endTime" : "20140609T174226-0700",
+    "place" : {
+      "id" : 74563566,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.4629617072,
+        "lon" : -122.1302079718
+      }
+    },
+    "lastUpdate" : "20140610T190557Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T184850-0700",
+    "endTime" : "20140609T195220-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140610T190557Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T200151-0700",
+    "endTime" : "20140609T215938-0700",
+    "place" : {
+      "id" : 72458029,
+      "name" : "Recreational Sports Facility (RSF)",
+      "type" : "foursquare",
+      "foursquareId" : "4a68deb9f964a52028cb1fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d1b2941735" ],
+      "location" : {
+        "lat" : 37.8686826907337,
+        "lon" : -122.262618027927
+      }
+    },
+    "lastUpdate" : "20140610T190557Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T221404-0700",
+    "endTime" : "20140609T230127-0700",
+    "place" : {
+      "id" : 74821269,
+      "name" : "Tuk Tuk Thai Cafe",
+      "type" : "foursquare",
+      "foursquareId" : "43334580f964a5200f281fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d149941735" ],
+      "location" : {
+        "lat" : 37.86449386303605,
+        "lon" : -122.2677398582839
+      }
+    },
+    "lastUpdate" : "20140610T213709Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140609T230602-0700",
+    "endTime" : "20140610T123650-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140610T213437Z"
+  } ],
+  "lastUpdate" : "20140610T213709Z"
+} ]

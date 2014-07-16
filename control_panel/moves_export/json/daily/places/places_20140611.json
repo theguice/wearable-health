@@ -1,0 +1,81 @@
+[ {
+  "date" : "20140611",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140610T204244-0700",
+    "endTime" : "20140611T102437-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140611T203209Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140611T103400-0700",
+    "endTime" : "20140611T132516-0700",
+    "place" : {
+      "id" : 73323513,
+      "name" : "Sutardja Dai Hall - CITRIS Building",
+      "type" : "foursquare",
+      "foursquareId" : "4a68c693f964a520fcca1fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+      "location" : {
+        "lat" : 37.87481528371463,
+        "lon" : -122.2583994269371
+      }
+    },
+    "lastUpdate" : "20140612T014753Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140611T133140-0700",
+    "endTime" : "20140611T184516-0700",
+    "place" : {
+      "id" : 72412230,
+      "name" : "School of Information",
+      "type" : "foursquare",
+      "foursquareId" : "4f184661e4b0b34551aaa7cb",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+      "location" : {
+        "lat" : 37.87135752021174,
+        "lon" : -122.2584125748343
+      }
+    },
+    "lastUpdate" : "20140613T005602Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140611T185455-0700",
+    "endTime" : "20140611T190341-0700",
+    "place" : {
+      "id" : 72458029,
+      "name" : "Recreational Sports Facility (RSF)",
+      "type" : "foursquare",
+      "foursquareId" : "4a68deb9f964a52028cb1fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d1b2941735" ],
+      "location" : {
+        "lat" : 37.8686826907337,
+        "lon" : -122.262618027927
+      }
+    },
+    "lastUpdate" : "20140613T005602Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140611T223527-0700",
+    "endTime" : "20140611T224720-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140613T005602Z"
+  } ],
+  "lastUpdate" : "20140613T005602Z"
+} ]

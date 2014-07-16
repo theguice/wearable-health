@@ -1,0 +1,96 @@
+[ {
+  "date" : "20140627",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140626T223228-0700",
+    "endTime" : "20140627T102642-0700",
+    "place" : {
+      "id" : 75869123,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.4033396014,
+        "lon" : -122.0854525385
+      }
+    },
+    "lastUpdate" : "20140627T205317Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140627T104203-0700",
+    "endTime" : "20140627T124225-0700",
+    "place" : {
+      "id" : 80523391,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.4398523503,
+        "lon" : -122.1614046654
+      }
+    },
+    "lastUpdate" : "20140627T205319Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140627T124821-0700",
+    "endTime" : "20140627T135235-0700",
+    "place" : {
+      "id" : 80523405,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.4279476099,
+        "lon" : -122.1448239382
+      }
+    },
+    "lastUpdate" : "20140628T040715Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140627T140521-0700",
+    "endTime" : "20140627T154230-0700",
+    "place" : {
+      "id" : 80622727,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.3916893714,
+        "lon" : -122.0946349615
+      }
+    },
+    "lastUpdate" : "20140628T040717Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140627T155910-0700",
+    "endTime" : "20140627T174838-0700",
+    "place" : {
+      "id" : 80239940,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.40300648,
+        "lon" : -122.0855962362
+      }
+    },
+    "lastUpdate" : "20140628T040720Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140627T180459-0700",
+    "endTime" : "20140627T210240-0700",
+    "place" : {
+      "id" : 80659942,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.4452840534,
+        "lon" : -122.164071541
+      }
+    },
+    "lastUpdate" : "20140628T223547Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140627T210719-0700",
+    "endTime" : "20140627T211713-0700",
+    "place" : {
+      "id" : 80659943,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.4437291259,
+        "lon" : -122.1615855569
+      }
+    },
+    "lastUpdate" : "20140628T223547Z"
+  } ],
+  "lastUpdate" : "20140628T223547Z"
+} ]

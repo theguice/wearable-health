@@ -1,0 +1,87 @@
+[ {
+  "date" : "20140706",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140705T231831-0700",
+    "endTime" : "20140706T095208-0700",
+    "place" : {
+      "id" : 81375678,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.403213609,
+        "lon" : -122.0854344467
+      }
+    },
+    "lastUpdate" : "20140706T193727Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140706T102814-0700",
+    "endTime" : "20140706T121840-0700",
+    "place" : {
+      "id" : 81375678,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.403213609,
+        "lon" : -122.0854344467
+      }
+    },
+    "lastUpdate" : "20140707T015347Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140706T122410-0700",
+    "endTime" : "20140706T123506-0700",
+    "place" : {
+      "id" : 83706596,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.3970746702,
+        "lon" : -122.0614777723
+      }
+    },
+    "lastUpdate" : "20140707T015347Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140706T125122-0700",
+    "endTime" : "20140706T170355-0700",
+    "place" : {
+      "id" : 83706596,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.3970746702,
+        "lon" : -122.0614777723
+      }
+    },
+    "lastUpdate" : "20140707T015349Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140706T171033-0700",
+    "endTime" : "20140706T175955-0700",
+    "place" : {
+      "id" : 81375678,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.403213609,
+        "lon" : -122.0854344467
+      }
+    },
+    "lastUpdate" : "20140707T093934Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140706T184954-0700",
+    "endTime" : "20140707T092921-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140707T175009Z"
+  } ],
+  "lastUpdate" : "20140707T175009Z"
+} ]
