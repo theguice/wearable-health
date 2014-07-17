@@ -1,0 +1,33 @@
+[ {
+  "date" : "20140608",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140607T221758-0700",
+    "endTime" : "20140608T002704-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140609T194254Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140608T203709-0700",
+    "endTime" : "20140609T083255-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140609T194254Z"
+  } ],
+  "lastUpdate" : "20140609T194254Z"
+} ]

@@ -1,0 +1,75 @@
+[ {
+  "date" : "20140621",
+  "summary" : [ {
+    "activity" : "walking",
+    "group" : "walking",
+    "duration" : 150.0,
+    "distance" : 152.0,
+    "steps" : 212
+  }, {
+    "activity" : "transport",
+    "group" : "transport",
+    "duration" : 5480.0,
+    "distance" : 144796.0
+  } ],
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140621T093051-0700",
+    "endTime" : "20140621T180027-0700",
+    "activities" : [ {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140621T093909-0700",
+      "endTime" : "20140621T093939-0700",
+      "duration" : 30.0,
+      "distance" : 15.0,
+      "steps" : 30
+    } ],
+    "lastUpdate" : "20140622T113759Z"
+  }, {
+    "type" : "move",
+    "startTime" : "20140621T180027-0700",
+    "endTime" : "20140621T190458-0700",
+    "activities" : [ {
+      "activity" : "transport",
+      "group" : "transport",
+      "manual" : false,
+      "startTime" : "20140621T180027-0700",
+      "endTime" : "20140621T190458-0700",
+      "duration" : 3871.0,
+      "distance" : 91282.0
+    } ],
+    "lastUpdate" : "20140622T113759Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140621T190458-0700",
+    "endTime" : "20140621T233310-0700",
+    "activities" : [ {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140621T190558-0700",
+      "endTime" : "20140621T190758-0700",
+      "duration" : 120.0,
+      "distance" : 137.0,
+      "steps" : 182
+    } ],
+    "lastUpdate" : "20140622T113804Z"
+  }, {
+    "type" : "move",
+    "startTime" : "20140621T233310-0700",
+    "endTime" : "20140622T004135-0700",
+    "activities" : [ {
+      "activity" : "transport",
+      "group" : "transport",
+      "manual" : false,
+      "startTime" : "20140621T233310-0700",
+      "endTime" : "20140621T235959-0700",
+      "duration" : 1609.0,
+      "distance" : 53514.0
+    } ],
+    "lastUpdate" : "20140622T113804Z"
+  } ],
+  "lastUpdate" : "20140622T113804Z"
+} ]

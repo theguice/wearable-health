@@ -1,0 +1,136 @@
+[ {
+  "date" : "20140705",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140704T222719-0700",
+    "endTime" : "20140705T092411-0700",
+    "place" : {
+      "id" : 83253060,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 34.1930824384,
+        "lon" : -118.571303669
+      }
+    },
+    "lastUpdate" : "20140705T204610Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T102911-0700",
+    "endTime" : "20140705T105344-0700",
+    "place" : {
+      "id" : 83329012,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 34.052833533,
+        "lon" : -118.4367557842
+      }
+    },
+    "lastUpdate" : "20140705T204625Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T110759-0700",
+    "endTime" : "20140705T112159-0700",
+    "place" : {
+      "id" : 83347896,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 34.0263951245,
+        "lon" : -118.4879002995
+      }
+    },
+    "lastUpdate" : "20140705T204625Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T113612-0700",
+    "endTime" : "20140705T121843-0700",
+    "place" : {
+      "id" : 83347939,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 34.0570655571,
+        "lon" : -118.444945488
+      }
+    },
+    "lastUpdate" : "20140705T204627Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T124433-0700",
+    "endTime" : "20140705T134550-0700",
+    "place" : {
+      "id" : 83347951,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 34.0433076741,
+        "lon" : -118.468944525
+      }
+    },
+    "lastUpdate" : "20140706T005643Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T135341-0700",
+    "endTime" : "20140705T150740-0700",
+    "place" : {
+      "id" : 83416327,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 34.0552698573,
+        "lon" : -118.4451775982
+      }
+    },
+    "lastUpdate" : "20140706T005652Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T151249-0700",
+    "endTime" : "20140705T152247-0700",
+    "place" : {
+      "id" : 83416351,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 34.054413211,
+        "lon" : -118.4421768964
+      }
+    },
+    "lastUpdate" : "20140706T005652Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T155103-0700",
+    "endTime" : "20140705T162324-0700",
+    "place" : {
+      "id" : 83416352,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 34.2471802354,
+        "lon" : -118.522739722
+      }
+    },
+    "lastUpdate" : "20140706T020324Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T175102-0700",
+    "endTime" : "20140705T190957-0700",
+    "place" : {
+      "id" : 83416381,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 35.3375409815,
+        "lon" : -119.0602020422
+      }
+    },
+    "lastUpdate" : "20140706T163450Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140705T231831-0700",
+    "endTime" : "20140706T095208-0700",
+    "place" : {
+      "id" : 81375678,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.403213609,
+        "lon" : -122.0854344467
+      }
+    },
+    "lastUpdate" : "20140706T193727Z"
+  } ],
+  "lastUpdate" : "20140706T193727Z"
+} ]

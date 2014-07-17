@@ -1,0 +1,72 @@
+[ {
+  "date" : "20140623",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140623T002638-0700",
+    "endTime" : "20140623T195407-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140624T070129Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140623T200107-0700",
+    "endTime" : "20140623T220054-0700",
+    "place" : {
+      "id" : 79326869,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.8682806478,
+        "lon" : -122.2633484756
+      }
+    },
+    "lastUpdate" : "20140624T070135Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140623T221121-0700",
+    "endTime" : "20140623T225511-0700",
+    "place" : {
+      "id" : 79326896,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.8682496604,
+        "lon" : -122.2581981938
+      }
+    },
+    "lastUpdate" : "20140624T070138Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140623T230501-0700",
+    "endTime" : "20140623T230720-0700",
+    "place" : {
+      "id" : 79326897,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.866895011,
+        "lon" : -122.2657204197
+      }
+    },
+    "lastUpdate" : "20140624T070138Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140623T231329-0700",
+    "endTime" : "20140623T235639-0700",
+    "place" : {
+      "id" : 77843155,
+      "name" : "Siemens Berkeley",
+      "type" : "work",
+      "location" : {
+        "lat" : 37.8704362297,
+        "lon" : -122.2662692272
+      }
+    },
+    "lastUpdate" : "20140703T003709Z"
+  } ],
+  "lastUpdate" : "20140703T003709Z"
+} ]

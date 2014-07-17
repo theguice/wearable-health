@@ -1,0 +1,129 @@
+[ {
+  "date" : "20140702",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140701T193036-0700",
+    "endTime" : "20140702T154254-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140703T003439Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140702T155254-0700",
+    "endTime" : "20140702T170127-0700",
+    "place" : {
+      "id" : 77843155,
+      "name" : "Siemens Berkeley",
+      "type" : "work",
+      "location" : {
+        "lat" : 37.8704362297,
+        "lon" : -122.2662692272
+      }
+    },
+    "lastUpdate" : "20140703T232952Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140702T170702-0700",
+    "endTime" : "20140702T173233-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140703T232952Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140702T184459-0700",
+    "endTime" : "20140702T185456-0700",
+    "place" : {
+      "id" : 82320962,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.616721722,
+        "lon" : -122.3917111991
+      }
+    },
+    "lastUpdate" : "20140703T232952Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140702T194911-0700",
+    "endTime" : "20140702T195331-0700",
+    "place" : {
+      "id" : 82320989,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.3943299456,
+        "lon" : -122.0760016991
+      }
+    },
+    "lastUpdate" : "20140703T232952Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140702T200341-0700",
+    "endTime" : "20140702T201114-0700",
+    "place" : {
+      "id" : 82320990,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.3945198311,
+        "lon" : -122.0766327694
+      }
+    },
+    "lastUpdate" : "20140703T232952Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140702T202012-0700",
+    "endTime" : "20140702T214314-0700",
+    "place" : {
+      "id" : 82558465,
+      "name" : "Saravana Bhavan",
+      "type" : "foursquare",
+      "foursquareId" : "458e49d4f964a52011401fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d10f941735" ],
+      "location" : {
+        "lat" : 37.350963,
+        "lon" : -122.050749
+      }
+    },
+    "lastUpdate" : "20140703T232952Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140702T215429-0700",
+    "endTime" : "20140702T230803-0700",
+    "place" : {
+      "id" : 81375678,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.403213609,
+        "lon" : -122.0854344467
+      }
+    },
+    "lastUpdate" : "20140703T232952Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140702T232918-0700",
+    "endTime" : "20140703T005919-0700",
+    "place" : {
+      "id" : 82558504,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.4175568399,
+        "lon" : -121.8990236057
+      }
+    },
+    "lastUpdate" : "20140703T232952Z"
+  } ],
+  "lastUpdate" : "20140703T232952Z"
+} ]

@@ -1,0 +1,31 @@
+[ {
+  "date" : "20140707",
+  "summary" : [ {
+    "activity" : "cycling",
+    "group" : "cycling",
+    "duration" : 1470.0,
+    "distance" : 7708.0
+  }, {
+    "activity" : "walking",
+    "group" : "walking",
+    "duration" : 4041.0,
+    "distance" : 4426.0,
+    "steps" : 6815
+  } ],
+  "lastUpdate" : "20140708T215350Z"
+}, {
+  "date" : "20140708",
+  "summary" : [ {
+    "activity" : "cycling",
+    "group" : "cycling",
+    "duration" : 717.0,
+    "distance" : 2655.0
+  }, {
+    "activity" : "walking",
+    "group" : "walking",
+    "duration" : 814.0,
+    "distance" : 1031.0,
+    "steps" : 1196
+  } ],
+  "lastUpdate" : "20140709T005430Z"
+} ]

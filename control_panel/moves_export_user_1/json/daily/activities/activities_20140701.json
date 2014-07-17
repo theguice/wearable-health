@@ -1,0 +1,99 @@
+[ {
+  "date" : "20140701",
+  "summary" : [ {
+    "activity" : "cycling",
+    "group" : "cycling",
+    "duration" : 940.0,
+    "distance" : 4665.0
+  }, {
+    "activity" : "walking",
+    "group" : "walking",
+    "duration" : 1029.0,
+    "distance" : 1179.0,
+    "steps" : 1457
+  } ],
+  "segments" : [ {
+    "type" : "move",
+    "startTime" : "20140701T135126-0700",
+    "endTime" : "20140701T135814-0700",
+    "activities" : [ {
+      "activity" : "cycling",
+      "group" : "cycling",
+      "manual" : false,
+      "startTime" : "20140701T135126-0700",
+      "endTime" : "20140701T135814-0700",
+      "duration" : 408.0,
+      "distance" : 1896.0
+    } ],
+    "lastUpdate" : "20140701T222316Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140701T135814-0700",
+    "endTime" : "20140701T151147-0700",
+    "activities" : [ {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140701T135814-0700",
+      "endTime" : "20140701T135843-0700",
+      "duration" : 29.0,
+      "distance" : 34.0,
+      "steps" : 68
+    }, {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140701T140143-0700",
+      "endTime" : "20140701T140213-0700",
+      "duration" : 30.0,
+      "distance" : 20.0,
+      "steps" : 41
+    } ],
+    "lastUpdate" : "20140703T003709Z"
+  }, {
+    "type" : "move",
+    "startTime" : "20140701T151147-0700",
+    "endTime" : "20140701T152657-0700",
+    "activities" : [ {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140701T151147-0700",
+      "endTime" : "20140701T152657-0700",
+      "duration" : 910.0,
+      "distance" : 1079.0,
+      "steps" : 1257
+    } ],
+    "lastUpdate" : "20140702T022644Z"
+  }, {
+    "type" : "move",
+    "startTime" : "20140701T192143-0700",
+    "endTime" : "20140701T193035-0700",
+    "activities" : [ {
+      "activity" : "cycling",
+      "group" : "cycling",
+      "manual" : false,
+      "startTime" : "20140701T192143-0700",
+      "endTime" : "20140701T193035-0700",
+      "duration" : 532.0,
+      "distance" : 2769.0
+    } ],
+    "lastUpdate" : "20140702T121316Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140701T193036-0700",
+    "endTime" : "20140702T154254-0700",
+    "activities" : [ {
+      "activity" : "walking",
+      "group" : "walking",
+      "manual" : false,
+      "startTime" : "20140701T193458-0700",
+      "endTime" : "20140701T193558-0700",
+      "duration" : 60.0,
+      "distance" : 46.0,
+      "steps" : 91
+    } ],
+    "lastUpdate" : "20140703T003439Z"
+  } ],
+  "lastUpdate" : "20140703T003709Z"
+} ]

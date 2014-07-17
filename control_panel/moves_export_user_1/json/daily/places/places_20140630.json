@@ -1,0 +1,62 @@
+[ {
+  "date" : "20140630",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140629T190701-0700",
+    "endTime" : "20140630T164648-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140701T030057Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140630T165929-0700",
+    "endTime" : "20140630T193829-0700",
+    "place" : {
+      "id" : 81674498,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.8737944085,
+        "lon" : -122.2588509546
+      }
+    },
+    "lastUpdate" : "20140701T205229Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140630T195549-0700",
+    "endTime" : "20140630T220105-0700",
+    "place" : {
+      "id" : 72458029,
+      "name" : "Recreational Sports Facility (RSF)",
+      "type" : "foursquare",
+      "foursquareId" : "4a68deb9f964a52028cb1fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d1b2941735" ],
+      "location" : {
+        "lat" : 37.8686826907337,
+        "lon" : -122.262618027927
+      }
+    },
+    "lastUpdate" : "20140701T205232Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140630T220531-0700",
+    "endTime" : "20140701T135126-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140701T222316Z"
+  } ],
+  "lastUpdate" : "20140701T222316Z"
+} ]

@@ -1,0 +1,133 @@
+[ {
+  "date" : "20140707",
+  "segments" : [ {
+    "type" : "place",
+    "startTime" : "20140706T184954-0700",
+    "endTime" : "20140707T092921-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140707T175009Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140707T094834-0700",
+    "endTime" : "20140707T133353-0700",
+    "place" : {
+      "id" : 73323513,
+      "name" : "Sutardja Dai Hall - CITRIS Building",
+      "type" : "foursquare",
+      "foursquareId" : "4a68c693f964a520fcca1fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+      "location" : {
+        "lat" : 37.87481528371463,
+        "lon" : -122.2583994269371
+      }
+    },
+    "lastUpdate" : "20140708T024931Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140707T134522-0700",
+    "endTime" : "20140707T142027-0700",
+    "place" : {
+      "id" : 84114745,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.8688801607,
+        "lon" : -122.2585626064
+      }
+    },
+    "lastUpdate" : "20140708T024934Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140707T143201-0700",
+    "endTime" : "20140707T194821-0700",
+    "place" : {
+      "id" : 73323513,
+      "name" : "Sutardja Dai Hall - CITRIS Building",
+      "type" : "foursquare",
+      "foursquareId" : "4a68c693f964a520fcca1fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d19f941735" ],
+      "location" : {
+        "lat" : 37.87481528371463,
+        "lon" : -122.2583994269371
+      }
+    },
+    "lastUpdate" : "20140708T054129Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140707T195151-0700",
+    "endTime" : "20140707T205245-0700",
+    "place" : {
+      "id" : 72458029,
+      "name" : "Recreational Sports Facility (RSF)",
+      "type" : "foursquare",
+      "foursquareId" : "4a68deb9f964a52028cb1fe3",
+      "foursquareCategoryIds" : [ "4bf58dd8d48988d1b2941735" ],
+      "location" : {
+        "lat" : 37.8686826907337,
+        "lon" : -122.262618027927
+      }
+    },
+    "lastUpdate" : "20140708T054131Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140707T205851-0700",
+    "endTime" : "20140707T214837-0700",
+    "place" : {
+      "id" : 84137853,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.8680715836,
+        "lon" : -122.2591184923
+      }
+    },
+    "lastUpdate" : "20140708T054139Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140707T215235-0700",
+    "endTime" : "20140707T223000-0700",
+    "place" : {
+      "id" : 77817074,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.8715286365,
+        "lon" : -122.2682853653
+      }
+    },
+    "lastUpdate" : "20140708T201206Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140707T224845-0700",
+    "endTime" : "20140707T225534-0700",
+    "place" : {
+      "id" : 84147929,
+      "type" : "unknown",
+      "location" : {
+        "lat" : 37.8789464939,
+        "lon" : -122.2652457569
+      }
+    },
+    "lastUpdate" : "20140708T201206Z"
+  }, {
+    "type" : "place",
+    "startTime" : "20140707T235116-0700",
+    "endTime" : "20140708T131051-0700",
+    "place" : {
+      "id" : 72187887,
+      "name" : "Home",
+      "type" : "home",
+      "location" : {
+        "lat" : 37.8651493645,
+        "lon" : -122.282029798
+      }
+    },
+    "lastUpdate" : "20140708T215350Z"
+  } ],
+  "lastUpdate" : "20140708T215350Z"
+} ]

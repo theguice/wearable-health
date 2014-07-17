@@ -1,0 +1,16 @@
+[ {
+  "date" : "20140626",
+  "summary" : [ {
+    "activity" : "transport",
+    "group" : "transport",
+    "duration" : 15170.0,
+    "distance" : 284956.0
+  }, {
+    "activity" : "walking",
+    "group" : "walking",
+    "duration" : 667.0,
+    "distance" : 730.0,
+    "steps" : 1017
+  } ],
+  "lastUpdate" : "20140627T205317Z"
+} ]
