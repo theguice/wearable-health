@@ -61,6 +61,7 @@ function init()
 {
 	// SCENE
 	scene = new THREE.Scene();
+	
 	// CAMERA
 	var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
 	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
@@ -68,6 +69,7 @@ function init()
 	scene.add(camera);
 	camera.position.set(0,150,400);
 	camera.lookAt(scene.position);	
+	
 	// RENDERER
 	if ( Detector.webgl )
 		renderer = new THREE.WebGLRenderer( {antialias:true} );
@@ -76,21 +78,27 @@ function init()
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	container = document.getElementById( 'ThreeJS' );
 	container.appendChild( renderer.domElement );
+	
 	// EVENTS
 	THREEx.WindowResize(renderer, camera);
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
+	
 	// CONTROLS
+	// mouse controls
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	
 	// STATS
 	stats = new Stats();
 	stats.domElement.style.position = 'absolute';
 	stats.domElement.style.bottom = '0px';
 	stats.domElement.style.zIndex = 100;
 	container.appendChild( stats.domElement );
+	
 	// LIGHT
 	var light = new THREE.PointLight(0xffffff);
 	light.position.set(0,250,0);
 	scene.add(light);
+	
 	// FLOOR
 	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/checkerboard.jpg' );
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
@@ -108,7 +116,7 @@ function init()
 	
 	var planeMaterial   = new THREE.MeshBasicMaterial({color: 0x000000, opacity: 0.1, side: THREE.DoubleSide });
 	var planeWidth = 360;
-    var planeHeight = 120;
+    var planeHeight = 200;
 	var planeGeometry = new THREE.PlaneGeometry( planeWidth, planeHeight );
 	var planeMesh= new THREE.Mesh( planeGeometry, planeMaterial );
 	planeMesh.position.y += planeHeight/2;
@@ -120,7 +128,7 @@ function init()
 	// create the iframe to contain webpage
 	var element	= document.createElement('iframe')
 	// webpage to be loaded into iframe
-	element.src	= "index.html";
+	element.src	= "googlemaps.html";
 	// width of iframe in pixels
 	var elementWidth = 1024;
 	// force iframe to have same relative dimensions as planeGeometry

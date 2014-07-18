@@ -8,13 +8,14 @@
 </head>
 <body>
 
-<script src="http://threejs.org/build/three.js"></script>
+<script src="js/Three58.js"></script>
 <script src="js/Detector.js"></script>
 <script src="js/Stats.js"></script>
 <script src="js/OrbitControls.js"></script>
 <script src="js/THREEx.KeyboardState.js"></script>
 <script src="js/THREEx.FullScreen.js"></script>
 <script src="js/THREEx.WindowResize.js"></script>
+<script src="js/CSS3DRenderer.js"></script>
 
 <!-- jQuery code to display an information button and box when clicked. -->
 <script src="js/jquery-1.9.1.js"></script>
@@ -179,7 +180,7 @@ function init()
 	// using THREE.MeshFaceMaterial() in the constructor below
 	//   causes the mesh to use the materials stored in the geometry
 	cube = new THREE.Mesh( cubeGeometry, cubeMaterials );
-	cube.position.set(-100, 50, -50);
+	cube.position.set(-100, 51, -50);
 	scene.add( cube );		
 
 	// create a set of coordinate axes to help orient user
@@ -191,17 +192,79 @@ function init()
 	// FLOOR //
 	///////////
 	
-	// note: 4x4 checkboard pattern scaled so that each square is 25 by 25 pixels.
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/bayarea.png' );
-	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
-	floorTexture.repeat.set( 1, 1 );
-	// DoubleSide: render texture on both sides of mesh
-	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
-	var floorGeometry = new THREE.PlaneGeometry(100, 100, 1, 1);
-	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-	floor.position.y = -0.5;
-	floor.rotation.x = Math.PI / 2;
-	scene.add(floor);
+//	// note: 4x4 checkboard pattern scaled so that each square is 25 by 25 pixels.
+//	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/bayarea.png' );
+//	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
+//	floorTexture.repeat.set( 1, 1 );
+//	// DoubleSide: render texture on both sides of mesh
+//	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+//	var floorGeometry = new THREE.PlaneGeometry(100, 100, 1, 1);
+//	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
+//	floor.position.y = -0.5;
+//	floor.rotation.x = Math.PI / 2;
+//	scene.add(floor);
+	
+	
+	/////////////////
+	// GOOGLE MAPS //
+	/////////////////
+
+	var planeMaterial   = new THREE.MeshBasicMaterial({color: 0x000000, opacity: 0.1, side: THREE.DoubleSide });
+	var planeWidth = 200;
+    var planeHeight = 200;
+	var planeGeometry = new THREE.PlaneGeometry( planeWidth, planeHeight, 1, 1);
+	var planeMesh = new THREE.Mesh( planeGeometry, planeMaterial );
+//	planeMesh.position.y = -0.5;
+	planeMesh.rotation.x = Math.PI / 2;
+	
+//	planeMesh.position.y += planeHeight/2;
+//	// add it to the standard (WebGL) scene
+	scene.add(planeMesh);
+//	
+	// create a new scene to hold CSS
+	cssScene = new THREE.Scene();
+	// create the iframe to contain webpage
+	var element	= document.createElement('iframe')
+	// webpage to be loaded into iframe
+	element.src	= "googlemaps.html";
+	// width of iframe in pixels
+	var elementWidth = 1024;
+	// force iframe to have same relative dimensions as planeGeometry
+	var aspectRatio = planeHeight / planeWidth;
+	var elementHeight = elementWidth * aspectRatio;
+	element.style.width  = elementWidth + "px";
+	element.style.height = elementHeight + "px";
+	
+	// create a CSS3DObject to display element
+	var cssObject = new THREE.CSS3DObject( element );
+	// synchronize cssObject position/rotation with planeMesh position/rotation 
+	cssObject.position = planeMesh.position;
+	cssObject.rotation = planeMesh.rotation;
+	// resize cssObject to same size as planeMesh (plus a border)
+	var percentBorder = 0.05;
+	cssObject.scale.x /= (1 + percentBorder) * (elementWidth / planeWidth);
+	cssObject.scale.y /= (1 + percentBorder) * (elementWidth / planeWidth);
+	cssScene.add(cssObject);
+	
+	// create a renderer for CSS
+	rendererCSS	= new THREE.CSS3DRenderer();
+	rendererCSS.setSize( window.innerWidth, window.innerHeight );
+	rendererCSS.domElement.style.position = 'absolute';
+	rendererCSS.domElement.style.top	  = 0;
+	rendererCSS.domElement.style.margin	  = 0;
+	rendererCSS.domElement.style.padding  = 0;
+	document.body.appendChild( rendererCSS.domElement );
+	// when window resizes, also resize this renderer
+	THREEx.WindowResize(rendererCSS, camera);
+
+	renderer.domElement.style.position = 'absolute';
+	renderer.domElement.style.top      = 0;
+	// make sure original renderer appears on top of CSS renderer
+	renderer.domElement.style.zIndex   = 1;
+	rendererCSS.domElement.appendChild( renderer.domElement );
+
+	
+	
 	
 	/////////
 	// SKY //
@@ -245,6 +308,7 @@ function update()
 
 function render() 
 {	
+	rendererCSS.render( cssScene, camera );
 	renderer.render( scene, camera );
 }
 
