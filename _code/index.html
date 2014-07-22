@@ -132,12 +132,12 @@ function init()
 	// geometry of planes
 	var points = [
 			new THREE.Vector3(0, 	0,		0  		),
-			new THREE.Vector3(500, 	500,	100  	 	),
-			new THREE.Vector3(600, 	500, 	200  	 	),
-			new THREE.Vector3(900, 	500,   	300 	 	),
-			new THREE.Vector3(1000,	1000, 	400	 	),
-			new THREE.Vector3(1000, 	900, 	500	 	),
-			new THREE.Vector3(1100, 	600, 	600 	 	)
+			new THREE.Vector3(100, 	500,	100  	 	),
+			new THREE.Vector3(150, 	500, 	200  	 	),
+			new THREE.Vector3(230, 	500,   	300 	 	),
+			new THREE.Vector3(400,	1000, 	400	 	),
+			new THREE.Vector3(430, 	900, 	500	 	),
+			new THREE.Vector3(600, 	600, 	600 	 	)
 			
 	];
 	
@@ -160,8 +160,8 @@ function init()
 		var alpha = Math.atan(Ydelta/Xdelta);
 		var beta = Math.asin(Zdelta/length);
 		
-		console.log('alpha :'+ alpha);
-		console.log('beta :'+ beta);
+		console.log('length :'+ length);
+//		console.log('beta :'+ beta);
 		
 		// create plane
 		var geometry = new THREE.PlaneGeometry(length, planeWidth);		
