@@ -19,45 +19,78 @@
 
 	// CAMERA
 	
-	var fov = 45; // camera field-of-view in degrees
-	var width = renderer.domElement.width;
-	var height = renderer.domElement.height;
-	var aspect = width / height; // view aspect ratio
-	var camera = new THREE.PerspectiveCamera( fov, aspect );
-	camera.position.z = -200;
-	camera.position.y = -400;
-	camera.lookAt(scene.position);
+//	var fov = 45; // camera field-of-view in degrees
+//	var width = renderer.domElement.width;
+//	var height = renderer.domElement.height;
+//	var aspect = width / height; // view aspect ratio
+//	var camera = new THREE.PerspectiveCamera( fov, aspect );
+//	camera.position.z = -200;
+//	camera.position.y = -400;
+//	camera.lookAt(scene.position);
+
+
+
+var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+scene.add(camera);
+camera.position.set(0,150,400);
+camera.lookAt(scene.position);	
+
 
 	// LIGHTS
+var light = new THREE.PointLight(0xffffff);
+light.position.set(0,250,0);
+scene.add(light);
 
-	ambientLight = new THREE.AmbientLight( 0xffffff );
-	scene.add( ambientLight );
+//	ambientLight = new THREE.AmbientLight( 0xffffff );
+//	scene.add( ambientLight );
 
 	// SHADERS
 
-	var myTexture = new THREE.ImageUtils.loadTexture("spectrogram_grey.png");
-
-	var shader = THREE.ShaderLib[ "normalmap" ];
-	var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
-
-	uniforms[ "enableDisplacement" ].value = true;
-	uniforms[ "enableDiffuse" ].value = true;
-	uniforms[ "tDisplacement" ].value = myTexture;
-	uniforms[ "tDiffuse" ].value = myTexture;
-	uniforms[ "uDisplacementScale" ].value = 50;
-
-	var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: true };
-	var material = new THREE.ShaderMaterial( parameters );
+//	var myTexture = new THREE.ImageUtils.loadTexture("US_heightmap_500px3.png");
+//
+//	var shader = THREE.ShaderLib[ "normalmap" ];
+//	var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+//
+//	uniforms[ "enableDisplacement" ].value = true;
+//	uniforms[ "enableDiffuse" ].value = true;
+//	uniforms[ "tDisplacement" ].value = myTexture;
+//	uniforms[ "tDiffuse" ].value = myTexture;
+//	uniforms[ "uDisplacementScale" ].value = 50;
+//
+//	var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: false };
+//	var material = new THREE.ShaderMaterial( parameters );
 
 	// GEOMETRY
+	var geometry = new THREE.Geometry();
 	
-	geometry = new THREE.PlaneGeometry(500, 250, 500, 281);
-	geometry.computeTangents();
-  
-	var plane = new THREE.Mesh( geometry, material);
-	plane.rotation.y = Math.PI;
+geometry.vertices.push( new THREE.Vector3( -100,  100, 0 ) );
+geometry.vertices.push( new THREE.Vector3( -100, -100, 0 ) );
+geometry.vertices.push( new THREE.Vector3(  100, -100, 0 ) );
+geometry.vertices.push( new THREE.Vector3(  100, 100, 0 ) );
 
-	scene.add(plane);
+//	geometry.vertices.push( new THREE.Vector3(  -500, 250, 0 ) );
+	
+	geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+	
+	geometry.computeBoundingSphere();
+	
+	var material = new THREE.MeshLambertMaterial({color: 0xff00ff, side: THREE.DoubleSide});
+	var triangle = new THREE.Mesh(geometry, material);
+	// Add the sphere to the scene
+	scene.add(triangle);
+	
+	
+//	geometry = new THREE.PlaneGeometry(500, 250, 500, 250);
+//	geometry.computeTangents();
+  
+//  					var material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, wireframe: false } );
+  
+//	var plane = new THREE.Mesh( geometry, material);
+//	plane.rotation.y = Math.PI/2;
+//	plane.rotation.x = Math.PI/2;
+//	scene.add(plane);
 
 	// FUNCTIONS
 	

@@ -122,40 +122,40 @@ function init()
 	
 	// Tape
 	
-					var closedSpline = new THREE.ClosedSplineCurve3( [
-						new THREE.Vector3( -60, -100,  60 ),
-						new THREE.Vector3( -60,   20,  60 ),
-						new THREE.Vector3( -60,  120,  60 ),
-						new THREE.Vector3(  60,   20, -60 ),
-						new THREE.Vector3(  60, -100, -60 )
-					] );
-	
-					var extrudeSettings = {
-						steps			: 100,
-						bevelEnabled	: false,
-						extrudePath		: closedSpline
-					};
-	
-	
-					var pts = [], count = 3;
-	
-					for ( var i = 0; i < count; i ++ ) {
-	
-						var l = 20;
-	
-						var a = 2 * i / count * Math.PI;
-	
-						pts.push( new THREE.Vector2 ( Math.cos( a ) * l, Math.sin( a ) * l ) );
-	
-					}
-	
-					var shape = new THREE.Shape( pts );
-	
-					var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
-	
-					var material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, wireframe: false } );
-	
-					var mesh = new THREE.Mesh( geometry, material );
+//					var closedSpline = new THREE.ClosedSplineCurve3( [
+//						new THREE.Vector3( -60, -100,  60 ),
+//						new THREE.Vector3( -60,   20,  60 ),
+//						new THREE.Vector3( -60,  120,  60 ),
+//						new THREE.Vector3(  60,   20, -60 ),
+//						new THREE.Vector3(  60, -100, -60 )
+//					] );
+//	
+//					var extrudeSettings = {
+//						steps			: 100,
+//						bevelEnabled	: false,
+//						extrudePath		: closedSpline
+//					};
+//	
+//	
+//					var pts = [], count = 3;
+//	
+//					for ( var i = 0; i < count; i ++ ) {
+//	
+//						var l = 20;
+//	
+//						var a = 2 * i / count * Math.PI;
+//	
+//						pts.push( new THREE.Vector2 ( Math.cos( a ) * l, Math.sin( a ) * l ) );
+//	
+//					}
+//	
+//					var shape = new THREE.Shape( pts );
+//	
+//					var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+//	
+//					var material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, wireframe: true } );
+//	
+//					var mesh = new THREE.Mesh( geometry, material );
 	
 //					scene.add( mesh );
 	
@@ -164,25 +164,26 @@ function init()
 	var tapePoints = [];
 var tapePoints = new THREE.SplineCurve3( [
 	new THREE.Vector3(0, 	0,		0  		),
-	new THREE.Vector3(10, 	50,		30  	 	),
-	new THREE.Vector3(20, 	50, 	120  	 	),
-	new THREE.Vector3(30, 	50,   	120 	 	),
-	new THREE.Vector3(40,	100, 	120	 	),
-	new THREE.Vector3(50, 	100, 	120	 	),
-	new THREE.Vector3(60, 	120, 	80 	 	)
+	new THREE.Vector3(100, 	500,		300  	 	),
+	new THREE.Vector3(200, 	500, 	1200  	 	),
+	new THREE.Vector3(300, 	500,   	1200 	 	),
+	new THREE.Vector3(400,	1000, 	1200	 	),
+	new THREE.Vector3(500, 	1000, 	1200	 	),
+	new THREE.Vector3(600, 	1200, 	800 	 	)
 	
 ] );
 
 var extrudeSettings = {
-	steps			: 20,
+	steps			: 5000,
 	bevelEnabled	: false,
-	extrudePath		: tapePoints
+	extrudePath		: tapePoints,
+	curveSegments	: 4626
 };
 
 var pts = [
 new THREE.Vector2 (0,0),
-new THREE.Vector2 (0,1),
-new THREE.Vector2 (20,1),
+new THREE.Vector2 (0,20),
+new THREE.Vector2 (20,20),
 new THREE.Vector2 (20,0)
 ];
 
@@ -199,51 +200,73 @@ new THREE.Vector2 (20,0)
 
 //				var material2 = new THREE.MeshLambertMaterial( { color: 0xff8000, wireframe: false } );
 
+
+
+
+
+	// SHADERS
+		var myTexture = new THREE.ImageUtils.loadTexture("samples/displacement/US_heightmap_500px4.png");
+	
+		var shader = THREE.ShaderLib[ "normalmap" ];
+		var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+	
+		uniforms[ "enableDisplacement" ].value = true;
+		uniforms[ "enableDiffuse" ].value = true;
+		uniforms[ "tDisplacement" ].value = myTexture;
+		uniforms[ "tDiffuse" ].value = myTexture;
+		uniforms[ "uDisplacementScale" ].value = 50;
+	
+		var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: true };
+		var displacementMapMaterial = new THREE.ShaderMaterial( parameters );
+	
 				var mesh = new THREE.Mesh( geometry, material );
 
 				scene.add( mesh );
 
 
 
+
+
+
 	
-					var randomPoints = [];
-	
-					for ( var i = 0; i < 10; i ++ ) {
-	
-						randomPoints.push( new THREE.Vector3( ( i - 4.5 ) * 50, THREE.Math.randFloat( - 50, 50 ), THREE.Math.randFloat( - 50, 50 ) ) );
-	
-					}
-	
-					var randomSpline =  new THREE.SplineCurve3( randomPoints );
-	
-					//
-	
-					var extrudeSettings = {
-						steps			: 200,
-						bevelEnabled	: false,
-						extrudePath		: randomSpline
-					};
-	
-	
-					var pts = [], numPts = 5;
-	
-					for ( var i = 0; i < numPts * 2; i ++ ) {
-	
-						var l = i % 2 == 1 ? 10 : 20;
-	
-						var a = i / numPts * Math.PI;
-	
-						pts.push( new THREE.Vector2 ( Math.cos( a ) * l, Math.sin( a ) * l ) );
-	
-					}
-	
-					var shape = new THREE.Shape( pts );
-	
-					var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
-	
-					var material2 = new THREE.MeshLambertMaterial( { color: 0xff8000, wireframe: false } );
-	
-					var mesh = new THREE.Mesh( geometry, material2 );
+//					var randomPoints = [];
+//	
+//					for ( var i = 0; i < 10; i ++ ) {
+//	
+//						randomPoints.push( new THREE.Vector3( ( i - 4.5 ) * 50, THREE.Math.randFloat( - 50, 50 ), THREE.Math.randFloat( - 50, 50 ) ) );
+//	
+//					}
+//	
+//					var randomSpline =  new THREE.SplineCurve3( randomPoints );
+//	
+//					//
+//	
+//					var extrudeSettings = {
+//						steps			: 200,
+//						bevelEnabled	: false,
+//						extrudePath		: randomSpline
+//					};
+//	
+//	
+//					var pts = [], numPts = 5;
+//	
+//					for ( var i = 0; i < numPts * 2; i ++ ) {
+//	
+//						var l = i % 2 == 1 ? 10 : 20;
+//	
+//						var a = i / numPts * Math.PI;
+//	
+//						pts.push( new THREE.Vector2 ( Math.cos( a ) * l, Math.sin( a ) * l ) );
+//	
+//					}
+//	
+//					var shape = new THREE.Shape( pts );
+//	
+//					var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+//	
+//					var material2 = new THREE.MeshLambertMaterial( { color: 0xff8000, wireframe: false } );
+//	
+//					var mesh = new THREE.Mesh( geometry, material2 );
 	
 //					scene.add( mesh );
 	
@@ -265,7 +288,7 @@ new THREE.Vector2 (20,0)
 	// Create the mesh from the geometry and material
 	var triangle = new THREE.Mesh(geometry, material);
 	// Add the sphere to the scene
-//	scene.add(triangle);
+	scene.add(triangle);
 
 
 
