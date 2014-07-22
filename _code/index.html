@@ -9,6 +9,8 @@
 <body>
 
 <script src="js/Three.js"></script>
+  <!--<script src="js/three.min.js"></script>-->
+
 <script src="js/Detector.js"></script>
 <script src="js/Stats.js"></script>
 <script src="js/OrbitControls.js"></script>
@@ -128,6 +130,29 @@ function init()
 	////////////
 	// CUSTOM //
 	////////////
+
+	// SHADERS
+	var myTexture = new THREE.ImageUtils.loadTexture("images/p1.png");
+	
+	var shader = THREE.ShaderLib[ "normalmap" ];
+	var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+	
+	uniforms[ "enableDisplacement" ].value = true;
+	uniforms[ "enableDiffuse" ].value = true;
+	uniforms[ "tDisplacement" ].value = myTexture;
+	uniforms[ "tDiffuse" ].value = myTexture;
+	uniforms[ "uDisplacementScale" ].value = 50;
+	
+	var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: false };
+	var displacementMapMaterial = new THREE.ShaderMaterial( parameters );
+	
+//	geometry = new THREE.PlaneGeometry(500, 250, 500, 250);
+//	geometry.computeTangents();
+	
+//	var mesh = new THREE.Mesh( geometry, material );
+
+//	scene.add( mesh );
+	
 	
 	// geometry of planes
 	var points = [
@@ -164,8 +189,9 @@ function init()
 //		console.log('beta :'+ beta);
 		
 		// create plane
-		var geometry = new THREE.PlaneGeometry(length, planeWidth);		
-		var plane = new THREE.Mesh( geometry, material);
+		var geometry = new THREE.PlaneGeometry(length, planeWidth, 500,20);		
+		geometry.computeTangents();
+		var plane = new THREE.Mesh( geometry, displacementMapMaterial);
 		
 		
 		rotateAroundWorldAxis(plane, yAxis, -beta);
@@ -293,24 +319,6 @@ function init()
 //
 //
 //
-//	// SHADERS
-//		var myTexture = new THREE.ImageUtils.loadTexture("samples/displacement/US_heightmap_500px4.png");
-//	
-//		var shader = THREE.ShaderLib[ "normalmap" ];
-//		var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
-//	
-//		uniforms[ "enableDisplacement" ].value = true;
-//		uniforms[ "enableDiffuse" ].value = true;
-//		uniforms[ "tDisplacement" ].value = myTexture;
-//		uniforms[ "tDiffuse" ].value = myTexture;
-//		uniforms[ "uDisplacementScale" ].value = 50;
-//	
-//		var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: true };
-//		var displacementMapMaterial = new THREE.ShaderMaterial( parameters );
-//	
-//				var mesh = new THREE.Mesh( geometry, material );
-//
-//				scene.add( mesh );
 
 
 
