@@ -45,6 +45,8 @@ This three.js demo is part of a collection at
 <!-- Load data -->
 <script src="data.js" type="text/javascript"></script>
 <script>
+
+
 /*
 	Three.js "tutorials by example"
 	Author: Lee Stemkoski
@@ -68,13 +70,15 @@ function init()
 {
 	// SCENE
 	scene = new THREE.Scene();
+	
 	// CAMERA
 	var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
 	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	scene.add(camera);
-	camera.position.set(0,150,400);
+	camera.position.set(0,-500,300);
 	camera.lookAt(scene.position);	
+	
 	// RENDERER
 	if ( Detector.webgl )
 		renderer = new THREE.WebGLRenderer( {antialias:true} );
@@ -83,21 +87,26 @@ function init()
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	container = document.getElementById( 'ThreeJS' );
 	container.appendChild( renderer.domElement );
+	
 	// EVENTS
 	THREEx.WindowResize(renderer, camera);
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
+	
 	// CONTROLS
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	
 	// STATS
 	stats = new Stats();
 	stats.domElement.style.position = 'absolute';
 	stats.domElement.style.bottom = '0px';
 	stats.domElement.style.zIndex = 100;
 	container.appendChild( stats.domElement );
+	
 	// LIGHT
 	var light = new THREE.PointLight(0xffffff);
 	light.position.set(0,250,0);
 	scene.add(light);
+	
 	// FLOOR
 	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/checkerboard.jpg' );
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
@@ -105,9 +114,10 @@ function init()
 	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
 	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-	floor.position.y = -0.5;
-	floor.rotation.x = Math.PI / 2;
+	floor.position.y = 0;
+//	floor.rotation.x = Math.PI / 2;
 	scene.add(floor);
+	
 	// SKYBOX/FOG
 	var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
 	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x9999ff, side: THREE.BackSide } );
@@ -118,6 +128,85 @@ function init()
 	////////////
 	// CUSTOM //
 	////////////
+	
+	// geometry of planes
+	var points = [
+			new THREE.Vector3(0, 	0,		0  		),
+			new THREE.Vector3(500, 	500,	100  	 	),
+			new THREE.Vector3(600, 	500, 	200  	 	),
+			new THREE.Vector3(900, 	500,   	300 	 	),
+			new THREE.Vector3(1000,	1000, 	400	 	),
+			new THREE.Vector3(1000, 	900, 	500	 	),
+			new THREE.Vector3(1100, 	600, 	600 	 	)
+			
+	];
+	
+	var material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, wireframe: false, side: THREE.DoubleSide } );
+	var xAxis = new THREE.Vector3(1,0,0);
+	var yAxis = new THREE.Vector3(0,1,0);
+	var zAxis = new THREE.Vector3(0,0,1);
+	
+	var planeWidth = 20;
+	for (var i = 1; i < points.length; i++)
+	{
+		var v1 = points[i-1];
+		var v2 = points[i];
+		
+		var length = distance3d(v1,v2);
+		var Xdelta = v2.x - v1.x;
+		var Ydelta = v2.y - v1.y;
+		var Zdelta = v2.z - v1.z;
+		
+		var alpha = Math.atan(Ydelta/Xdelta);
+		var beta = Math.asin(Zdelta/length);
+		
+		console.log('alpha :'+ alpha);
+		console.log('beta :'+ beta);
+		
+		// create plane
+		var geometry = new THREE.PlaneGeometry(length, planeWidth);		
+		var plane = new THREE.Mesh( geometry, material);
+		
+		
+		rotateAroundWorldAxis(plane, yAxis, -beta);
+		rotateAroundWorldAxis(plane, zAxis, alpha);
+
+		plane.position.x = (Xdelta/2)+v1.x;
+		plane.position.y = (Ydelta/2)+v1.y;
+		plane.position.z = (Zdelta/2)+v1.z;
+		scene.add(plane);
+	}
+		
+		
+	var sphereMaterial = new THREE.MeshLambertMaterial({color: 0xff00ff});
+		
+	 // debugging spears
+	for (var i = 0; i < points.length; i++)
+	{
+		var vec = points[i];
+		var sphereGeometry = new THREE.SphereGeometry(10, 32, 32);
+		var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
+		sphere.position = vec;
+		scene.add(sphere);
+	 	
+	}
+	 
+	 
+	 
+	 
+	 
+//		var tapePoints = [];
+//	var tapePoints = new THREE.SplineCurve3( [
+//		new THREE.Vector3(0, 	0,		0  		),
+//		new THREE.Vector3(100, 	500,		300  	 	),
+//		new THREE.Vector3(200, 	500, 	1200  	 	),
+//		new THREE.Vector3(300, 	500,   	1200 	 	),
+//		new THREE.Vector3(400,	1000, 	1200	 	),
+//		new THREE.Vector3(500, 	1000, 	1200	 	),
+//		new THREE.Vector3(600, 	1200, 	800 	 	)
+//		
+//	] );
+//	
 	
 	
 	// Tape
@@ -161,67 +250,67 @@ function init()
 	
 	
 	
-	var tapePoints = [];
-var tapePoints = new THREE.SplineCurve3( [
-	new THREE.Vector3(0, 	0,		0  		),
-	new THREE.Vector3(100, 	500,		300  	 	),
-	new THREE.Vector3(200, 	500, 	1200  	 	),
-	new THREE.Vector3(300, 	500,   	1200 	 	),
-	new THREE.Vector3(400,	1000, 	1200	 	),
-	new THREE.Vector3(500, 	1000, 	1200	 	),
-	new THREE.Vector3(600, 	1200, 	800 	 	)
-	
-] );
-
-var extrudeSettings = {
-	steps			: 5000,
-	bevelEnabled	: false,
-	extrudePath		: tapePoints,
-	curveSegments	: 4626
-};
-
-var pts = [
-new THREE.Vector2 (0,0),
-new THREE.Vector2 (0,20),
-new THREE.Vector2 (20,20),
-new THREE.Vector2 (20,0)
-];
-
+//	var tapePoints = [];
+//var tapePoints = new THREE.SplineCurve3( [
+//	new THREE.Vector3(0, 	0,		0  		),
+//	new THREE.Vector3(100, 	500,		300  	 	),
+//	new THREE.Vector3(200, 	500, 	1200  	 	),
+//	new THREE.Vector3(300, 	500,   	1200 	 	),
+//	new THREE.Vector3(400,	1000, 	1200	 	),
+//	new THREE.Vector3(500, 	1000, 	1200	 	),
+//	new THREE.Vector3(600, 	1200, 	800 	 	)
+//	
+//] );
+//
+//var extrudeSettings = {
+//	steps			: 5000,
+//	bevelEnabled	: false,
+//	extrudePath		: tapePoints,
+//	curveSegments	: 4626
+//};
+//
+//var pts = [
+//new THREE.Vector2 (0,0),
+//new THREE.Vector2 (0,20),
+//new THREE.Vector2 (20,20),
+//new THREE.Vector2 (20,0)
+//];
+//
 //, count = 3;
 //for ( var i = 0; i < count; i ++ ) {	
 //var l = 20;	
 //var a = 2 * i / count * Math.PI;	
 //pts.push( new THREE.Vector2 ( Math.cos( a ) * l, Math.sin( a ) * l ) );
 //}
-
-				var shape = new THREE.Shape( pts );
-
-				var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
-
+//
+//				var shape = new THREE.Shape( pts );
+//
+//				var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+//
 //				var material2 = new THREE.MeshLambertMaterial( { color: 0xff8000, wireframe: false } );
-
-
-
-
-
-	// SHADERS
-		var myTexture = new THREE.ImageUtils.loadTexture("samples/displacement/US_heightmap_500px4.png");
-	
-		var shader = THREE.ShaderLib[ "normalmap" ];
-		var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
-	
-		uniforms[ "enableDisplacement" ].value = true;
-		uniforms[ "enableDiffuse" ].value = true;
-		uniforms[ "tDisplacement" ].value = myTexture;
-		uniforms[ "tDiffuse" ].value = myTexture;
-		uniforms[ "uDisplacementScale" ].value = 50;
-	
-		var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: true };
-		var displacementMapMaterial = new THREE.ShaderMaterial( parameters );
-	
-				var mesh = new THREE.Mesh( geometry, material );
-
-				scene.add( mesh );
+//
+//
+//
+//
+//
+//	// SHADERS
+//		var myTexture = new THREE.ImageUtils.loadTexture("samples/displacement/US_heightmap_500px4.png");
+//	
+//		var shader = THREE.ShaderLib[ "normalmap" ];
+//		var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+//	
+//		uniforms[ "enableDisplacement" ].value = true;
+//		uniforms[ "enableDiffuse" ].value = true;
+//		uniforms[ "tDisplacement" ].value = myTexture;
+//		uniforms[ "tDiffuse" ].value = myTexture;
+//		uniforms[ "uDisplacementScale" ].value = 50;
+//	
+//		var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: true };
+//		var displacementMapMaterial = new THREE.ShaderMaterial( parameters );
+//	
+//				var mesh = new THREE.Mesh( geometry, material );
+//
+//				scene.add( mesh );
 
 
 
@@ -273,63 +362,63 @@ new THREE.Vector2 (20,0)
 	
 	
 //	var t1Points = []
-	var geometry = new THREE.Geometry();
-	
-	geometry.vertices.push( new THREE.Vector3( -10,  10, 0 ) );
-	geometry.vertices.push( new THREE.Vector3( -10, -10, 0 ) );
-	geometry.vertices.push( new THREE.Vector3(  10, -10, 0 ) );
-	
-	geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
-	
-	geometry.computeBoundingSphere();
-	
-	var material = new THREE.MeshLambertMaterial({color: 0xff00ff, side: THREE.DoubleSide});
-	
-	// Create the mesh from the geometry and material
-	var triangle = new THREE.Mesh(geometry, material);
-	// Add the sphere to the scene
-	scene.add(triangle);
-
-
-
-
-	
-	var starPoints = [];
-	
-	starPoints.push( new THREE.Vector2 (   0,  50 ) );
-	starPoints.push( new THREE.Vector2 (  10,  10 ) );
-	starPoints.push( new THREE.Vector2 (  40,  10 ) );
-	starPoints.push( new THREE.Vector2 (  20, -10 ) );
-	starPoints.push( new THREE.Vector2 (  30, -50 ) );
-	starPoints.push( new THREE.Vector2 (   0, -20 ) );
-	starPoints.push( new THREE.Vector2 ( -30, -50 ) );
-	starPoints.push( new THREE.Vector2 ( -20, -10 ) );
-	starPoints.push( new THREE.Vector2 ( -40,  10 ) );
-	starPoints.push( new THREE.Vector2 ( -10,  10 ) );
-	
-	var starShape = new THREE.Shape( starPoints );
-
-	var extrusionSettings = {
-		amount: 1, size: 5, height: 4, curveSegments: 3,
-		bevelThickness: 1, bevelSize: 2, bevelEnabled: false,
-		material: 0, extrudeMaterial: 1
-	};
-	
-	var starGeometry = new THREE.ExtrudeGeometry( starShape, extrusionSettings );
-	
-	var materialFront = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-	var materialSide = new THREE.MeshBasicMaterial( { color: 0xff8800 } );
-	var materialArray = [ materialFront, materialSide ];
-	var starMaterial = new THREE.MeshFaceMaterial(materialArray);
-	
-	var star = new THREE.Mesh( starGeometry, starMaterial );
-	star.position.set(0,50,0);
+//	var geometry = new THREE.Geometry();
+//	
+//	geometry.vertices.push( new THREE.Vector3( -10,  10, 0 ) );
+//	geometry.vertices.push( new THREE.Vector3( -10, -10, 0 ) );
+//	geometry.vertices.push( new THREE.Vector3(  10, -10, 0 ) );
+//	
+//	geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+//	
+//	geometry.computeBoundingSphere();
+//	
+//	var material = new THREE.MeshLambertMaterial({color: 0xff00ff, side: THREE.DoubleSide});
+//	
+//	// Create the mesh from the geometry and material
+//	var triangle = new THREE.Mesh(geometry, material);
+//	// Add the sphere to the scene
+//	scene.add(triangle);
+//
+//
+//
+//
+//	
+//	var starPoints = [];
+//	
+//	starPoints.push( new THREE.Vector2 (   0,  50 ) );
+//	starPoints.push( new THREE.Vector2 (  10,  10 ) );
+//	starPoints.push( new THREE.Vector2 (  40,  10 ) );
+//	starPoints.push( new THREE.Vector2 (  20, -10 ) );
+//	starPoints.push( new THREE.Vector2 (  30, -50 ) );
+//	starPoints.push( new THREE.Vector2 (   0, -20 ) );
+//	starPoints.push( new THREE.Vector2 ( -30, -50 ) );
+//	starPoints.push( new THREE.Vector2 ( -20, -10 ) );
+//	starPoints.push( new THREE.Vector2 ( -40,  10 ) );
+//	starPoints.push( new THREE.Vector2 ( -10,  10 ) );
+//	
+//	var starShape = new THREE.Shape( starPoints );
+//
+//	var extrusionSettings = {
+//		amount: 1, size: 5, height: 4, curveSegments: 3,
+//		bevelThickness: 1, bevelSize: 2, bevelEnabled: false,
+//		material: 0, extrudeMaterial: 1
+//	};
+//	
+//	var starGeometry = new THREE.ExtrudeGeometry( starShape, extrusionSettings );
+//	
+//	var materialFront = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+//	var materialSide = new THREE.MeshBasicMaterial( { color: 0xff8800 } );
+//	var materialArray = [ materialFront, materialSide ];
+//	var starMaterial = new THREE.MeshFaceMaterial(materialArray);
+//	
+//	var star = new THREE.Mesh( starGeometry, starMaterial );
+//	star.position.set(0,50,0);
 //	scene.add(star);
-	
-	// add a wireframe to model
-	var wireframeTexture = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true, transparent: true } ); 
-	var star = new THREE.Mesh( starGeometry, wireframeTexture );
-	star.position.set(0,50,0);
+//	
+//	// add a wireframe to model
+//	var wireframeTexture = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true, transparent: true } ); 
+//	var star = new THREE.Mesh( starGeometry, wireframeTexture );
+//	star.position.set(0,50,0);
 //	scene.add(star);
 }
 
@@ -354,6 +443,36 @@ function update()
 function render() 
 {
 	renderer.render( scene, camera );
+}
+
+function distance3d( v1,  v2)
+{
+    var dx = v1.x - v2.x;
+    var dy = v1.y - v2.y;
+    var dz = v1.z - v2.z;
+
+    return Math.sqrt(dx*dx+dy*dy+dz*dz);
+}
+
+var rotWorldMatrix;
+// Rotate an object around an arbitrary axis in world space       
+function rotateAroundWorldAxis(object, axis, radians) {
+    rotWorldMatrix = new THREE.Matrix4();
+    rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
+
+    // old code for Three.JS pre r54:
+    //  rotWorldMatrix.multiply(object.matrix);
+    // new code for Three.JS r55+:
+    rotWorldMatrix.multiply(object.matrix);                // pre-multiply
+
+    object.matrix = rotWorldMatrix;
+
+    // old code for Three.js pre r49:
+    // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
+    // old code for Three.js pre r59:
+    // object.rotation.setEulerFromRotationMatrix(object.matrix);
+    // code for r59+:
+    object.rotation.setFromRotationMatrix(object.matrix);
 }
 
 </script>
