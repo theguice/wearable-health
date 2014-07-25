@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<script src="js/Three.js"></script>
-  <!--<script src="js/three.min.js"></script>-->
+<!--<script src="js/Three.js"></script>-->
+  <script src="js/three.min.js"></script>
 
 <script src="js/Detector.js"></script>
 <script src="js/Stats.js"></script>
@@ -78,7 +78,7 @@ function init()
 	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	scene.add(camera);
-	camera.position.set(0,-500,300);
+	camera.position.set(0,200,300);
 	camera.lookAt(scene.position);	
 	
 	// RENDERER
@@ -107,7 +107,11 @@ function init()
 	// LIGHT
 	var light = new THREE.PointLight(0xffffff);
 	light.position.set(0,250,0);
-	scene.add(light);
+//	scene.add(light);
+	
+	var ambientLight = new THREE.AmbientLight(0xd3d3d3);
+	scene.add(ambientLight);
+	
 	
 	// FLOOR
 	var floorTexture = new THREE.ImageUtils.loadTexture( 'images/checkerboard.jpg' );
@@ -117,7 +121,7 @@ function init()
 	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.position.y = 0;
-//	floor.rotation.x = Math.PI / 2;
+	floor.rotation.x = Math.PI / 2;
 	scene.add(floor);
 	
 	// SKYBOX/FOG
@@ -132,19 +136,6 @@ function init()
 	////////////
 
 	// SHADERS
-	var myTexture = new THREE.ImageUtils.loadTexture("images/p1.png");
-	
-	var shader = THREE.ShaderLib[ "normalmap" ];
-	var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
-	
-	uniforms[ "enableDisplacement" ].value = true;
-	uniforms[ "enableDiffuse" ].value = true;
-	uniforms[ "tDisplacement" ].value = myTexture;
-	uniforms[ "tDiffuse" ].value = myTexture;
-	uniforms[ "uDisplacementScale" ].value = 50;
-	
-	var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: false };
-	var displacementMapMaterial = new THREE.ShaderMaterial( parameters );
 	
 //	geometry = new THREE.PlaneGeometry(500, 250, 500, 250);
 //	geometry.computeTangents();
@@ -157,12 +148,13 @@ function init()
 	// geometry of planes
 	var points = [
 			new THREE.Vector3(0, 	0,		0  		),
-			new THREE.Vector3(100, 	500,	100  	 	),
-			new THREE.Vector3(150, 	500, 	200  	 	),
-			new THREE.Vector3(230, 	500,   	300 	 	),
-			new THREE.Vector3(400,	1000, 	400	 	),
-			new THREE.Vector3(430, 	900, 	500	 	),
-			new THREE.Vector3(600, 	600, 	600 	 	)
+			new THREE.Vector3(500, 	500,	100  	 	)
+//			,
+//			new THREE.Vector3(150, 	500, 	200  	 	)
+//			new THREE.Vector3(230, 	500,   	300 	 	),
+//			new THREE.Vector3(400,	1000, 	400	 	),
+//			new THREE.Vector3(430, 	900, 	500	 	),
+//			new THREE.Vector3(600, 	600, 	600 	 	)
 			
 	];
 	
@@ -174,6 +166,21 @@ function init()
 	var planeWidth = 20;
 	for (var i = 1; i < points.length; i++)
 	{
+	var imageName = "images/p"+i+".png";
+	var myTexture = new THREE.ImageUtils.loadTexture(imageName);
+	
+	var shader = THREE.ShaderLib[ "normalmap" ];
+	var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+	
+	uniforms[ "enableDisplacement" ].value = true;
+	uniforms[ "enableDiffuse" ].value = true;
+	uniforms[ "tDisplacement" ].value = myTexture;
+	uniforms[ "tDiffuse" ].value = myTexture;
+	uniforms[ "uDisplacementScale" ].value = 30;
+	
+	var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms, lights: true, wireframe: false, side: THREE.DoubleSide };
+	var displacementMapMaterial = new THREE.ShaderMaterial( parameters );
+	
 		var v1 = points[i-1];
 		var v2 = points[i];
 		
@@ -189,10 +196,10 @@ function init()
 //		console.log('beta :'+ beta);
 		
 		// create plane
-		var geometry = new THREE.PlaneGeometry(length, planeWidth, 500,20);		
+		var geometry = new THREE.PlaneGeometry(length, planeWidth, 500,40);		
 		geometry.computeTangents();
 		var plane = new THREE.Mesh( geometry, displacementMapMaterial);
-		
+		var basePlate = new THREE.Mesh(geometry, material);
 		
 		rotateAroundWorldAxis(plane, yAxis, -beta);
 		rotateAroundWorldAxis(plane, zAxis, alpha);
@@ -200,7 +207,17 @@ function init()
 		plane.position.x = (Xdelta/2)+v1.x;
 		plane.position.y = (Ydelta/2)+v1.y;
 		plane.position.z = (Zdelta/2)+v1.z;
+//		plane.translateY(500);
+//		plane.translateX = 500;
 		scene.add(plane);
+		
+		rotateAroundWorldAxis(basePlate, yAxis, -beta);
+		rotateAroundWorldAxis(basePlate, zAxis, alpha);
+
+		basePlate.position.x = (Xdelta/2)+v1.x;
+		basePlate.position.y = (Ydelta/2)+v1.y;
+		basePlate.position.z = (Zdelta/2)+v1.z;
+		scene.add(basePlate);
 	}
 		
 		
