@@ -1,0 +1,8 @@
+
+map:
+
+hovering over main visualization can move marker on map dynamically?
+
+http://stackoverflow.com/questions/8840727/api-v3-update-marker-position-dynamically
+http://jsfiddle.net/ThinkingStiff/Rsp22/
+
