@@ -1,5 +1,7 @@
+// this javascript function builds a table one line at a time, with responses from a get_users.php api call.
 
-$.getJSON('get_users.php', function(data) {
+
+$.getJSON('../api/get_users.php', function(data) {
     console.log(data);
 
     var table='<table class="table table-striped">';

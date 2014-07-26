@@ -12,11 +12,25 @@ $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $parts = parse_url($url);
 parse_str($parts['query'], $param);
 
+
+
+/*  A NOTE ABOUT DEBUGGING PHP SCRIPTS:
+
+do it on the command line.  
+    passing params is different on the command line (doesn't work via a url fashion)
+
+Running it via the browser will give "internal server errors", but not reference specific line numbers of where the issue is occurring.
+
+*/
+
+
+
+// If we are not passed a user_id on the URL, then we cannot continue
 if (!$param['user_id']) {
-  $param['user_id'] = 1;
-  //exit();
+  exit();
 }
 
+// Granularity is passed in minutes. We convert that to seconds because times are stored as EPOCH in the db.
 if (!$param['granularity']) {
   // setting default to 5 minutes
   $gran = 5*60;
@@ -24,7 +38,7 @@ if (!$param['granularity']) {
   $gran = $param['granularity']*60;
 }
 
-// built in a limit for begin_time using epoch - since I have more that two weeks data in there
+// I built in a limit for begin_time using epoch - since I have more that two weeks data in there and I want to ignore the earlier stuff.  I guess I could just have deleted that data manually.  This detail won't affect any other user's queries because they'll occur later in time.
 
 $myquery = "SELECT * FROM `wh_d_basis` WHERE `u_id`=" . $param['user_id'] . " AND heartrate != 'None' AND steps != 'None' AND date_epoch > 1402012800 AND mod(date_epoch,".$gran.")=0 ORDER BY date_epoch ASC";
 $query = mysql_query($myquery);
@@ -42,6 +56,8 @@ if ( ! $query ) {
   die;
 }
 
+
+// Here we are looping through the query response and building the CSV reply.
 echo "Time,heartrate,steps,calories,gsr,skin_temp,air_temp\n";
 $data = array();
 for ($x = 0; $x < mysql_num_rows($query); $x++) {
@@ -67,6 +83,7 @@ for ($x = 0; $x < mysql_num_rows($query); $x++) {
     }
   }
 
+  // This is the actual data output.  echo == print essentially
   echo $d['date_human'] . "," . $hr/$c_hr . "," . $steps . "," . $calories . "," . $d['gsr'] . "," . $d['skin_temp'] . "," . $d['air_temp'] . "\n";
 }
      

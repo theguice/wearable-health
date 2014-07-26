@@ -12,6 +12,43 @@ $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $parts = parse_url($url);
 parse_str($parts['query'], $param);
 
+/*  welcome to php
+
+$param is an associative array (same as a dictionary in python).  It holds the parameters that come in via the URL.
+
+To implement the compare tool, you'll need to accept multiple date ranges as params, and so you should add some checks to see what you have:
+
+$time_ranges = array();  // initialize array of time ranges
+if ($param['s_time1']  && $param['e_time1']) {
+   // push this start/end time pair to a $time_ranges
+   $time_ranges[] = array($param['s_time1'], $param['e_time1']);
+   
+if ($param['s_time2']  && $param['e_time2']) {
+    // same as s_time1
+   
+if ($param['s_time3']  && $param['e_time3']) {
+    // same as s_time1
+
+do as many as you'd like to support in the compare tool
+
+
+//now, for each time range, do a mysql query
+for $r in $time_ranges:
+    SELECT .... FROM wh_d_basis WHERE ... AND time_epoch > $r[0] and time_epoch < $r[1]
+    // note that $r[0] and $r[1] are now the start/end times we pushed on earlier
+    
+    // push mysql response into a main data array
+    
+    
+// outside of the for loop now you can collect the data, add the appropriate min/max keys (see below)
+
+
+
+I hope this psuedocode makes at least some sense.
+
+
+*/
+
 if ($param['heartrate'] == 1) {
   $myquery = "SELECT  AVG(heartrate) as heartrate FROM  `wh_d_basis` WHERE `u_id`=1 AND heartrate != 'None' AND heartrate != '0'";
 } else if ($param['steps'] == 1) {
@@ -50,6 +87,8 @@ $d = array();
 for ($x = 0; $x < mysql_num_rows($query); $x++) {
   $data[] = mysql_fetch_assoc($query);
 }
+
+// Here I have hard coded min and max values for each parameter. These values will be read by d3 and used as the min/max on the y-axis of the bar charts.
 while ($k = current($data[0])) {
   if (key($data[0]) == 'heartrate') {
     $d[] = array('name' => key($data[0]), 'value' => $data[0][key($data[0])], 'min' => 0, 'max' => 200 );
@@ -75,7 +114,7 @@ while ($k = current($data[0])) {
   }
 }
 
-//echo json_encode($data);     
+// Sends back the array in a nice json format
 echo json_encode($d);
      
 mysql_close($server);

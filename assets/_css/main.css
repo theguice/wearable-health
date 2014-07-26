@@ -1,0 +1,159 @@
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/*
+.x.axis path {
+  display: none;
+}
+*/
+
+.line {
+  stroke: black;
+  fill: none;
+  stroke-width: 0.75px;
+}
+
+.line.line0 {
+  stroke: steelblue;
+}
+.heartrate rect.bar {
+  fill: steelblue;
+}
+
+.bar.bar1 {
+  fill: orange;
+}
+.steps rect.bar {
+  fill: orange;
+}
+
+.bar.bar2 {
+  fill: green;
+}
+.calories rect.bar {
+  fill: green;
+}
+
+.line.line3 {
+  stroke: yellow;
+}
+.gsr rect.bar{
+  fill: yellow;
+}
+
+.line.line4 {
+  stroke: purple;
+}
+.posture rect.bar{
+  fill: purple;
+}
+
+.line.line5 {
+  stroke: black;
+}
+.skin_temp rect.bar{
+  fill: black;
+}
+
+.line.line6 {
+  stroke: grey;
+}
+.air_temp rect.bar{
+  fill: grey;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: none;
+}
+
+.focus circle.y0 {
+  stroke: blue;
+}
+
+.focus circle.y1 {
+  stroke: red;
+}
+
+.focus line {
+  stroke: purple;
+  shape-rendering: crispEdges;
+}
+
+.focus line.y0 {
+  stroke: steelblue;
+  stroke-dasharray: 3 3;
+  opacity: .5;
+}
+
+.focus line.y1 {
+  stroke: indianred;
+  stroke-dasharray: 3 3;
+  opacity: .5;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+    
+#compare {
+    width: auto;
+    height: 120px;
+}
+
+#side {
+    display: inline-block;
+    width: 150px;
+    height:500px;
+}
+
+body {
+  font: 10px sans-serif;
+  background-color: green;
+}
+
+/* Top Styles */
+#main {
+  display: inline-block;
+}
+
+.top {
+  border: 1px #000 solid;
+  display: inline-block;
+  height: 120px;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+
+/* Side Styles - Google Map */
+
+#map-canvas {
+  height: 500px;
+  width: 300px;
+}
+
+    

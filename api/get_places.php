@@ -20,21 +20,29 @@ $data = array();
 $coords = array();
 
 
-/* PLACES */
+/*  If you want to see more granular locations, you could do this query from the trackpoints table instead.  As long as you build the $data array in the same format, everything that this depends on will keep working the same, just with more points.
+
+I think this would be really cool, especially when the user zooms in to a day or lower, and can follow their path along the map as they move across the main viz.
+
+If you do try this, you'll probably want to reduce the marker radius in the map_custom.js file
+*/
+
+
 $myquery = "SELECT * FROM `wh_d_moves_places` WHERE `u_id`=" . $param['user_id'] . " ORDER BY time_start ASC";
 $query = mysql_query($myquery);
 if ( ! $query ) {
   echo mysql_error();
   die;
 }
+
+// Build the array $data before sending it back as a json array
+
 $data['places'] = array();
 for ($x = 0; $x < mysql_num_rows($query); $x++) {
   $d = mysql_fetch_assoc($query);
-  //echo $d['time_start'] . "," . $d['time_end'] . "," . $d['type'] . "," . $d['place_id'] . "," . $d['name'] . "," . $d['lat'] . "," . $d['lon'] . "\n";
   $data['places'][] = $d;
   $coords[$x] = array( $d['lat'], $d['lon'] );
 }
-/*********/
 
 $data['center'] = GetCenterFromDegrees($coords);
 
