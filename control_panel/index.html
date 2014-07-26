@@ -11,38 +11,39 @@
     <link href="../assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/import_users.js"></script>
 </head>
 <body>
     <h1 class="text-error">CONFIDENTIAL</h1>
     <h2>Research Project Control Panel</h2>
-    
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>User ID</th>
-            <th>Begin Date</th>
-            <th>Last Synced</th>
-            <th>Basis</th>
-            <th>Lumo</th>
-            <th>Moves</th>
-        </tr>
-        <tr>
-            <td>Shaun</td>
-            <td>1</td>
-            <td>2014-06-03</td>
-            <td><button class="btn btn-small btn-primary" type="button">Sync</button></td>
-        </tr>
-        <tr>
-            <td>Suhaib</td>
-            <td>2</td>
-            <td>2014-06-21</td>
-            <td><button class="btn btn-small btn-primary" type="button">Sync</button></td>
-        </tr>
-    </table>
+
+    <div id="users"></div>
+
     <ol>
-        <li>populate table from user_table</li>
-        <li>initiate basis server-side download from client "sync" button</li>
-        <li>update client dashboard with latest timestamp of basis data</li>
+      <li>Simplify sync operations to a single button</li>
+      <li>Report failures on a case-by-case basis directly in the table</li>
     </ol>
+    <ol>
+      <li>save_to_db.py -- need to catch condition of incorrect basis credentials</li>
+    </ol>
+
+    <h4>Notes to add user data</h4>
+    <ul>
+      <p>Basis</p>
+      <li>Set three values in DB table: wh_users</li>
+      <li>basis_username</li>
+      <li>basis_password</li>
+      <li>begin_date in YYYY-MM-DD format</li>
+      <p>Lumo</p>
+      <li>Set two values in DB table: wh_users</li>
+      <li>Lumo API url - retrieve from my.lumaback.com</li>
+      <li>begin_date in YYYY-MM-DD format</li>
+      <p>Moves</p>
+      <li>Export data from web interface</li>
+      <li>Unzip main file, and json subdirectory</li>
+      <li>upload to  server with filename convention moves_export_user_ID</li>
+
 </body>
 </html>
+
+
