@@ -76,7 +76,7 @@ function top_bars(param) {
               .append("foreignObject")
                 .attr('x', '30')
                 .attr('y', '0')
-                .html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + d.name + "' ></input>" + d.name + "</label>"; });
+            .html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + d.name + "' ></input>" + d.name + "</label>"; });
 
           svg.selectAll(".bar")
               .data(data)

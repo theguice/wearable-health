@@ -84,7 +84,8 @@ for ($x = 0; $x < mysql_num_rows($query); $x++) {
   }
 
   // This is the actual data output.  echo == print essentially
-  echo $d['date_human'] . "," . $hr/$c_hr . "," . $steps . "," . $calories . "," . $d['gsr'] . "," . $d['skin_temp'] . "," . $d['air_temp'] . "\n";
+  // floor() rounds the value down to nearest whole number
+  echo $d['date_human'] . "," . floor($hr/$c_hr) . "," . floor($steps) . "," . floor($calories) . "," . floor($d['gsr']) . "," . floor($d['skin_temp']) . "," . floor($d['air_temp']) . "\n";
 }
      
 mysql_close($server);

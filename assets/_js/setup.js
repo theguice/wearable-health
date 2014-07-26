@@ -1,5 +1,5 @@
 
-var $base_url = "http://groups.ischool.berkeley.edu/healthstudy";
+var $base_url = "https://groups.ischool.berkeley.edu/healthstudy";
 
 
 

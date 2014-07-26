@@ -5,15 +5,17 @@ var main_margin = {top: 20, right: 80, bottom: 100, left: 40},
     main_height = 500 - main_margin.top - main_margin.bottom,
     mini_height = 500 - mini_margin.top - mini_margin.bottom;
 
-/* D3 has powerful date formatting engine. 
-    Allows you to make little helper functions to use throughout the code. For example here we can call formatDate anywhere we read the time from our data
-*/
-var formatDate = d3.time.format("%H:%M"),
+ 
+//D3 has powerful date formatting engine. 
+//    Allows you to make little helper functions to use throughout the code. For example here we can call formatDate anywhere we read the time from our data
+
+var formatDate = d3.time.format("%Y-%m-%d %H:%M:%S"), 
+    formatDateShort = d3.time.format("%H:%M"),
     parseDate = formatDate.parse,
     bisectDate = d3.bisector(function(d) { return d.Time; }).left,
-    formatOutput0 = function(d) { return formatDate(d.Time) + "  " + d.heartrate; },
-    formatOutput1 = function(d) { return formatDate(d.Time) + "  " + d.steps; },
-    formatOutput2 = function(d) { return formatDate(d.Time) + "  " + d.calories; };
+    formatOutput0 = function(d) { return formatDateShort(d.Time) + "  " + d.heartrate; },
+    formatOutput1 = function(d) { return formatDateShort(d.Time) + "  " + d.steps; },
+    formatOutput2 = function(d) { return formatDateShort(d.Time) + "  " + d.calories; };
 
 // telling scales to take up the full width and height available
 var main_x = d3.time.scale()
@@ -140,7 +142,6 @@ var barsGroup2 = main.append("g")
 
 */
 d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(error, data) {
-//console.log(data);
     
     // some formatting technique - i don't know
   data.forEach(function(d) {
@@ -382,7 +383,8 @@ function brush() {
 
   mainGraph1.attr("x", function(d, i) { return main_x(d.Time); });
   mainGraph2.attr("x", function(d, i) { return main_x(d.Time); });
-    //mainGraph.attr("width", 1);
+    // you can change the width of bars when zoomed in!
+    // mainGraph.attr("width", 1);
 
   main.select(".x.axis").call(main_xAxis);
 }
