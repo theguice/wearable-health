@@ -19,14 +19,14 @@ $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 // error while executing that code, it stops immediately and jumps down to the 
 // catch block.  For more detailed information on exceptions and try/catch blocks: 
 // http://us2.php.net/manual/en/language.exceptions.php 
-    try 
-    { 
-      // This statement opens a connection to your database using the PDO library 
-      // PDO is designed to provide a flexible interface between PHP and many 
-      // different types of database servers.  For more information on PDO: 
-      // http://us2.php.net/manual/en/class.pdo.php 
-      $db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options); 
-    } 
+try 
+{ 
+  // This statement opens a connection to your database using the PDO library 
+  // PDO is designed to provide a flexible interface between PHP and many 
+  // different types of database servers.  For more information on PDO: 
+  // http://us2.php.net/manual/en/class.pdo.php 
+  $db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options); 
+} 
 catch(PDOException $ex) 
 { 
   // If an error occurs while opening a connection to your database, it will 
