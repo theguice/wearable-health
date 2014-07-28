@@ -1,12 +1,10 @@
 <?php
-$username = "shaun"; 
-$password = "ischool";   
-$host = "localhost";
-$database="shaun";
-    
-$server = mysql_connect($host, $username, $password);
-$connection = mysql_select_db($database, $server);
 
+  // First we execute our common code to connection to the database and start the session 
+require("../common.php"); 
+
+$server = mysql_connect($host, $username, $password);
+$connection = mysql_select_db($dbname, $server);
 
 $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $parts = parse_url($url);

@@ -11,9 +11,9 @@ import datetime
 #Server Connection to MySQL:
 import MySQLdb
 conn = MySQLdb.connect(host=   "localhost",
-                       user=   "shaun",
-                       passwd= "ischool",
-                       db=     "shaun")
+                       user=   "healthstudy",
+                       passwd= "jo9fog",
+                       db=     "healthstudy")
 x = conn.cursor()
 
 #31,625

@@ -1,3 +1,6 @@
+
+
+
 .axis path,
 .axis line {
   fill: none;
@@ -119,7 +122,6 @@
 
 body {
   font: 10px sans-serif;
-  background-color: green;
 }
 
 /* Top Styles */
