@@ -85,7 +85,7 @@ if(!empty($_POST))
     // Initial query parameter values 
     $query_params = array( 
 			  ':email' => $_POST['email'], 
-			  ':user_id' => $_SESSION['user']['id'], 
+			  ':user_id' => $_SESSION['user']['u_id'], 
 			   ); 
          
     // If the user is changing their password, then we need parameter values 
@@ -119,7 +119,7 @@ if(!empty($_POST))
         // to update the one record with for the current user. 
         $query .= " 
             WHERE 
-                id = :user_id 
+                u_id = :user_id 
         "; 
          
         try 

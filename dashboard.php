@@ -52,7 +52,10 @@ if(empty($_SESSION['user']))
     <div id="side">
       <div id="map-canvas"></div>
     </div>
-
+  <br />  <br />  <br />
+  <footer class="center">
+  <a href="logout.php">Logout</a><span> | </span><a href="edit_account.php">Edit</a>
+  </footer>
 <!-- setup.js holds global vars and click-handlers -->
 <script src="assets/_js/setup.js"></script>
 <!-- main_graph.js holds all d3 logic for the main visualization -->

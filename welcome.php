@@ -19,6 +19,9 @@ if(empty($_SESSION['user']))
 // We can display the user's username to them by reading it from the session array.  Remember that because 
 // a username is user submitted content we must use htmlentities on it before displaying it to the user. 
 ?> 
+<script type="text/javascript" src="assets/_lib/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="assets/_lib/bootstrap/css/bootstrap.min.css">
+<script src="assets/_lib/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="assets/_css/basic.css">
 
   <div class="center">
@@ -27,7 +30,7 @@ if(empty($_SESSION['user']))
     <div class="checks">
       <h3>Before we begin:</h3>
       <div id="moves">
-	<label><input type="checkbox" class="checks">I have imported my latest moves data</label><br/>
+	<label><input type="checkbox" class="checks required"> I have imported my latest moves data</label><br/>
 	<ul>
 	  <li><a href="https://accounts.moves-app.com/export">Download your latest moves data here</a></li>
 	  <li>Upload your moves-export zip file here:</li>
@@ -39,13 +42,26 @@ if(empty($_SESSION['user']))
 	</ul>
       </div>
       <div id="basis">
-	<label><input type="checkbox" class="checks">I have plugged in my basis watch to charge & sync</label><br/>
+	<label><input type="checkbox" class="checks required"> I have plugged in my basis watch to charge & sync</label><br/>
         <img width="150" height="auto" src="assets/_img/basis-charging.jpg"/>
       </div>
       <div id="lumo">
-	<label><input type="checkbox" class="checks">I have launched the Lumo App on my smartphone to sync</label><br/>
+	<label><input type="checkbox" class="checks required"> I have launched the Lumo App on my smartphone to sync</label><br/>
         <img width="150" height="auto" src="assets/_img/lumo-sync.jpg"/>
       </div>
     </div>
+      <div id="button" style="display:none;" class="center">
+        <a href="dashboard.php"><button type="button" class="btn btn-lg btn-success">View Data Portal</button></a>
+      </div>
   </div>
 
+<script>
+  $(".required").on('change', function(){
+      console.log($('.required:checked').length, $('.required').length);
+    if ($('.required:checked').length == $('.required').length) {
+      // user has checked all boxes for steps to take
+      // show them the button
+      $("#button").show();
+    }
+  });
+</script>

@@ -23,32 +23,13 @@
     <h2>Researcher Portal</h2>
 
     <div id="users"></div>
-    <h3>Login as user to edit details</h3>
 
-    <ol>
-      <li>Simplify sync operations to a single button</li>
-      <li>Report failures on a case-by-case basis directly in the table</li>
-    </ol>
-    <ol>
-      <li>save_to_db.py -- need to catch condition of incorrect basis credentials</li>
-    </ol>
+    <h4>The following are available when logged in as a user:</h4>
+    <a href="../edit_account.php">edit account</a>
+    <a href="../logout.php">logout</a>
 
-    <h4>Notes to add user data</h4>
-    <ul>
-      <p>Basis</p>
-      <li>Set three values in DB table: wh_users</li>
-      <li>basis_username</li>
-      <li>basis_password</li>
-      <li>begin_date in YYYY-MM-DD format</li>
-      <p>Lumo</p>
-      <li>Set two values in DB table: wh_users</li>
-      <li>Lumo API url - retrieve from my.lumaback.com</li>
-      <li>begin_date in YYYY-MM-DD format</li>
-      <p>Moves</p>
-      <li>Export data from web interface</li>
-      <li>Unzip main file, and json subdirectory</li>
-      <li>upload to  server with filename convention moves_export_user_ID</li>
-
+    <h4>Use this to add new user accounts to the system:</h4>
+    <a href="../register.php">register</a>
 </body>
 </html>
 

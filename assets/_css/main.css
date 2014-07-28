@@ -1,5 +1,9 @@
 
-
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
 
 .axis path,
 .axis line {
@@ -157,5 +161,3 @@ body {
   height: 500px;
   width: 300px;
 }
-
-    

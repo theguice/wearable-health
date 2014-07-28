@@ -2,7 +2,7 @@
 
 
   // First we execute our common code to connection to the database and start the session 
-require("../common.php"); 
+  require("../common.php"); 
 
 $server = mysql_connect($host, $username, $password);
 $connection = mysql_select_db($dbname, $server);
@@ -11,7 +11,6 @@ $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $parts = parse_url($url);
 parse_str($parts['query'], $param);
 
-//if ($param['heartrate'] == 1) {
 $myquery = "SELECT * FROM wh_users";
 $query = mysql_query($myquery);
 
@@ -47,32 +46,23 @@ for ($x = 0; $x < mysql_num_rows($query); $x++) {
   $dt = new DateTime($b);
   $row[] = $dt->format('m-d H:i');
 
+  date_default_timezone_set('America/Los_Angeles');
   $q = mysql_query("SELECT MAX(date_epoch) as latest FROM wh_d_lumo WHERE u_id=" . $d['u_id']);
   $b = mysql_fetch_assoc($q);
   $b = intval($b['latest']);
-  $dt = new DateTime($b);
-  $row[] = $dt->format('m-d H:i');
+  //$dt2 = new DateTime($b);
+  //$row[] = $dt2->format('m-d H:i');
+  $row[] = $b;
 
   $q = mysql_query("SELECT MAX(time_end) as latest FROM wh_d_moves_acts WHERE u_id=" . $d['u_id']);
   $b = mysql_fetch_assoc($q);
   $b = intval($b['latest']);
-  $dt = new DateTime($b);
-  $row[] = $dt->format('m-d H:i');
-
+  //$dt = new DateTime($b);
+  //$row[] = $dt->format('m-d H:i');
+  $row[] = $b;
 
   $table[] = $row;
-  // save $d for good measure
-  //$data[] = $d;
 }
-
-//Name,User ID,Begin Date,Last Synced,Basis,Lumo,Moves
-/*
-while ($k = current($data[0])) {
-  $d[] = array('name' => key($data[0]), 'value' => $data[0][key($data[0])] );
-  next($data[0]);
-}
-*/
-
 echo json_encode($table);
 mysql_close($server);
 ?>

@@ -21,7 +21,7 @@ if(empty($_SESSION['user']))
 // of the rows from the database table. 
     $query = " 
         SELECT 
-            id, 
+            u_id, 
             username, 
             email,
             basis_u,
