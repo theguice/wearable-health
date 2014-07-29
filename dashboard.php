@@ -67,10 +67,15 @@ if(empty($_SESSION['user']))
     <br>
     <br>
 
-    <footer class="center"><a href="logout.php">Logout</a> <span>|</span> <a href="edit_account.php">Edit</a></footer><!-- setup.js holds global vars and click-handlers -->
-    <script src="assets/_js/setup.js" type="text/javascript"></script><!-- main_graph.js holds all d3 logic for the main visualization -->
-    <script src="assets/_js/main_graph.js" type="text/javascript"></script><!-- top_bars.js holds d3 logic for the average bar-graphs at the top of the page -->
-    <script src="assets/_js/top_bars.js" type="text/javascript"></script><!-- map_custom.js is where you specify map style, and setup markers -->
+    <footer class="center"><a href="logout.php">Logout</a> <span>|</span> <a href="edit_account.php">Edit</a></footer>
+    
+    <!-- setup.js holds global vars and click-handlers -->
+    <script src="assets/_js/setup.js" type="text/javascript"></script>
+    <!-- main_graph.js holds all d3 logic for the main visualization -->
+    <script src="assets/_js/main_graph.js" type="text/javascript"></script>
+    <!-- top_bars.js holds d3 logic for the average bar-graphs at the top of the page -->
+    <script src="assets/_js/top_bars.js" type="text/javascript"></script>
+    <!-- map_custom.js is where you specify map style, and setup markers -->
     <script src="assets/_js/map_custom.js" type="text/javascript"></script>
 </body>
 </html>
