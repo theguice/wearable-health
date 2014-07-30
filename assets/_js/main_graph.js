@@ -19,37 +19,71 @@ var formatDate = d3.time.format("%Y-%m-%d %H:%M:%S"),
     formatOutput2 = function(d) { return formatDateShort(d.Time) + "  " + d.calories; };
 
 // telling scales to take up the full width and height available
+/* time axis scales */
 var main_x = d3.time.scale()
     .range([0, main_width]),
     mini_x = d3.time.scale()
     .range([0, main_width]);
 
+/* main graph scale */
+var heartrate_scale = d3.scale.sqrt()
+    .range([main_height, 0]),
+	airtemp_scale = d3.scale.sqrt()
+	.range([250, 50]),
+	skintemp_scale = d3.scale.sqrt()
+	.range([250, 50]),
+	gsr_scale = d3.scale.sqrt()
+	.range([main_height, 300]),
+	step_scale = d3.scale.sqrt()
+	.range([main_height, 0]),
+	calorie_scale = d3.scale.sqrt()
+	.range([main_height, 0]);
+
+/* mini graph scale */
+var heartrate_scale_mini = d3.scale.sqrt()
+    .range([mini_height-20, 0]),
+    airtemp_scale_mini = d3.scale.sqrt()
+	.range([mini_height-15, 25]),
+	skintemp_scale_mini = d3.scale.sqrt()
+	.range([mini_height-15, 25]),
+	gsr_scale_mini = d3.scale.sqrt()
+	.range([mini_height, 40]);
+
+
+
+/*
 var main_y0 = d3.scale.sqrt()
     .range([main_height, 0]),
     main_y1 = d3.scale.sqrt()
     .range([main_height, 0]),
+*/
+/*
     main_y2 = d3.scale.sqrt()
-    .range([0, main_height]),
-    mini_y0 = d3.scale.sqrt()
+    .range([0, main_height]);
+*/
+    
+/*
+var mini_y0 = d3.scale.sqrt()
     .range([mini_height, 0]),
     mini_y1 = d3.scale.sqrt()
     .range([mini_height, 0]);
+*/
 
 // Axis formatting and positioning
 var main_xAxis = d3.svg.axis()
     .scale(main_x)
     .tickFormat(d3.time.format("%m/%d"))
     .orient("bottom"),
-    mini_xAxis = d3.svg.axis()
+	mini_xAxis = d3.svg.axis()
     .scale(mini_x)
     .tickFormat(d3.time.format("%m/%d"))
     .orient("bottom");
 
 var main_yAxisLeft = d3.svg.axis()
-    .scale(main_y0)
+    .scale(heartrate_scale)
     .orient("left");
-    main_yAxisRight = d3.svg.axis()
-.scale(main_y1)
+var main_yAxisRight = d3.svg.axis()
+	.scale(gsr_scale)
     .orient("right");
 
 // The BRUSH is activated when we click-and-drag on the mini graph, located below the main graph
@@ -72,38 +106,38 @@ This is what allows us to have different scales in place for each line, but then
 var main_line0 = d3.svg.line()
     .interpolate("cardinal")
     .x(function(d) { return main_x(d.Time); })
-    .y(function(d) { return main_y0(d.heartrate); });
+    .y(function(d) { return heartrate_scale(d.heartrate); });
 
 var main_line3 = d3.svg.line()
     .interpolate("cardinal")
     .x(function(d) { return main_x(d.Time); })
-    .y(function(d) { return main_y1(d.gsr); });
+    .y(function(d) { return gsr_scale(d.gsr); });
 
 var main_line5 = d3.svg.line()
     .interpolate("cardinal")
     .x(function(d) { return main_x(d.Time); })
-    .y(function(d) { return main_y0(d.skin_temp); });
+    .y(function(d) { return skintemp_scale(d.skin_temp); });
 
 var main_line6 = d3.svg.line()
     .interpolate("cardinal")
     .x(function(d) { return main_x(d.Time); })
-    .y(function(d) { return main_y0(d.air_temp); });
+    .y(function(d) { return airtemp_scale(d.air_temp); });
 
 var mini_line0 = d3.svg.line()
     .x(function(d) { return mini_x(d.Time); })
-    .y(function(d) { return mini_y0(d.heartrate); });
+    .y(function(d) { return heartrate_scale_mini(d.heartrate); });
 
 var mini_line3 = d3.svg.line()
     .x(function(d) { return mini_x(d.Time); })
-    .y(function(d) { return mini_y1(d.gsr); });
+    .y(function(d) { return gsr_scale_mini(d.gsr); });
 
 var mini_line5 = d3.svg.line()
     .x(function(d) { return mini_x(d.Time); })
-    .y(function(d) { return mini_y1(d.skin_temp); });
+    .y(function(d) { return skintemp_scale_mini(d.skin_temp); });
 
 var mini_line6 = d3.svg.line()
     .x(function(d) { return mini_x(d.Time); })
-    .y(function(d) { return mini_y1(d.air_temp); });
+    .y(function(d) { return airtemp_scale_mini(d.air_temp); });
 
 // sets up the svg canvas where we will draw cool stuff
 var svg = d3.select("div#main").append("svg")
@@ -137,7 +171,7 @@ var tip_circle = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<span style='color:white'>" + d.heartrate + "</span>";
+    return "<span style='color:white'>" + d.Time + "</span>";
   });
 
 main.call(tip_circle);
@@ -178,14 +212,24 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	
 	*/
 	main_x.domain([data[0].Time, data[data.length - 1].Time]);
-	main_y0.domain(d3.extent(data, function(d) { return d.heartrate; }));
-	main_y1.domain(d3.extent(data, function(d) { return d.calories; }));
-	main_y2.domain([0, d3.max(data, function(d) { return d.steps*3; })]);
+	
+	heartrate_scale.domain(d3.extent(data, function(d) { return d.heartrate; }));
+	skintemp_scale.domain(d3.extent(data, function(d) { return d.skin_temp; }));
+	airtemp_scale.domain(d3.extent(data, function(d) { return d.air_temp; }));
+	gsr_scale.domain(d3.extent(data, function(d) { return d.gsr; }));
+	calorie_scale.domain(d3.extent(data, function(d) { return d.calories; }));
+	step_scale.domain([0, d3.max(data, function(d) { return d.steps*3; })]);
 	
 	// mini just reuses whatever works for the main
 	mini_x.domain(main_x.domain());
-	mini_y0.domain(main_y0.domain());
+	heartrate_scale_mini.domain(heartrate_scale.domain());
+	skintemp_scale_mini.domain(skintemp_scale.domain());
+	airtemp_scale_mini.domain(airtemp_scale.domain());
+	gsr_scale_mini.domain(gsr_scale.domain());
+/*
+	mini_y0.domain(heartrate_scale.domain());
 	mini_y1.domain(main_y1.domain());
+*/
 	
 	
 	// append means "append element to svg canvas"
@@ -227,23 +271,25 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	Lastly we associate a class to these elements "bar" and "bar2", which are referenced by our main.css file
 	
 	*/
+/*
 	mainGraph2 = barsGroup2.selectAll("rect")
 		.data(data)
 		.enter().append("rect")
 		.attr("x", function(d, i) { return main_x(d.Time); })
-		.attr("y", function(d) { return main_height - main_y2(d.calories) - main_y2(d.steps); })
+		.attr("y", function(d) { return main_height - calorie_scale(d.calories) - step_scale(d.steps); })
 		.attr("width", 1)
-		.attr("height", function(d) { return main_y2(d.calories); })
+		.attr("height", function(d) { return calorie_scale(d.calories); })
 		.attr("class", "bar bar2");
 	
 	mainGraph1 = barsGroup1.selectAll("rect")
 		.data(data)
 		.enter().append("rect")
 		.attr("x", function(d, i) { return main_x(d.Time); })
-		.attr("y", function(d) { return main_height - main_y2(d.steps); })
+		.attr("y", function(d) { return main_height - step_scale(d.steps); })
 		.attr("width", 1)
-		.attr("height", function(d) { return main_y2(d.steps); })
+		.attr("height", function(d) { return step_scale(d.steps); })
 		.attr("class", "bar bar1");
+*/
 	
 	main.append("g")
 		.attr("class", "x axis")
@@ -321,8 +367,8 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	*/
 	focus.append("line")
 		.attr("class", "x")
-		.attr("y1", main_y0(0) - 6)
-		.attr("y2", main_y0(0) + 6)
+		.attr("y1", heartrate_scale(0) - 6)
+		.attr("y2", heartrate_scale(0) + 6)
 	
 	focus.append("line")
 		.attr("class", "y0")
@@ -354,11 +400,11 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("class", "overlay")
 		.attr("width", main_width)
 		.attr("height", main_height)
-		.on("mouseover", tip_circle.show)
-		.on('mouseout', tip_circle.hide)
-/* 		.on("mouseover", function() { focus.style("display", null); }) */
-/* 		.on("mouseout", function() { focus.style("display", "none"); }) */
-/* 		.on("mousemove", mousemove); */
+/* 		.on("mouseover", tip_circle.show) */
+/* 		.on('mouseout', tip_circle.hide) */
+		.on("mouseover", function() { focus.style("display", null); })
+		.on("mouseout", function() { focus.style("display", "none"); })
+		.on("mousemove", mousemove);
 
 	function mousemove() {
 	
@@ -371,13 +417,13 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		
 		mapHighlightPoint(t);
 		
-		focus.select("circle.y0").attr("transform", "translate(" + main_x(d.Time) + "," + main_y0(d.heartrate) + ")");
-		focus.select("text.y0").attr("transform", "translate(" + main_x(d.Time) + "," + main_y0(d.heartrate) + ")").text(formatOutput0(d));
-		focus.select("circle.y1").attr("transform", "translate(" + main_x(d.Time) + "," + main_y1(d.steps) + ")");
-		focus.select("text.y1").attr("transform", "translate(" + main_x(d.Time) + "," + main_y1(d.steps) + ")").text(formatOutput1(d));
+		focus.select("circle.y0").attr("transform", "translate(" + main_x(d.Time) + "," + heartrate_scale(d.heartrate) + ")");
+		focus.select("text.y0").attr("transform", "translate(" + main_x(d.Time) + "," + heartrate_scale(d.heartrate) + ")").text(formatOutput0(d));
+		focus.select("circle.y1").attr("transform", "translate(" + main_x(d.Time) + "," + step_scale(d.steps) + ")");
+		focus.select("text.y1").attr("transform", "translate(" + main_x(d.Time) + "," + step_scale(d.steps) + ")").text(formatOutput1(d));
 		focus.select(".x").attr("transform", "translate(" + main_x(d.Time) + ",0)");
-		focus.select(".y0").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.heartrate) + ")").attr("x2", main_width + main_x(d.Time));
-		focus.select(".y1").attr("transform", "translate(0, " + main_y1(d.steps) + ")").attr("x1", main_x(d.Time));
+		focus.select(".y0").attr("transform", "translate(" + main_width * -1 + ", " + heartrate_scale(d.heartrate) + ")").attr("x2", main_width + main_x(d.Time));
+		focus.select(".y1").attr("transform", "translate(0, " + step_scale(d.steps) + ")").attr("x1", main_x(d.Time));
 	}
 });
 
@@ -394,8 +440,10 @@ function brush() {
 	main.select(".line5").attr("d", main_line5);
 	main.select(".line6").attr("d", main_line6);
 	
+/*
 	mainGraph1.attr("x", function(d, i) { return main_x(d.Time); });
 	mainGraph2.attr("x", function(d, i) { return main_x(d.Time); });
+*/
 	// you can change the width of bars when zoomed in!
 	// mainGraph.attr("width", 1);
 	
