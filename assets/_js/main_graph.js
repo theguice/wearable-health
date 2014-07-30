@@ -14,9 +14,9 @@ var formatDate = d3.time.format("%Y-%m-%d %H:%M:%S"),
     formatDateShort = d3.time.format("%H:%M"),
     parseDate = formatDate.parse,
     bisectDate = d3.bisector(function(d) { return d.Time; }).left,
-    formatOutput0 = function(d) { return formatDateShort(d.Time) + "  " + d.heartrate; },
-    formatOutput1 = function(d) { return formatDateShort(d.Time) + "  " + d.steps; },
-    formatOutput2 = function(d) { return formatDateShort(d.Time) + "  " + d.calories; };
+    formatOutputHeartRate = function(d) { return formatDateShort(d.Time) + "  " + d.heartrate + " bmp"; },
+    formatOutputSteps = function(d) { return formatDateShort(d.Time) + "  " + d.steps + " steps"; },
+    formatOutputCalories = function(d) { return formatDateShort(d.Time) + "  " + d.calories; };
 
 // telling scales to take up the full width and height available
 /* time axis scales */
@@ -293,7 +293,7 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("y", 6)
 		.attr("dy", ".71em")
 		.style("text-anchor", "end")
-		.text("Heartrate & Steps");
+		.text("Heartrate");
 	
 	main.append("g")
 		.attr("class", "y axis axisRight")
@@ -352,37 +352,39 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	/*  The focus is what draws the mouseover lines, cirles and labels on the main data lines 
 	
 	It is linked to data below, in the mousemove function. It is there that you will format the dates
+	
+	y0 - heart rate
+	y1 - steps
 	*/
+
 	focus.append("line")
 		.attr("class", "x")
-		.attr("y1", heartrate_scale(0) - 6)
-		.attr("y2", heartrate_scale(0) + 6)
+		.attr("y1", 0)
+		.attr("y2", main_height);
 	
 	focus.append("line")
 		.attr("class", "y0")
-		.attr("x1", main_width - 6) // nach links
-		.attr("x2", main_width + 6); // nach rechts
-		
+		.attr("x1", main_width - 6)
+		.attr("x2", main_width + 6);
+	focus.append("circle")
+		.attr("class", "y0")
+		.attr("r", 4);
+	focus.append("text")
+		.attr("class", "y0")
+		.attr("dy", "-1em");
+	
+	
 	focus.append("line")
 		.attr("class", "y1")
 		.attr("x1", main_width - 6)
 		.attr("x2", main_width + 6);
-	
-	focus.append("circle")
-		.attr("class", "y0")
-		.attr("r", 4);
-	
-	focus.append("text")
-		.attr("class", "y0")
-		.attr("dy", "-1em");
-	
 	focus.append("circle")
 		.attr("class", "y1")
 		.attr("r", 4);
-	
 	focus.append("text")
 		.attr("class", "y1")
 		.attr("dy", "-1em");
+	
 	
 	main.append("rect")
 		.attr("class", "overlay")
@@ -404,12 +406,14 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		mapHighlightPoint(t);
 		
 		focus.select("circle.y0").attr("transform", "translate(" + main_x(d.Time) + "," + heartrate_scale(d.heartrate) + ")");
-		focus.select("text.y0").attr("transform", "translate(" + main_x(d.Time) + "," + heartrate_scale(d.heartrate) + ")").text(formatOutput0(d));
-		focus.select("circle.y1").attr("transform", "translate(" + main_x(d.Time) + "," + step_scale(d.steps) + ")");
-		focus.select("text.y1").attr("transform", "translate(" + main_x(d.Time) + "," + step_scale(d.steps) + ")").text(formatOutput1(d));
-		focus.select(".x").attr("transform", "translate(" + main_x(d.Time) + ",0)");
+		focus.select("text.y0").attr("transform", "translate(" + main_x(d.Time) + "," + heartrate_scale(d.heartrate) + ")").text(formatOutputHeartRate(d));
 		focus.select(".y0").attr("transform", "translate(" + main_width * -1 + ", " + heartrate_scale(d.heartrate) + ")").attr("x2", main_width + main_x(d.Time));
-		focus.select(".y1").attr("transform", "translate(0, " + step_scale(d.steps) + ")").attr("x1", main_x(d.Time));
+		
+		focus.select("circle.y1").attr("transform", "translate(" + main_x(d.Time) + "," + (main_height - step_scale(d.steps)) + ")");
+		focus.select("text.y1").attr("transform", "translate(" + main_x(d.Time) + "," + (main_height - step_scale(d.steps)) + ")").text(formatOutputSteps(d));
+		focus.select(".y1").attr("transform", "translate(0, " + (main_height - step_scale(d.steps)) + ")").attr("x1", main_x(d.Time));
+		
+		focus.select(".x").attr("transform", "translate(" + main_x(d.Time) + ",0)");
 	}
 });
 

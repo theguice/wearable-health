@@ -84,26 +84,30 @@
 }
 
 .focus circle.y0 {
-  stroke: blue;
+  stroke: #386EA5;
 }
 
 .focus circle.y1 {
-  stroke: red;
+  stroke: #FA9420;
 }
 
 .focus line {
-  stroke: purple;
-  shape-rendering: crispEdges;
+/*stroke: #9FBAC5;
+shape-rendering: crispEdges;
+
+  stroke: grey;
+  shape-rendering: crispEdges;*/
+  stroke: rgb(0, 0, 0); stroke-width: 1px; stroke-opacity: 0.4;
 }
 
 .focus line.y0 {
-  stroke: steelblue;
+  stroke: #386EA5;
   stroke-dasharray: 3 3;
   opacity: .5;
 }
 
 .focus line.y1 {
-  stroke: indianred;
+  stroke: #FA9420;
   stroke-dasharray: 3 3;
   opacity: .5;
 }
