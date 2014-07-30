@@ -66,7 +66,9 @@ if(empty($_SESSION['user']))
     <br>
     <br>
     <br>
-
+    <div class="compare">
+		<button id="addComparison" style="display:none">Add</button>
+    </div>
     <footer class="center"><a href="logout.php">Logout</a> <span>|</span> <a href="edit_account.php">Edit</a></footer>
     
     <!-- setup.js holds global vars and click-handlers -->

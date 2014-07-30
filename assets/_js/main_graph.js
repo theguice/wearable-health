@@ -432,8 +432,23 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
     Of course we want to add them all here
 */
 
+var addComparisonButton = d3.select("button")
+
+
 function brush() {
+
+	if (brush.empty())
+	{
+		// hide button
+		addComparisonButton.style("display","none");
+	}else
+	{
+		// show button
+		addComparisonButton.style("display",null);
+	}
+	
 	main_x.domain(brush.empty() ? mini_x.domain() : brush.extent());
+	
 	main.select(".line0").attr("d", main_line0);
 	main.select(".line3").attr("d", main_line3);
 	main.select(".line5").attr("d", main_line5);
