@@ -33,6 +33,7 @@
 
 .bar.bar1 {
   fill: orange;
+  opacity: 0.9;
 }
 .steps rect.bar {
   fill: orange;

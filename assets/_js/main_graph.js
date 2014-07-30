@@ -35,9 +35,9 @@ var heartrate_scale = d3.scale.sqrt()
 	gsr_scale = d3.scale.sqrt()
 	.range([main_height, 300]),
 	step_scale = d3.scale.sqrt()
-	.range([main_height, 0]),
+	.range([0, main_height-200]),
 	calorie_scale = d3.scale.sqrt()
-	.range([main_height, 0]);
+	.range([0, main_height-300]);
 
 /* mini graph scale */
 var heartrate_scale_mini = d3.scale.sqrt()
@@ -158,12 +158,12 @@ var main = svg.append("g")
 var mini = svg.append("g")
     .attr("transform", "translate(" + mini_margin.left + "," + mini_margin.top + ")");
 
-// Steps Bars  --  linked to data below
-var barsGroup1 = main.append("g")
+// Calories Bars  --  linked to data below
+var caloriesBarGroup = main.append("g")
     .attr('clip-path', 'url(#clip)');
 
-// Calories Bars  --  linked to data below
-var barsGroup2 = main.append("g")
+// Steps Bars  --  linked to data below
+var stepsBarGroup = main.append("g")
     .attr('clip-path', 'url(#clip)');
 
 // Tool Tip
@@ -218,7 +218,7 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	airtemp_scale.domain(d3.extent(data, function(d) { return d.air_temp; }));
 	gsr_scale.domain(d3.extent(data, function(d) { return d.gsr; }));
 	calorie_scale.domain(d3.extent(data, function(d) { return d.calories; }));
-	step_scale.domain([0, d3.max(data, function(d) { return d.steps*3; })]);
+	step_scale.domain([0, d3.max(data, function(d) { return d.steps; })]);
 	
 	// mini just reuses whatever works for the main
 	mini_x.domain(main_x.domain());
@@ -271,17 +271,16 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	Lastly we associate a class to these elements "bar" and "bar2", which are referenced by our main.css file
 	
 	*/
-/*
-	mainGraph2 = barsGroup2.selectAll("rect")
+	caloriesMainGraph = caloriesBarGroup.selectAll("rect")
 		.data(data)
 		.enter().append("rect")
 		.attr("x", function(d, i) { return main_x(d.Time); })
-		.attr("y", function(d) { return main_height - calorie_scale(d.calories) - step_scale(d.steps); })
+		.attr("y", function(d) { return main_height - calorie_scale(d.calories); })
 		.attr("width", 1)
 		.attr("height", function(d) { return calorie_scale(d.calories); })
 		.attr("class", "bar bar2");
 	
-	mainGraph1 = barsGroup1.selectAll("rect")
+	stepsMainGraph = stepsBarGroup.selectAll("rect")
 		.data(data)
 		.enter().append("rect")
 		.attr("x", function(d, i) { return main_x(d.Time); })
@@ -289,7 +288,6 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("width", 1)
 		.attr("height", function(d) { return step_scale(d.steps); })
 		.attr("class", "bar bar1");
-*/
 	
 	main.append("g")
 		.attr("class", "x axis")
@@ -440,10 +438,8 @@ function brush() {
 	main.select(".line5").attr("d", main_line5);
 	main.select(".line6").attr("d", main_line6);
 	
-/*
-	mainGraph1.attr("x", function(d, i) { return main_x(d.Time); });
-	mainGraph2.attr("x", function(d, i) { return main_x(d.Time); });
-*/
+	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
+	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	// you can change the width of bars when zoomed in!
 	// mainGraph.attr("width", 1);
 	
