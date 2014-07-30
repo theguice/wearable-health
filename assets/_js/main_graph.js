@@ -35,9 +35,9 @@ var heartrate_scale = d3.scale.sqrt()
 	gsr_scale = d3.scale.sqrt()
 	.range([main_height, 300]),
 	step_scale = d3.scale.sqrt()
-	.range([0, main_height-200]),
+	.range([main_height, 200]),
 	calorie_scale = d3.scale.sqrt()
-	.range([0, main_height-300]);
+	.range([main_height, 300]);
 
 /* mini graph scale */
 var heartrate_scale_mini = d3.scale.sqrt()
@@ -83,8 +83,9 @@ var main_yAxisLeft = d3.svg.axis()
     .scale(heartrate_scale)
     .orient("left");
 var main_yAxisRight = d3.svg.axis()
-	.scale(gsr_scale)
-    .orient("right");
+	.scale(step_scale)
+    .orient("right")
+    .tickValues([0, 400, 900, 1600, 2500, 3600, 4900]);
 
 // The BRUSH is activated when we click-and-drag on the mini graph, located below the main graph
 var brush = d3.svg.brush()
@@ -265,7 +266,7 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.data(data)
 		.enter().append("rect")
 		.attr("x", function(d, i) { return main_x(d.Time); })
-		.attr("y", function(d) { return main_height - calorie_scale(d.calories); })
+		.attr("y", function(d) { return calorie_scale(d.calories); })
 		.attr("width", 1)
 		.attr("height", function(d) { return calorie_scale(d.calories); })
 		.attr("class", "bar bar2");
@@ -274,7 +275,7 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.data(data)
 		.enter().append("rect")
 		.attr("x", function(d, i) { return main_x(d.Time); })
-		.attr("y", function(d) { return main_height - step_scale(d.steps); })
+		.attr("y", function(d) { return step_scale(d.steps); })
 		.attr("width", 1)
 		.attr("height", function(d) { return step_scale(d.steps); })
 		.attr("class", "bar bar1");
@@ -294,7 +295,15 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("dy", ".71em")
 		.style("text-anchor", "end")
 		.text("Heartrate");
-	
+
+	// Right Axis line #glue
+	main.append("line")
+		.attr("class", "axis")
+		.attr("y1", 0)
+		.attr("y2", main_height)
+		.attr("x1", main_width)
+		.attr("x2", main_width);
+
 	main.append("g")
 		.attr("class", "y axis axisRight")
 		.attr("transform", "translate(" + main_width + ", 0)")
@@ -304,7 +313,7 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("y", -12)
 		.attr("dy", ".71em")
 		.style("text-anchor", "end")
-		.text("Calories");
+		.text("Steps");
 	
 	/*  And then we draw the mini lines
 	
@@ -409,9 +418,9 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		focus.select("text.y0").attr("transform", "translate(" + main_x(d.Time) + "," + heartrate_scale(d.heartrate) + ")").text(formatOutputHeartRate(d));
 		focus.select(".y0").attr("transform", "translate(" + main_width * -1 + ", " + heartrate_scale(d.heartrate) + ")").attr("x2", main_width + main_x(d.Time));
 		
-		focus.select("circle.y1").attr("transform", "translate(" + main_x(d.Time) + "," + (main_height - step_scale(d.steps)) + ")");
-		focus.select("text.y1").attr("transform", "translate(" + main_x(d.Time) + "," + (main_height - step_scale(d.steps)) + ")").text(formatOutputSteps(d));
-		focus.select(".y1").attr("transform", "translate(0, " + (main_height - step_scale(d.steps)) + ")").attr("x1", main_x(d.Time));
+		focus.select("circle.y1").attr("transform", "translate(" + main_x(d.Time) + "," + step_scale(d.steps) + ")");
+		focus.select("text.y1").attr("transform", "translate(" + main_x(d.Time) + "," + step_scale(d.steps) + ")").text(formatOutputSteps(d));
+		focus.select(".y1").attr("transform", "translate(0, " + step_scale(d.steps) + ")").attr("x1", main_x(d.Time));
 		
 		focus.select(".x").attr("transform", "translate(" + main_x(d.Time) + ",0)");
 	}
