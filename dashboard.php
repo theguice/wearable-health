@@ -27,7 +27,6 @@ if(empty($_SESSION['user']))
 	<link rel="stylesheet" href="assets/_css/main.css" type="text/css"><!-- Libs -->
 	
 	<script type="text/javascript" src="assets/_lib/d3.v3.min.js"></script>
-	<script type="text/javascript" src="assets/_lib/tooltip.js"></script>
 	<script type="text/javascript" src="assets/_lib/jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet" href="assets/_lib/bootstrap/css/bootstrap.min.css" type="text/css">
 	<script src="assets/_lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

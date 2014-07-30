@@ -166,16 +166,6 @@ var caloriesBarGroup = main.append("g")
 var stepsBarGroup = main.append("g")
     .attr('clip-path', 'url(#clip)');
 
-// Tool Tip
-var tip_circle = d3.tip()
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .html(function(d) {
-    return "<span style='color:white'>" + d.Time + "</span>";
-  });
-
-main.call(tip_circle);
-
 
 /* This next line gets the big dataset and opens a new scope
     everything within its scope executes once per line in the dataset
@@ -398,8 +388,6 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("class", "overlay")
 		.attr("width", main_width)
 		.attr("height", main_height)
-/* 		.on("mouseover", tip_circle.show) */
-/* 		.on('mouseout', tip_circle.hide) */
 		.on("mouseover", function() { focus.style("display", null); })
 		.on("mouseout", function() { focus.style("display", "none"); })
 		.on("mousemove", mousemove);
