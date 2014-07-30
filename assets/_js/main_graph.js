@@ -14,8 +14,8 @@ var formatDate = d3.time.format("%Y-%m-%d %H:%M:%S"),
     formatDateShort = d3.time.format("%H:%M"),
     parseDate = formatDate.parse,
     bisectDate = d3.bisector(function(d) { return d.Time; }).left,
-    formatOutputHeartRate = function(d) { return formatDateShort(d.Time) + "  " + d.heartrate + " bmp"; },
-    formatOutputSteps = function(d) { return formatDateShort(d.Time) + "  " + d.steps + " steps"; },
+    formatOutputHeartRate = function(d) { return formatDateShort(d.Time) + "  " + d.heartrate + "bmp"; },
+    formatOutputSteps = function(d) { return formatDateShort(d.Time) + "  " + d.steps + "steps"; },
     formatOutputCalories = function(d) { return formatDateShort(d.Time) + "  " + d.calories; };
 
 // telling scales to take up the full width and height available
