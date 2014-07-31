@@ -1,10 +1,12 @@
 var $base_url = "http://localhost:8888";
 /* var $base_url = "https://groups.ischool.berkeley.edu/healthstudy"; */
 
-console.log('assigning click handler');
+/* console.log('assigning click handler'); */
+/*
 if (!$("#option_heartrate").is(":checked")) {
 	console.log('checked');
 }
+*/
 $(".top").on('click', function() {
 	if ($('#option_heartrate').is(":checked")) {
 		$(".line.line0").css("visibility", "hidden");
