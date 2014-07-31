@@ -65,13 +65,11 @@ for (i = 0; i < topBarSensors.length; i++)
 
 function addCompareRangeToTopBar()
 {
-	console.log('addCompareRangeToTopBar');
 	for (i = 0; i < topBarSensors.length; i++)
 	{
 	    var sensor = topBarSensors[i];
 		d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc, function(error, data)
 		{
-			console.log(data[0].name+":"+data[0].value);
 		    topBarData[data[0].name].push(data[0].value);
 		    animateAndUpdateTopbar(data[0].name);
 		});
@@ -117,10 +115,7 @@ function initTopBar(sensor)
 		.attr("dy", ".71em")
 		.style("text-anchor", "end");
 
-	svg_bar.selectAll("foreignObject")
-		.data(data)
-		.enter()
-		.append("foreignObject")
+	svg_bar.append("foreignObject")
 		.attr('x', '30')
 		.attr('y', '0')
 		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' ></input>" + sensor + "</label>"; });
