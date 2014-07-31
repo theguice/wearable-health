@@ -47,7 +47,7 @@ if(empty($_SESSION['user']))
 
         <div class="gsr top"></div>
 
-        <div class="posture top"></div>
+<!--         <div class="posture top"></div> -->
 
         <div class="skin_temp top"></div>
 
