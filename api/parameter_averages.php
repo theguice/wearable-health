@@ -47,6 +47,27 @@ I hope this psuedocode makes at least some sense.
 
 */
 
+/*
+
+Expected Parameters
+start_time: epoc
+end_time: epoc
+
+heartrate: 1
+steps
+calories
+gsr
+skin_temp
+air_temp
+
+days: weekdays or weekends
+*/
+
+
+
+
+
+
 if ($param['heartrate'] == 1) {
   $myquery = "SELECT  AVG(heartrate) as heartrate FROM  `wh_d_basis` WHERE `u_id`=1 AND heartrate != 'None' AND heartrate != '0'";
 } else if ($param['steps'] == 1) {
@@ -63,6 +84,12 @@ if ($param['heartrate'] == 1) {
   // quit
   exit();
 }
+
+if ($param['start_time']  && $param['end_time'])
+{
+	$myquery .= sprintf(" AND date_epoch > %u AND date_epoch < %u", $param['start_time'], $param['end_time']);
+}
+
 // day modifier
 if ($param['days'] == 'weekdays') {
   $myquery .= " AND dayofweek(date_human) IN (2,3,4,5,6)";

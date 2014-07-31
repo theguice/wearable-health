@@ -432,7 +432,25 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
     Of course we want to add them all here
 */
 
-var addComparisonButton = d3.select("button")
+var addComparisonButton = d3.select("button");
+
+addComparisonButton.on("click", addCompareRangeToTopBar);
+
+var startDateEpoc = 0,
+	endDateEpoc = 0;
+
+function addCompareRangeToTopBar() {
+	console.log('addCompareRangeToTopBar');
+	var param = "heartrate";
+	var url = $base_url + "/api/parameter_averages.php?"+param+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc;
+	console.log(url);
+	d3.json($base_url + "/api/parameter_averages.php?"+param+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc, function(error, data)
+	{
+		console.log(data);
+	});
+
+}
+
 
 
 function brush() {
@@ -445,6 +463,10 @@ function brush() {
 	{
 		// show button
 		addComparisonButton.style("display",null);
+		var dateRange = brush.extent();
+		window.startDateEpoc = (((+dateRange[0])/1000)|0);
+		window.endDateEpoc = (((+dateRange[1])/1000)|0);
+		console.log(+dateRange[0]);
 	}
 	
 	main_x.domain(brush.empty() ? mini_x.domain() : brush.extent());
@@ -461,3 +483,4 @@ function brush() {
 	
 	main.select(".x.axis").call(main_xAxis);
 }
+
