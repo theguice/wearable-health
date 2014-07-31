@@ -31,7 +31,7 @@ function mapResetIcons() {
 
 $.getJSON($base_url + "/api/get_places.php?user_id=1", function( data ) {
   data_places = data;
-  console.log(data_places);
+  /* console.log(data_places); */
 
   var myLatLng = new google.maps.LatLng( data['center'][0], data['center'][1] );
   map.setCenter(myLatLng);
