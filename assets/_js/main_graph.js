@@ -90,7 +90,7 @@ var main_yAxisRight = d3.svg.axis()
 // The BRUSH is activated when we click-and-drag on the mini graph, located below the main graph
 var brush = d3.svg.brush()
     .x(mini_x)
-    .on("brush", brush);
+    .on("brush", onBrush);
 
 
 /* main_lineX and mini_lineX are linking the lines (or paths) that will be drawn to scaled data.  
@@ -439,14 +439,29 @@ addComparisonButton.on("click", addCompareRange);
 var startDateEpoc = 0,
 	endDateEpoc = 0;
 
+
 function addCompareRange() {
 	addCompareRangeToTopBar();
-
+	diableAddRangeButton();
+	addCompareRangeToMainViz();
 }
 
 
+function addCompareRangeToMainViz()
+{
+	console.log("start px:"+main_x(startDateEpoc*1000));
+	console.log("start px:"+main_x(endDateEpoc*1000));
+}
 
-function brush() {
+
+function diableAddRangeButton()
+{
+	d3.selectAll(".brush").call(brush.clear());
+	onBrush();
+}
+
+
+function onBrush() {
 
 	if (brush.empty())
 	{
@@ -457,6 +472,10 @@ function brush() {
 		// show button
 		addComparisonButton.style("display",null);
 		var dateRange = brush.extent();
+/*
+		console.log("brush Range:"+dateRange[0]+","+dateRange[1]);
+		console.log("brush range in pixels:"+main_x(dateRange[0])+","+main_x(dateRange[1]));
+*/
 		window.startDateEpoc = (((+dateRange[0])/1000)|0);
 		window.endDateEpoc = (((+dateRange[1])/1000)|0);
 	}
