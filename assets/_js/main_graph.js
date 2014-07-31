@@ -155,6 +155,14 @@ svg.append("defs").append("clipPath")
 // Appending these group elements is needed for drawing the bars vertically.
 var main = svg.append("g")
     .attr("transform", "translate(" + main_margin.left + "," + main_margin.top + ")");
+    
+
+var brushedRegionGroup = main.append("g")
+	.attr("id", "brushedRegion")
+	.attr("width", main_width)
+	.attr("height", main_height)
+	.style("fill","none");
+
 
 var mini = svg.append("g")
     .attr("transform", "translate(" + mini_margin.left + "," + mini_margin.top + ")");
@@ -225,6 +233,8 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	
 	// append means "append element to svg canvas"
 	// path is drawing the line according to the data (which we linked up earlier to these main_lineX variables
+	
+
 	main.append("path")
 		.datum(data)
 		.attr("clip-path", "url(#clip)")
@@ -451,6 +461,19 @@ function addCompareRangeToMainViz()
 {
 	console.log("start px:"+main_x(startDateEpoc*1000));
 	console.log("start px:"+main_x(endDateEpoc*1000));
+	
+	var brushedRegion = svg.select("#brushedRegion");
+	
+	var start_px = main_x(startDateEpoc*1000);
+	var end_px = main_x(endDateEpoc*1000);
+	
+	brushedRegion.append("rect")
+		.attr("class", "brushedRegion")
+		.attr("width", (end_px-start_px))
+		.attr("height", main_height)
+		.attr("x",start_px)
+		.style("fill","grey")
+		.style("opacity",0.2);
 }
 
 
@@ -467,10 +490,14 @@ function onBrush() {
 	{
 		// hide button
 		addComparisonButton.style("display","none");
+		brushedRegionGroup.style("display",null);
+		
 	}else
 	{
 		// show button
 		addComparisonButton.style("display",null);
+		brushedRegionGroup.style("display","none");
+
 		var dateRange = brush.extent();
 /*
 		console.log("brush Range:"+dateRange[0]+","+dateRange[1]);
