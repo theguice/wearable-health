@@ -1,5 +1,5 @@
-/* var $base_url = "http://localhost:8888"; */
-var $base_url = "https://people.ischool.berkeley.edu/~shubham/wearable-health";
+var $base_url = "http://localhost:8888";
+/* var $base_url = "https://people.ischool.berkeley.edu/~shubham/wearable-health"; */
 /* var $base_url = "https://groups.ischool.berkeley.edu/healthstudy"; */
 
 /* console.log('assigning click handler'); */
@@ -15,14 +15,14 @@ $(".top").on('click', function() {
 		$(".line.line0").css("visibility", "hidden");
 	}
 	if ($('#option_steps').is(":checked")) {
-		$(".line.line1").css("visibility", "visible");
+		$(".bar.bar1").css("visibility", "visible");
 	} else {
-		$(".line.line1").css("visibility", "hidden");
+		$(".bar.bar1").css("visibility", "hidden");
 	}
 	if ($('#option_calories').is(":checked")) {
-		$(".line.line2").css("visibility", "visible");
+		$(".bar.bar2").css("visibility", "visible");
 	} else {
-		$(".line.line2").css("visibility", "hidden");
+		$(".bar.bar2").css("visibility", "hidden");
 	}
 	if ($('#option_gsr').is(":checked")) {
 		$(".line.line3").css("visibility", "visible");
