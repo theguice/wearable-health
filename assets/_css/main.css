@@ -2015,7 +2015,7 @@ table [class*=span],
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../img/glyphicons-halflings.png");
+  background-image: url("../_img/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
 }
@@ -2033,7 +2033,7 @@ table [class*=span],
 .dropdown-menu > li > a:hover > [class*=" icon-"],
 .dropdown-menu > .active > a > [class^="icon-"],
 .dropdown-menu > .active > a > [class*=" icon-"] {
-  background-image: url("../img/glyphicons-halflings-white.png");
+  background-image: url("../_img/glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;
@@ -5477,7 +5477,7 @@ header#header .container {
 }
 header#header #logo {
   text-indent: -9999px;
-  background: url('../img/logo.png') no-repeat;
+  background: url('../_img/logo.png') no-repeat;
   width: 120px;
   height: 48px;
   padding: 0px;
@@ -5618,12 +5618,12 @@ header#header .navbar .sign-in {
 .feature-right .iphone {
   position: relative;
   margin: 0px auto;
-  background: url('../img/iphone.png') no-repeat;
+  background: url('../_img/iphone.png') no-repeat;
   width: 296px;
   height: 582px;
 }
 .feature-right .iphone .iphone-glare {
-  background: url('../img/iphone-glare.png') no-repeat;
+  background: url('../_img/iphone-glare.png') no-repeat;
   width: 296px;
   height: 582px;
   position: absolute;
@@ -5660,12 +5660,12 @@ header#header .navbar .sign-in {
 .feature-right .iphone5 {
   position: relative;
   margin: 0px auto;
-  background: url('../img/iphone5.png') no-repeat;
+  background: url('../_img/iphone5.png') no-repeat;
   width: 296px;
   height: 582px;
 }
 .feature-right .iphone5 .iphone5-glare {
-  background: url('../img/iphone5-glare.png') no-repeat;
+  background: url('../_img/iphone5-glare.png') no-repeat;
   width: 296px;
   height: 582px;
   position: absolute;
@@ -5702,12 +5702,12 @@ header#header .navbar .sign-in {
 .feature-right .macbook {
   position: relative;
   float: right;
-  background: url('../img/macbook.png') no-repeat;
+  background: url('../_img/macbook.png') no-repeat;
   width: 600px;
   height: 342px;
 }
 .feature-right .macbook .macbook-glare {
-  background: url('../img/macbook-glare.png') no-repeat;
+  background: url('../_img/macbook-glare.png') no-repeat;
   width: 600px;
   height: 342px;
   position: absolute;
@@ -5745,12 +5745,12 @@ header#header .navbar .sign-in {
 .feature-right .ipad {
   position: relative;
   float: right;
-  background: url('../img/ipad.png') no-repeat;
+  background: url('../_img/ipad.png') no-repeat;
   width: 582px;
   height: 494px;
 }
 .feature-right .ipad .ipad-glare {
-  background: url('../img/ipad-glare.png') no-repeat;
+  background: url('../_img/ipad-glare.png') no-repeat;
   width: 600px;
   height: 342px;
   position: absolute;
@@ -6208,7 +6208,7 @@ body.compact aside .nav.affix {
 }
 .container[role=main].coming-soon .feature #logo {
   text-indent: -9999px;
-  background: url('../img/logo.png') no-repeat;
+  background: url('../_img/logo.png') no-repeat;
   width: 120px;
   height: 48px;
   margin: 5px 0;
