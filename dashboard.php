@@ -59,8 +59,9 @@ if(empty($_SESSION['user']))
 <!--             TODO: php script to use actual user name -->
             <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">User Name »</a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
-                <li><a href="#">Coming soon - iPhone</a></li>
-                <li><a href="#">Coming soon - iPhone 5</a></li>
+                <li><a href="logout.php">Logout</a></li>
+                <li><a href="edit_account.php">Edit</a></li>
+                <li><a href="#">Health Coach Mode</a></li>
                <!--
  <li><a href="coming-soon-ipad.html">Coming soon - iPad</a></li>
                 <li><a href="coming-soon-mac.html">Coming soon - MacBook</a></li>
@@ -114,6 +115,10 @@ if(empty($_SESSION['user']))
     <div id="side">
         <div id="map-canvas"></div>
     </div>
+        <div class="compare">
+		<button id="addComparison" style="display:none">Add</button>
+    </div>
+
 	</div><!-- Span11 -->
       <footer>
         <p>
@@ -122,19 +127,6 @@ if(empty($_SESSION['user']))
       </footer>
 
     </div> <!-- /container -->
-
-
-
-    
-    
-    <br>
-    <br>
-    <br>
-    <div class="compare">
-		<button id="addComparison" style="display:none">Add</button>
-    </div>
-    <footer class="center"><a href="logout.php">Logout</a> <span>|</span> <a href="edit_account.php">Edit</a></footer>
-    
     <!-- setup.js holds global vars and click-handlers -->
     <script src="assets/_js/setup.js" type="text/javascript"></script>
     <!-- main_graph.js holds all d3 logic for the main visualization -->
