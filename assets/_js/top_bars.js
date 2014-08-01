@@ -118,7 +118,7 @@ function initTopBar(sensor)
 	svg_bar.append("foreignObject")
 		.attr('x', '30')
 		.attr('y', '0')
-		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' ></input>" + sensor + "</label>"; });
+		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input>" + sensor + "</label>"; });
     
     // start data dowload> which will update the charts automatically
     d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1", function(error, data) {
