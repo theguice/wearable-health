@@ -23,15 +23,15 @@ Judged by Shubham
 */
 var topBarSensors = ["heartrate","steps","calories","gsr","skin_temp","air_temp"];
 var topBarData = new Array();
-var topBarRanges = {"heartrate":[0,200],
-					"steps":[0,100],
+var topBarRanges = {"heartrate":[0,140],
+					"steps":[0,10],
 					"calories":[0,20],
 					"gsr":[0,2],
 					"skin_temp":[0,200],
 					"air_temp":[0,200]};
 var bar_margin = {top: 0, right: 0, bottom: 30, left: 0},
-    bar_width = 100 - bar_margin.left - bar_margin.right,
-    bar_height = 120 - bar_margin.top - bar_margin.bottom;
+    bar_width = 90 - bar_margin.left - bar_margin.right,
+    bar_height = 128 - bar_margin.top - bar_margin.bottom;
 
 var bar_x = d3.scale.ordinal(),
 	bar_y = d3.scale.linear();
@@ -83,8 +83,8 @@ function initTopBar(sensor)
 	var data = topBarData[sensor];
 
     var svg_bar = d3.select("div."+sensor).append("svg")
-		.attr("width", 100)
-		.attr("height", 120)
+		.attr("width", bar_width)
+		.attr("height", bar_height)
 		.append("g")
 		.attr("class", sensor)
 		.attr("transform", "translate(" + 0 + "," + 0 + ")");
@@ -93,7 +93,7 @@ function initTopBar(sensor)
 	    bar_x.rangeRoundBands([30, bar_width], .2)
 	    .domain(d3.range(data.length));
 	
-	    bar_y.range([bar_height-5, 10])
+	    bar_y.range([0, bar_height])
 	    .domain([topBarRanges[sensor][0], topBarRanges[sensor][1]]);
 	
     var xAxis = d3.svg.axis()
@@ -107,16 +107,16 @@ function initTopBar(sensor)
 
     svg_bar.append("g")
 		.attr("class", "y axis")
-		.attr("transform", "translate(30,20)")
+		.attr("transform", "translate(10,0)")
 		.call(yAxis)
 		.append("text")
-		.attr("transform", "rotate(-90)")
+		.attr("transform", "rotate(0)")
 		.attr("y", 6)
 		.attr("dy", ".71em")
 		.style("text-anchor", "end");
 
 	svg_bar.append("foreignObject")
-		.attr('x', '30')
+		.attr('x', '0')
 		.attr('y', '0')
 		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input>" + sensor + "</label>"; });
     
@@ -150,7 +150,7 @@ function animateAndUpdateTopbar(sensor)
 	    .duration(300)
 	    .ease("quad")
 		.attr("width", bar_x.rangeBand())
-		.attr("height", function(d) { return bar_height - bar_y(d) + 15; })
-		.attr("y", function(d) { return bar_y(d); })
+		.attr("height", function(d) { return bar_y(d); })
+		.attr("y", function(d) { return bar_height-bar_y(d); })
 		.attr("x", function(d,i) { return bar_x(i); });
 }

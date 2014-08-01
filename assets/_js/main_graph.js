@@ -1,10 +1,11 @@
 // Main is the viz with time series and the bar charts
 // Min is the viz with the time line for brushing
-var main_margin = {top: 20, right: 80, bottom: 100, left: 40},
-    mini_margin = {top: 430, right: 80, bottom: 20, left: 40},
-    main_width = 700 - main_margin.left - main_margin.right,
-    main_height = 500 - main_margin.top - main_margin.bottom,
-    mini_height = 500 - mini_margin.top - mini_margin.bottom;
+var main_margin = {top: 30, right: 35, bottom: 126, left: 25},
+    mini_margin = {top: 414, right: 0, bottom: 25, left: 0},
+    main_height = 472 - main_margin.top - main_margin.bottom,
+    mini_height = 472 - mini_margin.top - mini_margin.bottom,
+    main_width = 570 - main_margin.left - main_margin.right;
+    mini_width = 570 - mini_margin.left - mini_margin.right;
 
  
 // D3 has powerful date formatting engine. 
@@ -23,7 +24,7 @@ var formatDate = d3.time.format("%Y-%m-%d %H:%M:%S"),
 var main_x = d3.time.scale()
     .range([0, main_width]),
     mini_x = d3.time.scale()
-    .range([0, main_width]);
+    .range([0, mini_width]);
 
 /* main graph scale */
 var heartrate_scale = d3.scale.sqrt()
@@ -47,7 +48,7 @@ var heartrate_scale_mini = d3.scale.sqrt()
 	skintemp_scale_mini = d3.scale.sqrt()
 	.range([mini_height-15, 25]),
 	gsr_scale_mini = d3.scale.sqrt()
-	.range([mini_height, 40]);
+	.range([mini_height, 25]);
 
 
 
