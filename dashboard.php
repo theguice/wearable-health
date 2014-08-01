@@ -13,7 +13,7 @@ if(empty($_SESSION['user']))
 	// people can view your members-only content without logging in. 
 	die("Redirecting to login.php"); 
 } 
-     
+$username = ucfirst($_SESSION['user']['username']);
 // Everything below this point in the file is secured by the login system 
 ?>
 
@@ -57,7 +57,8 @@ if(empty($_SESSION['user']))
 <!--             <li><a href="blog.html">Blog</a></li> -->
             <li><a href="contact.html">Contact</a></li>
 <!--             TODO: php script to use actual user name -->
-            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">User Name »</a>
+            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $username;?>
+ »</a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="edit_account.php">Edit</a></li>
