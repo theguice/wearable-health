@@ -50,6 +50,7 @@ $username = ucfirst($_SESSION['user']['username']);
     <header id="header">
       <div class="container">
         <div class="navbar">
+        <h1 class="brand">Health Viz</h1>
           <ul>
             <li class="active"><a href="index.html">Dashboard</a></li>
             <li><a href="about.html">About</a></li>
