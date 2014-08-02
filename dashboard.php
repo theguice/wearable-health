@@ -36,7 +36,7 @@ $username = ucfirst($_SESSION['user']['username']);
 	<script src="assets/_js/vendor/modernizr-2.6.1.min.js"></script>
 	<script type="text/javascript" src="assets/_lib/d3.v3.min.js"></script>
 	<script type="text/javascript" src="assets/_lib/jquery-1.11.1.min.js"></script>
-	<link rel="stylesheet" href="assets/_lib/bootstrap/css/bootstrap.min.css" type="text/css">
+<!-- 	<link rel="stylesheet" href="assets/_lib/bootstrap/css/bootstrap.min.css" type="text/css"> -->
 	<script src="assets/_lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLPJEHtrhCrnosJLI6_cSpmELl7y1BPnQ"></script>
 
@@ -94,6 +94,7 @@ $username = ucfirst($_SESSION['user']['username']);
 	</div>
 	<div class="span11">
 	<div id="compare">
+		<p class="plot title">Compare Averages</p>
         <div class="heartrate top"></div>
 
         <div class="steps top"></div>
@@ -111,11 +112,26 @@ $username = ucfirst($_SESSION['user']['username']);
             http://bl.ocks.org/gniemetz/4618602
             http://jsfiddle.net/JGytk/
     -->
-    <div id="main"></div>
-    <div id="side">
-        <div id="map-canvas"></div>
+    <div id="healthCoachWindow">
+	    	<p class="plot title">Health Coach Window</p>
     </div>
-        <div class="compare">
+    
+    <div id="main">
+	    <p class="plot title">Activity Details</p>
+    </div>
+
+    <div id="side">
+    <p class="plot title" id="activitymap">Activity Map</p>
+        <div id="map-canvas">
+	    
+
+        </div>
+    </div>
+        <div id="mini">
+	    <p class="plot title">Select Timeline</p>
+    </div>
+
+        <div class="compareButton">
 		<button id="addComparison" style="display:none">Add</button>
     </div>
 

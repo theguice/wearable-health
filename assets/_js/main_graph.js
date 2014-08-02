@@ -1,10 +1,10 @@
 // Main is the viz with time series and the bar charts
 // Min is the viz with the time line for brushing
-var main_margin = {top: 30, right: 35, bottom: 126, left: 25},
-    mini_margin = {top: 414, right: 0, bottom: 25, left: 0},
-    main_height = 472 - main_margin.top - main_margin.bottom,
-    mini_height = 472 - mini_margin.top - mini_margin.bottom,
+var main_margin = {top: 2, right: 35, bottom: 20, left: 25},
+    mini_margin = {top: 0, right: 0, bottom: 18, left: 0},
+    main_height = 338 - main_margin.top - main_margin.bottom,
     main_width = 570 - main_margin.left - main_margin.right;
+    mini_height = 58 - mini_margin.top - mini_margin.bottom,
     mini_width = 570 - mini_margin.left - mini_margin.right;
 
  
@@ -146,6 +146,10 @@ var svg = d3.select("div#main").append("svg")
     .attr("width", main_width + main_margin.left + main_margin.right)
     .attr("height", main_height + main_margin.top + main_margin.bottom);
 
+var svg_mini = d3.select("div#mini").append("svg")
+    .attr("width", mini_width + mini_margin.left + mini_margin.right)
+    .attr("height", mini_height + mini_margin.top + mini_margin.bottom);
+
 // I still don't understand what clipPath does, but it seems important. It doesn't bother me so, I don't bother it.
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -165,7 +169,7 @@ var brushedRegionGroup = main.append("g")
 	.style("fill","none");
 
 
-var mini = svg.append("g")
+var mini = svg_mini.append("g")
     .attr("transform", "translate(" + mini_margin.left + "," + mini_margin.top + ")");
 
 // Calories Bars  --  linked to data below
