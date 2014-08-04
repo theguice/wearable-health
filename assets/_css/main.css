@@ -121,6 +121,11 @@ shape-rendering: crispEdges;
   fill-opacity: .125;
   shape-rendering: crispEdges;
 }
+
+label.checkbox{
+	font-size: 10px;
+	text-rendering: optimizelegibility;
+}
     
 #compare {
     width: 570px;
@@ -244,7 +249,13 @@ body {
 	stroke: #9FBAC5;
 	shape-rendering: crispEdges;
 }
-
+/*
+.y.axis text
+{
+	transform: translate(8,10);
+	-webkit-transform-origin: 8px 10px;
+}
+*/
 /*    .x.axis path {
   display: none;
 }*/

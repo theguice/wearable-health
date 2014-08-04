@@ -29,12 +29,23 @@ var topBarRanges = {"heartrate":[0,140],
 					"gsr":[0,2],
 					"skin_temp":[0,200],
 					"air_temp":[0,200]};
+var sensorName = {"heartrate":"Heart Rate",
+					"steps":"Steps",
+					"calories":"Calories",
+					"gsr":"Perspiration",
+					"skin_temp":"Skin Temp",
+					"air_temp":"Air Temp"};
+
 var bar_margin = {top: 0, right: 0, bottom: 30, left: 0},
     bar_width = 90 - bar_margin.left - bar_margin.right,
     bar_height = 128 - bar_margin.top - bar_margin.bottom;
 
-var bar_x = d3.scale.ordinal(),
-	bar_y = d3.scale.linear();
+var bar_x = d3.scale.ordinal();
+function bar_y(sensor)
+{
+	var bar_scale = d3.scale.linear().range([bar_height, 0]).domain([topBarRanges[sensor][0], topBarRanges[sensor][1]]);
+	return bar_scale;
+}
 
 for (i = 0; i < topBarSensors.length; i++)
 {
@@ -87,38 +98,45 @@ function initTopBar(sensor)
 		.attr("height", bar_height)
 		.append("g")
 		.attr("class", sensor)
-		.attr("transform", "translate(" + 0 + "," + 0 + ")");
-        //TODO: update width and height from parameters
+		.attr("transform", "translate(" + bar_margin.left + "," + bar_margin.top + ")");
 	
-	    bar_x.rangeRoundBands([30, bar_width], .2)
+	    bar_x.rangeRoundBands([10, bar_width], .2)
 	    .domain(d3.range(data.length));
 	
-	    bar_y.range([0, bar_height])
+/* 	console.log(sensor+":"+topBarRanges[sensor][0]+","+topBarRanges[sensor][1]); */
+/*
+	    bar_y.range([bar_height, 0])
 	    .domain([topBarRanges[sensor][0], topBarRanges[sensor][1]]);
+*/
 	
     var xAxis = d3.svg.axis()
         .scale(bar_x)
         .orient("bottom");
 
     var yAxis = d3.svg.axis()
-        .scale(bar_y)
+        .scale(bar_y(sensor))
         .orient("left")
-        .ticks(1);
-
+        .ticks(3);
+        
     svg_bar.append("g")
 		.attr("class", "y axis")
-		.attr("transform", "translate(10,0)")
+		.attr("transform", "translate(12,0)")
 		.call(yAxis)
 		.append("text")
 		.attr("transform", "rotate(0)")
 		.attr("y", 6)
-		.attr("dy", ".71em")
+		.attr("dy", ".60em")
 		.style("text-anchor", "end");
+	svg_bar.selectAll("g.tick > text")
+		.attr("transform", "translate(8,6)")
+		.attr("font-size","8px");
 
 	svg_bar.append("foreignObject")
-		.attr('x', '0')
+		.attr('x', '14')
 		.attr('y', '0')
-		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input>" + sensor + "</label>"; });
+		.attr('width',bar_width)
+		.attr('height',20)
+		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input>" + sensorName[sensor] + "</label>"; });
     
     // start data dowload> which will update the charts automatically
     d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1", function(error, data) {
@@ -145,12 +163,18 @@ function animateAndUpdateTopbar(sensor)
 	bars.enter()
 		.append("rect")
 		.attr("class", "bar");
-		
+	
+	var bar_scale = bar_y(sensor);
+	
 	bars.transition()
 	    .duration(300)
 	    .ease("quad")
 		.attr("width", bar_x.rangeBand())
-		.attr("height", function(d) { return bar_y(d); })
-		.attr("y", function(d) { return bar_height-bar_y(d); })
+		.attr("height", function(d) { 
+		console.log(sensor+":"+d+"->",bar_height-bar_scale(d));
+		return bar_height-bar_scale(d); })
+		.attr("y", function(d) { return bar_scale(d); })
 		.attr("x", function(d,i) { return bar_x(i); });
+		
+	
 }
