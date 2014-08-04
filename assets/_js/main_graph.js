@@ -73,12 +73,13 @@ var mini_y0 = d3.scale.sqrt()
 // Axis formatting and positioning
 var main_xAxis = d3.svg.axis()
     .scale(main_x)
-    .tickFormat(d3.time.format("%m/%d"))
-    .orient("bottom"),
+    .orient("bottom")
+    .ticks(5),
 	mini_xAxis = d3.svg.axis()
     .scale(mini_x)
     .tickFormat(d3.time.format("%m/%d"))
-    .orient("bottom");
+    .orient("bottom")
+    .ticks(14);
 
 var main_yAxisLeft = d3.svg.axis()
     .scale(heartrate_scale)
