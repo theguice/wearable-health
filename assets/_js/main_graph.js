@@ -338,7 +338,11 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	mini.append("g")
 		.attr("class", "x axis")
 		.attr("transform", "translate(0," + mini_height + ")")
-		.call(main_xAxis);
+		.call(mini_xAxis);
+	mini.selectAll("g.tick > text")
+		.attr("transform", "translate(0,-4)");
+	mini.selectAll("g.tick > line")
+		.attr("transform", "translate(0,-6)")
 	
 	mini.append("path")
 		.datum(data)
