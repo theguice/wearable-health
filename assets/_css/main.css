@@ -27,22 +27,24 @@ line.axis {
   fill: none;
   stroke-width: 0.75px;
 }
-
+/* Heart Rate */
 .line.line0 {
-  stroke: steelblue;
+  stroke: #E20079;
 }
 .heartrate rect.bar {
-  fill: steelblue;
+  fill: #E20079;
 }
 
+/* Steps */
 .bar.bar1 {
-  fill: orange;
+  fill: #754B30;
   opacity: 0.9;
 }
 .steps rect.bar {
-  fill: orange;
+  fill: #754B30;
 }
 
+/* Calories */
 .bar.bar2 {
   fill: green;
 }
@@ -50,32 +52,36 @@ line.axis {
   fill: green;
 }
 
+/* Perspiration */
 .line.line3 {
-  stroke: yellow;
+  stroke: #501C7B;
 }
 .gsr rect.bar{
-  fill: yellow;
+  fill: #501C7B;
 }
 
+/* Posture */
 .line.line4 {
-  stroke: purple;
+  stroke: #F07F26;
 }
 .posture rect.bar{
-  fill: purple;
+  fill: #F07F26;
 }
 
+/* Skin Temp */
 .line.line5 {
-  stroke: black;
+  stroke: #F07F26;
 }
 .skin_temp rect.bar{
-  fill: black;
+  fill: #F07F26;
 }
 
+/* Air Temp */
 .line.line6 {
-  stroke: grey;
+  stroke: #1F9DE7;
 }
 .air_temp rect.bar{
-  fill: grey;
+  fill: #1F9DE7;
 }
 
 .overlay {
