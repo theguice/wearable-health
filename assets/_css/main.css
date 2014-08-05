@@ -25,7 +25,7 @@ line.axis {
 .line {
   stroke: black;
   fill: none;
-  stroke-width: 0.75px;
+  stroke-width: 0.4px;
 }
 /* Heart Rate */
 .line.line0 {

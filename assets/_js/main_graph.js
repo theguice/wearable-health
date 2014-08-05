@@ -515,6 +515,44 @@ function onBrush() {
 */
 		window.startDateEpoc = (((+dateRange[0])/1000)|0);
 		window.endDateEpoc = (((+dateRange[1])/1000)|0);
+		
+		var selectionLength = window.endDateEpoc - window.startDateEpoc;
+		//1 day is 86400 secs
+		var oneDay = 86400;
+		
+		// number of day < 3 -> make line and bar charts thicker
+		if (selectionLength < oneDay*3)
+		{
+			main.selectAll(".line0").style("stroke-width","1.25px");
+			main.selectAll(".line3").style("stroke-width","1.25px");
+			main.selectAll(".line5").style("stroke-width","1.25px");
+			main.selectAll(".line6").style("stroke-width","1.25px");
+			
+/*
+	main.select(".line0").attr("d", main_line0);
+	main.select(".line3").attr("d", main_line3);
+	main.select(".line5").attr("d", main_line5);
+	main.select(".line6").attr("d", main_line6);
+stepsMainGraph
+caloriesMainGraph
+*/
+		}
+		else if (oneDay*3 <= selectionLength && selectionLength < oneDay*6)
+		{
+		// else make them thinner 
+			main.selectAll(".line0").style("stroke-width","0.75px");
+			main.selectAll(".line3").style("stroke-width","0.75px");
+			main.selectAll(".line5").style("stroke-width","0.75px");
+			main.selectAll(".line6").style("stroke-width","0.75px");
+		}else
+		{
+			console.log("more than 6 days")
+			main.selectAll(".line0").style("stroke-width","0.4px");
+			main.selectAll(".line3").style("stroke-width","0.4px");
+			main.selectAll(".line5").style("stroke-width","0.4px");
+			main.selectAll(".line6").style("stroke-width","0.4px");
+		}
+
 	}
 	
 	main_x.domain(brush.empty() ? mini_x.domain() : brush.extent());
