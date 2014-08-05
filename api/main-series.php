@@ -73,14 +73,23 @@ for ($x = 0; $x < mysql_num_rows($query); $x++) {
     if (isset($c_data[$y])) {
       $steps += $c_data[$y]['steps'];
       $calories += $c_data[$y]['calories'];
-      $hr += $c_data[$y]['heartrate'];
-      $c_hr++;
+      if ($c_data[$y]['heartrate'] != "None")
+      {
+		  $hr += $c_data[$y]['heartrate'];
+	      $c_hr++;
+      }
     }
   }
-
+/*   echo $c_hr; */
+  $heart_rate = "null";
+  if ($c_hr>0)
+  {
+  	$heart_rate = floor($hr/$c_hr);
+  }
+/*   echo $heart_rate."\n"; */
   // This is the actual data output.  echo == print essentially
   // floor() rounds the value down to nearest whole number
-  echo $d['date_human'] . "," . floor($hr/$c_hr) . "," . floor($steps) . "," . floor($calories) . "," . floor($d['gsr']) . "," . floor($d['skin_temp']) . "," . floor($d['air_temp']) . "\n";
+  echo $d['date_human'] . "," . $heart_rate . "," . floor($steps) . "," . floor($calories) . "," . floor($d['gsr']) . "," . floor($d['skin_temp']) . "," . floor($d['air_temp']) . "\n";
 }
      
 mysql_close($server);

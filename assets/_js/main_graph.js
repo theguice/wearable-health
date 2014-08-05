@@ -107,22 +107,22 @@ This is what allows us to have different scales in place for each line, but then
     6 - air temp
 */
 var main_line0 = d3.svg.line()
-    .interpolate("cardinal")
+    .defined(function(d) { return d.heartrate != null; })
     .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return heartrate_scale(d.heartrate); });
 
 var main_line3 = d3.svg.line()
-    .interpolate("cardinal")
+    .defined(function(d) { return d.gsr != null; })
     .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return gsr_scale(d.gsr); });
 
 var main_line5 = d3.svg.line()
-    .interpolate("cardinal")
+    .defined(function(d) { return d.skin_temp != null; })
     .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return skintemp_scale(d.skin_temp); });
 
 var main_line6 = d3.svg.line()
-    .interpolate("cardinal")
+    .defined(function(d) { return d.air_temp != null; })
     .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return airtemp_scale(d.air_temp); });
 
@@ -196,11 +196,11 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	// some formatting technique - i don't know
 	data.forEach(function(d) {
 	    d.Time = parseDate(d.Time);
-	    d.heartrate = +d.heartrate;
+	    d.heartrate = isNaN(d.heartrate)?null:+d.heartrate;
 	    d.steps = +d.steps;
 	    d.calories = +d.calories;
-	    d.skin_temp = +d.skin_temp;
-	    d.air_temp = +d.air_temp;
+	    d.skin_temp = +d.skin_temp == 0?null:+d.skin_temp;
+	    d.air_temp = +d.air_temp == 0?null:+d.air_temp;
 	});
 
 	data.sort(function(a, b) {
