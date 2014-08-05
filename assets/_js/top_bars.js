@@ -171,7 +171,7 @@ function animateAndUpdateTopbar(sensor)
 	    .ease("quad")
 		.attr("width", bar_x.rangeBand())
 		.attr("height", function(d) { 
-		console.log(sensor+":"+d+"->",bar_height-bar_scale(d));
+/* 		console.log(sensor+":"+d+"->",bar_height-bar_scale(d)); */
 		return bar_height-bar_scale(d); })
 		.attr("y", function(d) { return bar_scale(d); })
 		.attr("x", function(d,i) { return bar_x(i); });

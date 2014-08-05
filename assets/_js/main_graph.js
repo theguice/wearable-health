@@ -469,8 +469,10 @@ function addCompareRange() {
 
 function addCompareRangeToMainViz()
 {
+/*
 	console.log("start px:"+main_x(startDateEpoc*1000));
 	console.log("start px:"+main_x(endDateEpoc*1000));
+*/
 	
 	var brushedRegion = svg.select("#brushedRegion");
 	
@@ -501,7 +503,12 @@ function onBrush() {
 		// hide button
 		addComparisonButton.style("display","none");
 		brushedRegionGroup.style("display",null);
-		
+		main.selectAll(".line0").style("stroke-width","0.4px");
+		main.selectAll(".line3").style("stroke-width","0.4px");
+		main.selectAll(".line5").style("stroke-width","0.4px");
+		main.selectAll(".line6").style("stroke-width","0.4px");
+		stepsMainGraph.attr("width", "1");
+		caloriesMainGraph.attr("width", "1");
 	}else
 	{
 		// show button
@@ -520,6 +527,17 @@ function onBrush() {
 		//1 day is 86400 secs
 		var oneDay = 86400;
 		
+		var barThickness = (main_width*300)/selectionLength | 0;
+
+		barThickness = barThickness>1 ? barThickness: 1;
+/*
+		console.log("range: "+selectionLength);
+		console.log("number of points: "+selectionLength/300)
+*/
+		stepsMainGraph.attr("width", barThickness);
+ 		caloriesMainGraph.attr("width", barThickness);
+
+		
 		// number of day < 3 -> make line and bar charts thicker
 		if (selectionLength < oneDay*3)
 		{
@@ -527,15 +545,6 @@ function onBrush() {
 			main.selectAll(".line3").style("stroke-width","1.25px");
 			main.selectAll(".line5").style("stroke-width","1.25px");
 			main.selectAll(".line6").style("stroke-width","1.25px");
-			
-/*
-	main.select(".line0").attr("d", main_line0);
-	main.select(".line3").attr("d", main_line3);
-	main.select(".line5").attr("d", main_line5);
-	main.select(".line6").attr("d", main_line6);
-stepsMainGraph
-caloriesMainGraph
-*/
 		}
 		else if (oneDay*3 <= selectionLength && selectionLength < oneDay*6)
 		{
@@ -546,7 +555,6 @@ caloriesMainGraph
 			main.selectAll(".line6").style("stroke-width","0.75px");
 		}else
 		{
-			console.log("more than 6 days")
 			main.selectAll(".line0").style("stroke-width","0.4px");
 			main.selectAll(".line3").style("stroke-width","0.4px");
 			main.selectAll(".line5").style("stroke-width","0.4px");
