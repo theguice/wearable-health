@@ -38,7 +38,8 @@ if (!$param['granularity']) {
 
 // I built in a limit for begin_time using epoch - since I have more that two weeks data in there and I want to ignore the earlier stuff.  I guess I could just have deleted that data manually.  This detail won't affect any other user's queries because they'll occur later in time.
 
-$myquery = "SELECT * FROM `wh_d_basis` WHERE `u_id`=" . $param['user_id'] . " AND heartrate != 'None' AND steps != 'None' AND date_epoch > 1402012800 AND mod(date_epoch,".$gran.")=0 ORDER BY date_epoch ASC";
+/* $myquery = "SELECT * FROM `wh_d_basis` WHERE `u_id`=" . $param['user_id'] . " AND heartrate != 'None' AND steps != 'None' AND date_epoch > 1402012800 AND mod(date_epoch,".$gran.")=0 ORDER BY date_epoch ASC"; */
+$myquery = "SELECT * FROM `wh_d_basis` WHERE `u_id`=" . $param['user_id'] . " AND steps != 'None' AND date_epoch > 1402012800 AND mod(date_epoch,".$gran.")=0 ORDER BY date_epoch ASC";
 $query = mysql_query($myquery);
 
 $myquery = "SELECT * FROM `wh_d_basis` WHERE `u_id`=" . $param['user_id'] . " AND steps != 'None' AND date_epoch > 1402012800 ORDER BY date_epoch ASC";
@@ -71,11 +72,7 @@ for ($x = 0; $x < mysql_num_rows($query); $x++) {
     $c++;
     if (isset($c_data[$y])) {
       $steps += $c_data[$y]['steps'];
-    }
-    if (isset($c_data[$y])) {
       $calories += $c_data[$y]['calories'];
-    }
-    if (isset($c_data[$y])) {
       $hr += $c_data[$y]['heartrate'];
       $c_hr++;
     }
