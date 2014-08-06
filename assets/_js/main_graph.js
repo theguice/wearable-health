@@ -109,7 +109,12 @@ This is what allows us to have different scales in place for each line, but then
 var main_line0 = d3.svg.line()
     .defined(function(d) { return d.heartrate != null; })
     .x(function(d) { return main_x(d.Time); })
+    .y(function(d) { return heartrate_scale(d.heartrate); }),
+    main_base0 = d3.svg.line()
+    .defined(function(d) { return d.heartrate != null; })
+    .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return heartrate_scale(d.heartrate); });
+
 
 var main_line3 = d3.svg.line()
     .defined(function(d) { return d.gsr != null; })
@@ -119,12 +124,22 @@ var main_line3 = d3.svg.line()
 var main_line5 = d3.svg.line()
     .defined(function(d) { return d.skin_temp != null; })
     .x(function(d) { return main_x(d.Time); })
+    .y(function(d) { return skintemp_scale(d.skin_temp); }),
+	main_base5 = d3.svg.line()
+    .defined(function(d) { return d.skin_temp != null; })
+    .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return skintemp_scale(d.skin_temp); });
+ 
 
 var main_line6 = d3.svg.line()
     .defined(function(d) { return d.air_temp != null; })
     .x(function(d) { return main_x(d.Time); })
+    .y(function(d) { return airtemp_scale(d.air_temp); }),
+    main_base6 = d3.svg.line()
+    .defined(function(d) { return d.air_temp != null; })
+    .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return airtemp_scale(d.air_temp); });
+
 
 var mini_line0 = d3.svg.line()
     .x(function(d) { return mini_x(d.Time); })
@@ -193,16 +208,39 @@ var stepsBarGroup = main.append("g")
 */
 d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(error, data) {
     
-	// some formatting technique - i don't know
+	// (Shaun)some formatting technique - i don't know
+	var heart_rate_base_line = new Array();
+	var skin_temp_base_line = new Array();
+	var air_temp_base_line = new Array();
+	
 	data.forEach(function(d) {
 	    d.Time = parseDate(d.Time);
-	    d.heartrate = isNaN(d.heartrate)?null:+d.heartrate;
+	    if(isNaN(d.heartrate))
+	    {
+		    d.heartrate = null;
+	    }else
+	    {
+		    d.heartrate = +d.heartrate;
+		    heart_rate_base_line.push({"Time":d.Time,"heartrate":+d.heartrate});
+	    }
+
+		// usually skin temp and air temp readings are missing together
+	    if(+d.skin_temp == 0)
+	    {
+		    d.skin_temp = null;
+		    d.air_temp = null;
+	    }else
+	    {
+		    d.skin_temp = +d.skin_temp;
+		    skin_temp_base_line.push({"Time":d.Time,"skin_temp":+d.skin_temp});
+		   
+		    d.air_temp = +d.air_temp;
+		    air_temp_base_line.push({"Time":d.Time,"air_temp":+d.air_temp});
+	    }
 	    d.steps = +d.steps;
 	    d.calories = +d.calories;
-	    d.skin_temp = +d.skin_temp == 0?null:+d.skin_temp;
-	    d.air_temp = +d.air_temp == 0?null:+d.air_temp;
 	});
-
+	
 	data.sort(function(a, b) {
 		return a.Time - b.Time;
 	});
@@ -246,6 +284,11 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line line0")
 		.attr("d", main_line0);
+	main.append("path")
+		.datum(heart_rate_base_line)
+		.attr("clip-path", "url(#clip)")
+		.attr("class", "line base0 base")
+		.attr("d", main_base0);
 	
 	main.append("path")
 		.datum(data)
@@ -258,13 +301,22 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line line5")
 		.attr("d", main_line5);
+	main.append("path")
+		.datum(skin_temp_base_line)
+		.attr("clip-path", "url(#clip)")
+		.attr("class", "line base5 base")
+		.attr("d", main_base5);
 	
 	main.append("path")
 		.datum(data)
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line line6")
 		.attr("d", main_line6);
-	
+	main.append("path")
+		.datum(air_temp_base_line)
+		.attr("clip-path", "url(#clip)")
+		.attr("class", "line base6 base")
+		.attr("d", main_base6);
 	
 	/* Here we are drawing the bars, which works differently from drawing lines
 	for bars you need to give 
@@ -566,10 +618,13 @@ function onBrush() {
 	main_x.domain(brush.empty() ? mini_x.domain() : brush.extent());
 	
 	main.select(".line0").attr("d", main_line0);
+	main.select(".base0").attr("d", main_base0);
 	main.select(".line3").attr("d", main_line3);
 	main.select(".line5").attr("d", main_line5);
+	main.select(".base5").attr("d", main_base5);
 	main.select(".line6").attr("d", main_line6);
-	
+	main.select(".base6").attr("d", main_base6);
+
 	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	// you can change the width of bars when zoomed in!
