@@ -137,7 +137,39 @@ label.checkbox{
 	font-size: 10px;
 	text-rendering: optimizelegibility;
 }
-    
+span.icon{
+/*
+margin-left: 2px;
+margin-top: 1px;
+*/
+width: 9px;
+height: 9px;
+margin-left: -2px;
+margin-right: 1px;
+/* padding-left: 1px; */
+display: inline-block;
+background-image: url("/assets/_img/icon-metrics.png");
+background-size: 68px 22px;
+background-repeat: no-repeat;
+}
+span.icon.heartrate{
+	background-position: -30px 0px;
+}
+span.icon.steps{
+	background-position: -45px 0px;
+}
+span.icon.calories{
+	background-position: -60px 0px;
+}
+span.icon.gsr{
+	background-position: -0px 0px;
+}
+span.icon.skin_temp{
+	background-position: -15px 0px;
+}    
+span.icon.air_temp{
+	background-position: -15px 0px;
+}
 #compare {
     width: 570px;
     height: 128px;

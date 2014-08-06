@@ -22,6 +22,7 @@ Judged by Shubham
 
 */
 var topBarSensors = ["heartrate","steps","calories","gsr","skin_temp","air_temp"];
+var initBarData = new Array();
 var topBarData = new Array();
 var topBarRanges = {"heartrate":[0,140],
 					"steps":[0,10],
@@ -49,6 +50,7 @@ function bar_y(sensor)
 
 for (i = 0; i < topBarSensors.length; i++)
 {
+	initBarData[topBarSensors[i]] = new Array();
 	topBarData[topBarSensors[i]] = new Array();
 	initTopBar(topBarSensors[i]);
 }
@@ -82,7 +84,7 @@ function addCompareRangeToTopBar()
 		d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc, function(error, data)
 		{
 		    topBarData[data[0].name].push(data[0].value);
-		    animateAndUpdateTopbar(data[0].name);
+		    animateAndUpdateTopbar(data[0].name,false);
 		});
 
 	}
@@ -91,7 +93,7 @@ function addCompareRangeToTopBar()
 
 function initTopBar(sensor)
 {
-	var data = topBarData[sensor];
+	var data = initBarData[sensor];
 
     var svg_bar = d3.select("div."+sensor).append("svg")
 		.attr("width", bar_width)
@@ -136,22 +138,30 @@ function initTopBar(sensor)
 		.attr('y', '0')
 		.attr('width',bar_width)
 		.attr('height',20)
-		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input>" + sensorName[sensor] + "</label>"; });
+		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input><span class='icon "+sensor+"'></span>" + sensorName[sensor] + "</label>"; });
     
     // start data dowload> which will update the charts automatically
     d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1", function(error, data) {
-	    topBarData[data[0].name].push(data[0].value);
+	    initBarData[data[0].name].push(data[0].value);
 	    // update the bar charts
-	    animateAndUpdateTopbar(data[0].name);
+	    animateAndUpdateTopbar(data[0].name,true);
 	});
 
 }
 
 
-function animateAndUpdateTopbar(sensor)
+function animateAndUpdateTopbar(sensor, isFirstRun)
 {
 
-	var data = topBarData[sensor];
+	
+	var data = 0;
+	if(isFirstRun)
+	{
+		data = initBarData[sensor];
+	}else
+	{
+		data = topBarData[sensor];
+	}
 	
 	bar_x.domain(d3.range(data.length));
 

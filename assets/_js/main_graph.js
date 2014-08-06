@@ -296,7 +296,6 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("class", "line line3")
 		.attr("d", main_line3);
 	
-	
 	main.append("path")
 		.datum(skin_temp_base_line)
 		.attr("clip-path", "url(#clip)")
