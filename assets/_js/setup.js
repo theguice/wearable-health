@@ -1,5 +1,5 @@
-/* var $base_url = "http://localhost:8888"; */
-var $base_url = "https://people.ischool.berkeley.edu/~shubham/wearable-health";
+var $base_url = "http://localhost:8888";
+/* var $base_url = "https://people.ischool.berkeley.edu/~shubham/wearable-health"; */
 /* var $base_url = "https://groups.ischool.berkeley.edu/healthstudy"; */
 
 /* console.log('assigning click handler'); */
