@@ -278,17 +278,17 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	// append means "append element to svg canvas"
 	// path is drawing the line according to the data (which we linked up earlier to these main_lineX variables
 	
-
-	main.append("path")
-		.datum(data)
-		.attr("clip-path", "url(#clip)")
-		.attr("class", "line line0")
-		.attr("d", main_line0);
 	main.append("path")
 		.datum(heart_rate_base_line)
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line base0 base")
 		.attr("d", main_base0);
+	main.append("path")
+		.datum(data)
+		.attr("clip-path", "url(#clip)")
+		.attr("class", "line line0")
+		.attr("d", main_line0);
+	
 	
 	main.append("path")
 		.datum(data)
@@ -296,27 +296,29 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("class", "line line3")
 		.attr("d", main_line3);
 	
-	main.append("path")
-		.datum(data)
-		.attr("clip-path", "url(#clip)")
-		.attr("class", "line line5")
-		.attr("d", main_line5);
+	
 	main.append("path")
 		.datum(skin_temp_base_line)
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line base5 base")
 		.attr("d", main_base5);
-	
 	main.append("path")
 		.datum(data)
 		.attr("clip-path", "url(#clip)")
-		.attr("class", "line line6")
-		.attr("d", main_line6);
+		.attr("class", "line line5")
+		.attr("d", main_line5);
+	
+	
 	main.append("path")
 		.datum(air_temp_base_line)
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line base6 base")
 		.attr("d", main_base6);
+	main.append("path")
+		.datum(data)
+		.attr("clip-path", "url(#clip)")
+		.attr("class", "line line6")
+		.attr("d", main_line6);
 	
 	/* Here we are drawing the bars, which works differently from drawing lines
 	for bars you need to give 
