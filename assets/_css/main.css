@@ -89,6 +89,14 @@ line.axis {
   fill: #1F9DE7;
 }
 
+/* posture */
+.line.line7 {
+  stroke: #008080;
+}
+.posture rect.bar{
+  fill: #008080;
+}
+
 .overlay {
   fill: none;
   pointer-events: all;

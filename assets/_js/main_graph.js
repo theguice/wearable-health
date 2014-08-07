@@ -38,7 +38,9 @@ var heartrate_scale = d3.scale.sqrt()
 	step_scale = d3.scale.sqrt()
 	.range([main_height, 200]),
 	calorie_scale = d3.scale.sqrt()
-	.range([main_height, 300]);
+	.range([main_height, 300]),
+	posture_scale = d3.scale.sqrt()
+	.range([300,0]);
 
 /* mini graph scale */
 var heartrate_scale_mini = d3.scale.sqrt()
@@ -105,6 +107,7 @@ This is what allows us to have different scales in place for each line, but then
     3 - GSR
     5 - skin temp
     6 - air temp
+    7 - lumo back posture score
 */
 var main_line0 = d3.svg.line()
     .defined(function(d) { return d.heartrate != null; })
@@ -139,6 +142,16 @@ var main_line6 = d3.svg.line()
     .defined(function(d) { return d.air_temp != null; })
     .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return airtemp_scale(d.air_temp); });
+    
+
+var main_line7 = d3.svg.line()
+    .defined(function(d) { return d.posture != null; })
+    .x(function(d) { return main_x(d.Time); })
+    .y(function(d) { return posture_scale(d.posture); }),
+    main_base7 = d3.svg.line()
+    .defined(function(d) { return d.posture != null; })
+    .x(function(d) { return main_x(d.Time); })
+    .y(function(d) { return posture_scale(d.posture); });
 
 
 var mini_line0 = d3.svg.line()
@@ -156,6 +169,7 @@ var mini_line5 = d3.svg.line()
 var mini_line6 = d3.svg.line()
     .x(function(d) { return mini_x(d.Time); })
     .y(function(d) { return airtemp_scale_mini(d.air_temp); });
+
 
 // sets up the svg canvas where we will draw cool stuff
 var svg = d3.select("div#main").append("svg")
@@ -212,6 +226,7 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	var heart_rate_base_line = new Array();
 	var skin_temp_base_line = new Array();
 	var air_temp_base_line = new Array();
+	var posture_base_line = new Array();
 	
 	data.forEach(function(d) {
 	    d.Time = parseDate(d.Time);
@@ -236,6 +251,15 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		   
 		    d.air_temp = +d.air_temp;
 		    air_temp_base_line.push({"Time":d.Time,"air_temp":+d.air_temp});
+	    }
+	    
+	    if(isNaN(d.posture))
+	    {
+		    d.posture = null;
+	    }else
+	    {
+		    d.posture = +d.posture;
+		    posture_base_line.push({"Time":d.Time,"posture":+d.posture});
 	    }
 	    d.steps = +d.steps;
 	    d.calories = +d.calories;
@@ -262,6 +286,7 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	gsr_scale.domain(d3.extent(data, function(d) { return d.gsr; }));
 	calorie_scale.domain(d3.extent(data, function(d) { return d.calories; }));
 	step_scale.domain([0, d3.max(data, function(d) { return d.steps; })]);
+	posture_scale.domain([0, 100]);
 	
 	// mini just reuses whatever works for the main
 	mini_x.domain(main_x.domain());
@@ -319,6 +344,18 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.attr("class", "line line6")
 		.attr("d", main_line6);
 	
+	
+	main.append("path")
+		.datum(posture_base_line)
+		.attr("clip-path", "url(#clip)")
+		.attr("class", "line base7 base")
+		.attr("d", main_base7);
+	main.append("path")
+		.datum(data)
+		.attr("clip-path", "url(#clip)")
+		.attr("class", "line line7")
+		.attr("d", main_line7);
+
 	/* Here we are drawing the bars, which works differently from drawing lines
 	for bars you need to give 
 	a starting point (x,y)
@@ -560,6 +597,7 @@ function onBrush() {
 		main.selectAll(".line3").style("stroke-width","0.4px");
 		main.selectAll(".line5").style("stroke-width","0.4px");
 		main.selectAll(".line6").style("stroke-width","0.4px");
+		main.selectAll(".line7").style("stroke-width","0.4px");
 		stepsMainGraph.attr("width", "1");
 		caloriesMainGraph.attr("width", "1");
 	}else
@@ -598,6 +636,7 @@ function onBrush() {
 			main.selectAll(".line3").style("stroke-width","1.25px");
 			main.selectAll(".line5").style("stroke-width","1.25px");
 			main.selectAll(".line6").style("stroke-width","1.25px");
+			main.selectAll(".line7").style("stroke-width","1.25px");
 		}
 		else if (oneDay*3 <= selectionLength && selectionLength < oneDay*6)
 		{
@@ -606,14 +645,15 @@ function onBrush() {
 			main.selectAll(".line3").style("stroke-width","0.75px");
 			main.selectAll(".line5").style("stroke-width","0.75px");
 			main.selectAll(".line6").style("stroke-width","0.75px");
+			main.selectAll(".line7").style("stroke-width","0.75px");		
 		}else
 		{
 			main.selectAll(".line0").style("stroke-width","0.4px");
 			main.selectAll(".line3").style("stroke-width","0.4px");
 			main.selectAll(".line5").style("stroke-width","0.4px");
 			main.selectAll(".line6").style("stroke-width","0.4px");
+			main.selectAll(".line7").style("stroke-width","0.4px");
 		}
-
 	}
 	
 	main_x.domain(brush.empty() ? mini_x.domain() : brush.extent());
@@ -625,6 +665,9 @@ function onBrush() {
 	main.select(".base5").attr("d", main_base5);
 	main.select(".line6").attr("d", main_line6);
 	main.select(".base6").attr("d", main_base6);
+	main.select(".line7").attr("d", main_line7);
+	main.select(".base7").attr("d", main_base7);
+	
 
 	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
