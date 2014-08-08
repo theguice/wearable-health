@@ -94,7 +94,8 @@ var main_yAxisRight = d3.svg.axis()
 // The BRUSH is activated when we click-and-drag on the mini graph, located below the main graph
 var brush = d3.svg.brush()
     .x(mini_x)
-    .on("brush", onBrush);
+    .on("brush", onBrush)
+    .on("brushend", on_brush_ended);
 
 
 /* main_lineX and mini_lineX are linking the lines (or paths) that will be drawn to scaled data.  
@@ -463,6 +464,7 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 	mini.append("g")
 		.attr("class", "x brush")
 		.call(brush)
+		.call(brush.event)
 		.selectAll("rect")
 		.attr("y", -6)
 		.attr("height", mini_height + 7);
@@ -675,13 +677,24 @@ function onBrush() {
 	main.select(".base6").attr("d", main_base6);
 	main.select(".line7").attr("d", main_line7);
 	main.select(".base7").attr("d", main_base7);
-	
-
 	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
-	// you can change the width of bars when zoomed in!
-	// mainGraph.attr("width", 1);
 	
 	main.select(".x.axis").call(main_xAxis);
 }
 
+function on_brush_ended() {
+	if (!d3.event.sourceEvent) return; // only transition after input
+	var extent0 = brush.extent(),
+		extent1 = extent0.map(d3.time.day.round);
+
+	// if empty when rounded, use floor & ceil instead
+	if (extent1[0] >= extent1[1]) {
+		extent1[0] = d3.time.day.floor(extent0[0]);
+		extent1[1] = d3.time.day.ceil(extent0[1]);
+	}
+	
+	d3.select(this).transition()
+		.call(brush.extent(extent1))
+		.call(brush.event);
+}
