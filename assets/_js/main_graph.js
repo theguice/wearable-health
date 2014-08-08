@@ -691,8 +691,9 @@ function on_brush_ended() {
 	// if empty when rounded, use floor & ceil instead
 	if (extent1[0] >= extent1[1]) {
 		extent1[0] = d3.time.day.floor(extent0[0]);
-		extent1[1] = d3.time.day.ceil(extent0[1]);
+//		extent1[1] = d3.time.day.ceil(extent0[1]);
 	}
+	extent1[1] = d3.time.day.offset(extent1[0],1);
 	
 	d3.select(this).transition()
 		.call(brush.extent(extent1))
