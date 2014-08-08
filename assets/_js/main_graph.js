@@ -307,7 +307,8 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.datum(heart_rate_base_line)
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line base0 base")
-		.attr("d", main_base0);
+		.attr("d", main_base0)
+		.style("stroke-dasharray", ("3, 3"));
 	main.append("path")
 		.datum(data)
 		.attr("clip-path", "url(#clip)")
@@ -325,7 +326,8 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.datum(skin_temp_base_line)
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line base5 base")
-		.attr("d", main_base5);
+		.attr("d", main_base5)
+		.style("stroke-dasharray", ("3, 3"));;
 	main.append("path")
 		.datum(data)
 		.attr("clip-path", "url(#clip)")
@@ -337,7 +339,8 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.datum(air_temp_base_line)
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line base6 base")
-		.attr("d", main_base6);
+		.attr("d", main_base6)
+		.style("stroke-dasharray", ("3, 3"));;
 	main.append("path")
 		.datum(data)
 		.attr("clip-path", "url(#clip)")
@@ -349,7 +352,8 @@ d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(err
 		.datum(posture_base_line)
 		.attr("clip-path", "url(#clip)")
 		.attr("class", "line base7 base")
-		.attr("d", main_base7);
+		.attr("d", main_base7)
+		.style("stroke-dasharray", ("3, 3"));;
 	main.append("path")
 		.datum(data)
 		.attr("clip-path", "url(#clip)")
@@ -598,6 +602,7 @@ function onBrush() {
 		main.selectAll(".line5").style("stroke-width","0.4px");
 		main.selectAll(".line6").style("stroke-width","0.4px");
 		main.selectAll(".line7").style("stroke-width","0.4px");
+		main.selectAll(".base").style("stroke-width","0.4px");
 		stepsMainGraph.attr("width", "1");
 		caloriesMainGraph.attr("width", "1");
 	}else
@@ -637,6 +642,7 @@ function onBrush() {
 			main.selectAll(".line5").style("stroke-width","1.25px");
 			main.selectAll(".line6").style("stroke-width","1.25px");
 			main.selectAll(".line7").style("stroke-width","1.25px");
+			main.selectAll(".base").style("stroke-width","1.25px");		
 		}
 		else if (oneDay*3 <= selectionLength && selectionLength < oneDay*6)
 		{
@@ -645,7 +651,8 @@ function onBrush() {
 			main.selectAll(".line3").style("stroke-width","0.75px");
 			main.selectAll(".line5").style("stroke-width","0.75px");
 			main.selectAll(".line6").style("stroke-width","0.75px");
-			main.selectAll(".line7").style("stroke-width","0.75px");		
+			main.selectAll(".line7").style("stroke-width","0.75px");
+			main.selectAll(".base").style("stroke-width","0.75px");					
 		}else
 		{
 			main.selectAll(".line0").style("stroke-width","0.4px");
@@ -653,6 +660,7 @@ function onBrush() {
 			main.selectAll(".line5").style("stroke-width","0.4px");
 			main.selectAll(".line6").style("stroke-width","0.4px");
 			main.selectAll(".line7").style("stroke-width","0.4px");
+			main.selectAll(".base").style("stroke-width","0.4px");
 		}
 	}
 	

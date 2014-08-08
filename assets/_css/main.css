@@ -34,7 +34,7 @@ line.axis {
 .line.base {
 	stroke: grey;
 	opacity: 0.2;
-	stroke-width: 1.25px;
+	stroke-width: 0.4px;
 }
 .heartrate rect.bar {
   fill: #E20079;
