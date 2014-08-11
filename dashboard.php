@@ -62,6 +62,7 @@ $username = ucfirst($_SESSION['user']['username']);
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="edit_account.php">Edit</a></li>
+                <li><a href="#">Comments</a></li>
                 <li><a href="#">Health Coach Mode</a></li>
                <!--
  <li><a href="coming-soon-ipad.html">Coming soon - iPad</a></li>
