@@ -222,6 +222,7 @@ var stepsBarGroup = main.append("g")
 
 */
 
+//TODO: move user_id to a global location> this is not the best place to do it
 var user_id = document.getElementsByClassName("user_id")[0];
 //console.log("user id "+user_id.id);
 window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&granularity=30", function(error, data) {

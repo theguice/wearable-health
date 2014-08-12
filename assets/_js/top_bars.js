@@ -82,7 +82,7 @@ function addCompareRangeToTopBar()
 	{
 	    var sensor = topBarSensors[i];
 	    // user_id comes from main_graph.js
-		d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc+"&user_id="+user_id, function(error, data)
+		d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc+"&user_id="+user_id.id, function(error, data)
 		{
 		    topBarData[data[0].name].push(data[0].value);
 		    animateAndUpdateTopbar(data[0].name,false);
@@ -142,7 +142,7 @@ function initTopBar(sensor)
 		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input><span class='icon "+sensor+"'></span>" + sensorName[sensor] + "</label>"; });
     
     // start data dowload> which will update the charts automatically
-    d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1", function(error, data) {
+    d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&user_id="+user_id.id, function(error, data) {
 	    initBarData[data[0].name].push(data[0].value);
 	    // update the bar charts
 	    animateAndUpdateTopbar(data[0].name,true);
