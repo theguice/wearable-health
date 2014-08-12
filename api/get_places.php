@@ -11,7 +11,7 @@ $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $parts = parse_url($url);
 parse_str($parts['query'], $param);
 
-$param['user_id'] = 1;
+//$param['user_id'] = 1;
 if (!$param['user_id']) {
   exit();
 

@@ -2,3 +2,5 @@ basis-data-export/cookie.txt
 control_panel/basis_data_export/data_basis/*
 uploads/*
 *.esproj
+
+*-basis.json
