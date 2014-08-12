@@ -31,7 +31,6 @@ function mapResetIcons() {
 }
 
 //user_id.id comes from main_graph
-console.log("/api/get_places.php?user_id="+user_id.id);
 $.getJSON($base_url + "/api/get_places.php?user_id="+user_id.id, function( data ) {
   data_places = data;
   /* console.log(data_places); */

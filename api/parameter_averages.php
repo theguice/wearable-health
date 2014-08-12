@@ -9,7 +9,6 @@ $connection = mysql_select_db($dbname, $server);
 $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $parts = parse_url($url);
 parse_str($parts['query'], $param);
-
 /*  welcome to php
 
 $param is an associative array (same as a dictionary in python).  It holds the parameters that come in via the URL.
@@ -69,17 +68,17 @@ days: weekdays or weekends
 
 
 if ($param['heartrate'] == 1) {
-  $myquery = "SELECT  AVG(heartrate) as heartrate FROM  `wh_d_basis` WHERE `u_id`=1 AND heartrate != 'None' AND heartrate != '0'";
+  $myquery = "SELECT  AVG(heartrate) as heartrate FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND heartrate != 'None' AND heartrate != '0'";
 } else if ($param['steps'] == 1) {
-  $myquery = "SELECT  AVG(steps) as steps  FROM  `wh_d_basis` WHERE `u_id`=1 AND steps != 'None'";
+  $myquery = "SELECT  AVG(steps) as steps  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND steps != 'None'";
 } else if ($param['calories'] == 1) {
-  $myquery = "SELECT  AVG(calories) as calories  FROM  `wh_d_basis` WHERE `u_id`=1 AND calories != 'None'";
+  $myquery = "SELECT  AVG(calories) as calories  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND calories != 'None'";
 } else if ($param['gsr'] == 1) {
-  $myquery = "SELECT  AVG(gsr) as gsr  FROM  `wh_d_basis` WHERE `u_id`=1 AND gsr != 'None'";
+  $myquery = "SELECT  AVG(gsr) as gsr  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND gsr != 'None'";
 } else if ($param['skin_temp'] == 1) {
-  $myquery = "SELECT  AVG(skin_temp) as skin_temp  FROM  `wh_d_basis` WHERE `u_id`=1 AND skin_temp != 'None'";
+  $myquery = "SELECT  AVG(skin_temp) as skin_temp  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND skin_temp != 'None'";
 } else if ($param['air_temp'] == 1) {
-  $myquery = "SELECT  AVG(air_temp) as air_temp  FROM  `wh_d_basis` WHERE `u_id`=1 AND air_temp != 'None'";
+  $myquery = "SELECT  AVG(air_temp) as air_temp  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND air_temp != 'None'";
 } else {
   // quit
   exit();
