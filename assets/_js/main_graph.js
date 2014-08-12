@@ -221,7 +221,10 @@ var stepsBarGroup = main.append("g")
     the ".csv" tells d3 to read the column headers, and allows us to call things directly by name (such as d.steps)
 
 */
-d3.csv($base_url + "/api/main-series.php?user_id=1&granularity=30", function(error, data) {
+
+var user_id = document.getElementsByClassName("user_id")[0];
+//console.log("user id "+user_id.id);
+window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&granularity=30", function(error, data) {
     
 	// (Shaun)some formatting technique - i don't know
 	var heart_rate_base_line = new Array();

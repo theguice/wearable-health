@@ -23,13 +23,16 @@ function mapHighlightPoint(time) {
         }
     });
 }
+
 function mapResetIcons() {
   $.each(markers, function(i,val) {
     markers[i].setIcon(icon);
   });
 }
 
-$.getJSON($base_url + "/api/get_places.php?user_id=1", function( data ) {
+//user_id.id comes from main_graph
+console.log("/api/get_places.php?user_id="+user_id.id);
+$.getJSON($base_url + "/api/get_places.php?user_id="+user_id.id, function( data ) {
   data_places = data;
   /* console.log(data_places); */
 

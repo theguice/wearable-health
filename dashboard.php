@@ -14,6 +14,7 @@ if(empty($_SESSION['user']))
 	die("Redirecting to login.php"); 
 } 
 $username = ucfirst($_SESSION['user']['username']);
+$userid = ucfirst($_SESSION['user']['u_id']);
 // Everything below this point in the file is secured by the login system 
 ?>
 
@@ -87,14 +88,15 @@ $username = ucfirst($_SESSION['user']['username']);
     <!-- Top section for averages and comparison bars -->
     <div class="container" role="main">
     <div class="span-text-top">
-	<h2>Health Data Visualization</h2>
+<!--	<h2>Health Data Visualization</h2>
 	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 
 
-	</p>	
+	</p>	-->
 	
 	</div>
 	<div class="span11">
+	<div class="user_id" id="<?php echo $userid;?>" style="display: none;"></div>
 	<div id="compare">
 		<p class="plot title">Compare Averages</p>
         <div class="heartrate top"></div>
