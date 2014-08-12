@@ -13,9 +13,14 @@ from HTMLParser import HTMLParser
 #Server Connection to MySQL:
 import MySQLdb
 conn = MySQLdb.connect(host=   "localhost",
-                       user=   "healthstudy",
-                       passwd= "jo9fog",
-                       db=     "healthstudy")
+                      user=   "healthstudy",
+                      passwd= "jo9fog",
+                      db=     "healthstudy")
+# conn = MySQLdb.connect(host=   "127.0.0.1",
+#                        user=   "root",
+#                        passwd= "root",
+#                        db=     "healthstudy")
+
 x = conn.cursor()
 
 #31,625
@@ -26,7 +31,6 @@ def main():
     cur.execute("SELECT u_id,begin_date,basis_u,basis_p,lumo_api,moves_u,moves_p FROM `wh_users`")
     for (u_id,begin_date,basis_u,basis_p,lumo_api,moves_u,moves_p) in cur:
         print u_id,begin_date,basis_u,basis_p,lumo_api,moves_u,moves_p
-
         if (begin_date):
             ##### SYNC DATA FROM BASIS CLOUD #####
             if (basis_u and basis_p):
@@ -36,10 +40,10 @@ def main():
             else:
                 print "Basis sync failed for user: " + str(u_id) + " - reason: basis credentials missing"
             
-            
+            ##### SYNC DATA FROM LUMO CLOUD #####
             if (lumo_api):
-                ##### SYNC DATA FROM LUMO CLOUD #####
                 download_lumo(u_id, lumo_api, begin_date)
+                print "download lumo stuff"
             else:
                 print "Lumo sync failed for user: " + str(u_id) + " lumo_api string missing"
             
@@ -125,6 +129,8 @@ def collect_basis_json(user_id):
 	    if file.endswith(".json"):
 	        with open(cur_dir + '/' + file) as data_file:
 	    		data = json.load(data_file)
+			print file
+	    	os.remove(cur_dir + '/' + file)
 	    	if data['bodystates']:
 	    		print "\tImporting to database: ", file
 	    		json_to_db(data, user_id)
@@ -137,7 +143,8 @@ def collect_basis_json(user_id):
 #translate json file to mysql statements
 def json_to_db(d, user_id):
 	keys = ['air_temp','calories','gsr','heartrate','skin_temp','steps']
-	for i in range (0, 1440):
+	number_of_entries = len(d['metrics']['air_temp']['values']) - 1
+	for i in range (0, number_of_entries):
 		values = ''
 		for k in keys:
 			values += "'" + str(d['metrics'][k]['values'][i]) + "'"
