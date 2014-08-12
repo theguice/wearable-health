@@ -4,3 +4,5 @@ uploads/*
 *.esproj
 
 *-basis.json
+
+/control_panel/basis_data_export/cookie.txt
