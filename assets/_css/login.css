@@ -25,6 +25,14 @@ body {
   font-size: 2.3em;
 }
 
+.login-card h3 {
+  font-weight: 600;
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  margin: 20px 0px 5px 0px;
+}
+
+
 .login-card input[type=submit] {
   width: 100%;
   display: block;
@@ -84,6 +92,9 @@ body {
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
 
+.login-submit a{
+	width: 100%;
+}
 .login-card a {
   text-decoration: none;
   color: #666;
@@ -94,10 +105,38 @@ body {
   transition: opacity ease 0.5s;
 }
 
+.login-card.instructions a {
+text-decoration: none;
+color:  #4d90fe;
+font-weight: 400;
+text-align: left;
+display: inline-block;
+opacity: 1;
+transition: opacity ease 0.5s;
+	font-variant: normal;
+}
+
 .login-card a:hover {
   opacity: 1;
 }
 
+.login-card img {
+	display: block;
+	margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.login-card button {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#button{
+	  margin-top: 20px;
+}
 .login-help {
   width: 100%;
   text-align: center;
