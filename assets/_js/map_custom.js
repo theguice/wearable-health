@@ -5,11 +5,15 @@ var markers = [];
 var icon = {
   path: google.maps.SymbolPath.CIRCLE,
   strokeColor: 'gold',
+  fillColor: 'gold',
+  fillOpacity: 1.0,
   scale: 3
 };
 var iconSelected = {
   path: google.maps.SymbolPath.CIRCLE,
   strokeColor: 'red',
+  fillColor: 'red',
+  fillOpacity: 1.0,
   scale: 6
 };
 
@@ -19,7 +23,8 @@ function mapHighlightPoint(time) {
     $.each(data_places['places'], function(i,val) {
         if (epoch > parseInt(val['time_start']) && epoch < parseInt(val['time_end'])) {
             mapResetIcons();
-	    markers[i].setIcon(iconSelected);
+	    	markers[i].setIcon(iconSelected);
+	    	markers[i].setZIndex(2147480001);
         }
     });
 }
@@ -27,6 +32,11 @@ function mapHighlightPoint(time) {
 function mapResetIcons() {
   $.each(markers, function(i,val) {
     markers[i].setIcon(icon);
+    var markerZIndex = markers[i].getZIndex()
+    if (markerZIndex>2147480000) {
+	    markerZIndex = 2147480000;
+    	markers[i].setZIndex(markerZIndex);
+    }
   });
 }
 
