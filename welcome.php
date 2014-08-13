@@ -68,7 +68,6 @@ if(empty($_SESSION['user']))
 
    
 </div>
-  <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
 <script>
   $(".required").on('change', function(){
       console.log($('.required:checked').length, $('.required').length);
@@ -79,6 +78,7 @@ if(empty($_SESSION['user']))
     }
   });
 </script>
+<script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
 
 </body>
 
