@@ -197,49 +197,46 @@ if (!empty($_POST)) {
 	die("Redirecting to login.php");
 }
 
-?> 
-<h1>Register</h1> 
-<form action="register.php" method="post"> 
-  Username:<br /> 
-    <input type="text" name="username" value="" /> 
-    <br /><br /> 
-  E-Mail:<br /> 
-    <input type="text" name="email" value="" /> 
-    <br /><br /> 
-  Password:<br /> 
-    <input type="password" name="password" value="" /> 
-    <br /><br />
-<form action="register.php" method="post"> 
-  Begin Date(eg 2014-08-13):<br /> 
-    <input type="text" name="begin_date" value="" /> 
-    <br /><br /> 
-<form action="register.php" method="post"> 
-  Basis Username:<br /> 
-    <input type="text" name="basis_u" value="" /> 
-    <br /><br /> 
-<form action="register.php" method="post"> 
-  Basis Password:<br /> 
-    <input type="text" name="basis_p" value="" /> 
-    <br /><br /> 
-<form action="register.php" method="post"> 
-  Lumo Username:<br /> 
-    <input type="text" name="lumo_u" value="" /> 
-    <br /><br /> 
-<form action="register.php" method="post"> 
-  Lumo Password:<br /> 
-    <input type="text" name="lumo_p" value="" /> 
-    <br /><br /> 
-<form action="register.php" method="post"> 
-  Lumo API String:<br /> 
-    <input type="text" name="lumo_api" value="" /> 
-    <br /><br /> 
-<form action="register.php" method="post"> 
-  Moves Username:<br /> 
-    <input type="text" name="moves_u" value="" /> 
-    <br /><br /> 
-<form action="register.php" method="post"> 
-  Moves Password:<br /> 
-    <input type="text" name="moves_p" value="" /> 
-    <br /><br /> 
-    <input type="submit" value="Register" /> 
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Register</title>
+
+  <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+	<link rel="stylesheet" href="assets/_css/login.css" type="text/css">
+
+</head>
+<body>
+
+  <div class="login-card">
+    <h1>Register</h1><br>
+  <form action="register.php" method="post"> 
+
+    <input type="text" name="username" placeholder="Username" value="" /> 
+
+    <input type="text" name="email" placeholder="E-Mail" value="" /> 
+   
+    <input type="password" name="password" value="" placeholder="Password"/> 
+    <input type="text" name="begin_date" value="" placeholder="Begin Date(eg 2014-08-13)"/> 
+    <input type="text" name="basis_u" value="" placeholder="Basis Username"/> 
+    <input type="text" name="basis_p" value="" placeholder="Basis Password"/> 
+    <input type="text" name="lumo_u" value="" placeholder="Lumo Username"/> 
+    <input type="text" name="lumo_p" value="" placeholder="Lumo Password"/> 
+    <input type="text" name="lumo_api" value="" placeholder="Lumo API String"/> 
+    <input type="text" name="moves_u" value="" placeholder="Moves Username"/> 
+    <input type="text" name="moves_p" value="" placeholder="Moves Password"/> 
+    <input type="submit" value="Register" class="login login-submit"/> 
 </form>
+<div class="login-help">
+  <a href="login.php">Log-in</a> • <a href="#">Support</a>
+</div>
+</div>
+  <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
+
+</body>
+
+</html>

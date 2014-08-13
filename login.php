@@ -102,16 +102,29 @@ if(!empty($_POST))
 } 
      
 ?> 
-<link rel="stylesheet" href="assets/_css/basic.css">
-<div class="center">
-<h1>Healthstudy Login</h1> 
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Log-in</title>
+  <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+  <link rel="stylesheet" href="assets/_css/login.css" type="text/css">
+</head>
+<body>
+  <div class="login-card">
+    <h1>Log-in</h1><br>
 <form action="login.php" method="post"> 
-  Username:<br /> 
-    <input type="text" name="username" value="<?php echo $submitted_username; ?>" /> 
-    <br /><br /> 
-  Password:<br /> 
-    <input type="password" name="password" value="" /> 
-    <br /><br /> 
-    <input type="submit" value="Login" /> 
+    <input type="text" name="username" placeholder="Username" value="<?php echo $submitted_username; ?>" />    
+    <input type="password" name="password" value="" placeholder="Password"/> 
+    <input type="submit" value="Login" class="login login-submit"/> 
 </form>
+<div class="login-help">
+  <a href="register.php">Register</a> • <a href="#">Support</a>
 </div>
+</div>
+  <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
+
+</body>
+
+</html>
