@@ -25,8 +25,8 @@ var topBarSensors = ["heartrate","steps","calories","gsr","skin_temp","air_temp"
 var initBarData = new Array();
 var topBarData = new Array();
 var topBarRanges = {"heartrate":[0,140],
-					"steps":[0,10],
-					"calories":[0,20],
+					"steps":[0,10000],
+					"calories":[0,5000],
 					"gsr":[0,2],
 					"skin_temp":[0,200],
 					"air_temp":[0,200]};

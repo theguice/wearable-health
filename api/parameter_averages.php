@@ -63,15 +63,25 @@ days: weekdays or weekends
 */
 
 
+$isTimePresent = false;
 
+$timeQueryString = "";
 
-
+if ($param['start_time']  && $param['end_time'])
+{
+	$isTimePresent = true;
+	$timeQueryString = sprintf(" AND date_epoch > %u AND date_epoch < %u", $param['start_time'], $param['end_time']);
+}
 
 if ($param['heartrate'] == 1) {
   $myquery = "SELECT  AVG(heartrate) as heartrate FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND heartrate != 'None' AND heartrate != '0'";
-} else if ($param['steps'] == 1) {
+} else if (($param['steps'] == 1) && ($isTimePresent)) {
+  $myquery = "SELECT  SUM(steps) as steps  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND steps != 'None'";
+} else if (($param['steps'] == 1) && (!$isTimePresent)) {
   $myquery = "SELECT  AVG(steps) as steps  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND steps != 'None'";
-} else if ($param['calories'] == 1) {
+} else if (($param['calories'] == 1) && ($isTimePresent)) {
+  $myquery = "SELECT  SUM(calories) as calories  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND calories != 'None'";
+} else if (($param['calories'] == 1) && (!$isTimePresent)) {
   $myquery = "SELECT  AVG(calories) as calories  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND calories != 'None'";
 } else if ($param['gsr'] == 1) {
   $myquery = "SELECT  AVG(gsr) as gsr  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND gsr != 'None'";
@@ -84,10 +94,8 @@ if ($param['heartrate'] == 1) {
   exit();
 }
 
-if ($param['start_time']  && $param['end_time'])
-{
-	$myquery .= sprintf(" AND date_epoch > %u AND date_epoch < %u", $param['start_time'], $param['end_time']);
-}
+// adding the time range to the query
+$myquery .= $timeQueryString;
 
 // day modifier
 if ($param['days'] == 'weekdays') {
