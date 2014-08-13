@@ -25,7 +25,7 @@ if(empty($_SESSION['user']))
 <head>
   <meta charset="UTF-8">
   <title>Welcome</title>
-  <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+  <link rel='stylesheet' href='https://codepen.io/assets/libs/fullpage/jquery-ui.css'>
   <link rel="stylesheet" href="assets/_css/login.css" type="text/css">
 </head>
 
@@ -78,7 +78,7 @@ if(empty($_SESSION['user']))
     }
   });
 </script>
-<script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
+<script src='https://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
 
 </body>
 
