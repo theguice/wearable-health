@@ -1,3 +1,10 @@
+"""
+MAILTO=shubham.goel@gmail.com
+
+*/30 * * * * /groups/healthstudy/public_html.ssl/control_panel/save_to_db.py
+
+"""
+
 #!/usr/bin/python
 
 import os
@@ -119,12 +126,12 @@ def download_basis_json(user_id):
     for i in range(30): 
 	curdate = date.strftime('%Y-%m-%d')
 	print "\tDownload from Basis: " + str(curdate)
-	cmd = "php ./basis_data_export/basisdataexport.php -u" + user_details[1] + " -p" + user_details[2] + " -fjson -d" + curdate
+	cmd = "php /groups/healthstudy/public_html.ssl/control_panel/basis_data_export/basisdataexport.php -u" + user_details[1] + " -p" + user_details[2] + " -fjson -d" + curdate
 	call(cmd, shell=True)
         date += datetime.timedelta(days=1)
 
 def collect_basis_json(user_id):
-	cur_dir = "./basis_data_export/data_basis"
+	cur_dir = "/groups/healthstudy/public_html.ssl/control_panel/basis_data_export/data_basis"
 	for file in os.listdir(cur_dir):
 	    if file.endswith(".json"):
 	        with open(cur_dir + '/' + file) as data_file:
@@ -167,7 +174,7 @@ def json_to_db(d, user_id):
 
 def import_moves(user_id):
     try:
-        f = open('../uploads/moves_export_user_' + str(user_id) + '/json/full/activities.json', 'r')
+        f = open('/groups/healthstudy/public_html.ssl/uploads/moves_export_user_' + str(user_id) + '/json/full/activities.json', 'r')
     except:
         print "moves - no activities.json file for user: ", user_id
         return
@@ -200,7 +207,7 @@ def import_moves(user_id):
                     ##### WRITE Finished #####
 
     try:
-        f = open('../uploads/moves_export_user_' + str(user_id) + '/json/full/places.json', 'r')
+        f = open('/groups/healthstudy/public_html.ssl/uploads/moves_export_user_' + str(user_id) + '/json/full/places.json', 'r')
     except:
         print "moves - no places.json file for user: ", user_id
         return
@@ -233,7 +240,7 @@ def import_moves(user_id):
                 ##### WRITE Finished #####
 
     try:
-        f = open('../uploads/moves_export_user_' + str(user_id) + '/json/full/storyline.json', 'r')
+        f = open('/groups/healthstudy/public_html.ssl/uploads/moves_export_user_' + str(user_id) + '/json/full/storyline.json', 'r')
     except:
         print "moves - no storyline.json file for user: ", user_id
         return
