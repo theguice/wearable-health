@@ -27,6 +27,7 @@ if(empty($_SESSION['user']))
   <title>Welcome</title>
   <link rel='stylesheet' href='https://codepen.io/assets/libs/fullpage/jquery-ui.css'>
   <link rel="stylesheet" href="assets/_css/login.css" type="text/css">
+  <script src='https://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
 </head>
 
 <body>
@@ -68,7 +69,9 @@ if(empty($_SESSION['user']))
 
    
 </div>
-<script>
+
+<script type="text/javascript">
+console.log("it does enter the script");
   $(".required").on('change', function(){
       console.log($('.required:checked').length, $('.required').length);
     if ($('.required:checked').length == $('.required').length) {
@@ -78,7 +81,6 @@ if(empty($_SESSION['user']))
     }
   });
 </script>
-<script src='https://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
 
 </body>
 
