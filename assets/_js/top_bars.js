@@ -52,8 +52,8 @@ function bar_y(sensor)
 function initTopBarAxis() {
 	/* Get data ranges*/
 	d3.json($base_url + "/api/get_parameter_ranges.php?user_id="+user_id.id, function(error, data) {
-	console.log("top bar range data received");
-	console.log(data);
+//	console.log("top bar range data received");
+//	console.log(data);
 		topBarRanges = data;
 		initTopBarChart();
 	});

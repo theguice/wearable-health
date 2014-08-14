@@ -544,8 +544,18 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		
 		focus.select(".x").attr("transform", "translate(" + main_x(d.Time) + ",0)");
 	}
+	
+	focusOnLastday(data[data.length - 1].Time)
 });
 
+
+function focusOnLastday(lastDay) {
+	console.log(lastDay);
+	var extent = [d3.time.day.offset(lastDay,-1),lastDay];
+	
+	d3.selectAll(".brush").call(brush.extent(extent));
+	onBrush();
+}
 
 /* Here we are specifying which lines and barGroups will be zoomed when the brushing is happening
 
@@ -698,7 +708,7 @@ function on_brush_ended() {
 //		extent1[1] = d3.time.day.ceil(extent0[1]);
 	}
 	extent1[1] = d3.time.day.offset(extent1[0],1);
-	
+		
 	d3.select(this).transition()
 		.call(brush.extent(extent1))
 		.call(brush.event);
