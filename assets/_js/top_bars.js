@@ -128,6 +128,7 @@ function addCompareRangeToTopBar()
 	{
 	    var sensor = topBarSensors[i];
 	    // user_id comes from main_graph.js
+//	    console.log($base_url + "/api/parameter_averages.php?"+sensor+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc+"&user_id="+user_id.id)
 		d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc+"&user_id="+user_id.id, function(error, data)
 		{
 		    topBarData[data[0].name].push(data[0].value);

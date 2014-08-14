@@ -20,26 +20,6 @@ MIN(CAST(air_temp as Decimal(18,2))) AS air_temp_min,
 MAX(CAST(air_temp as Decimal(18,2))) AS air_temp_max 
 FROM `wh_d_basis` WHERE `u_id`=1;
 
-
-
-
- AND heartrate != 'None' AND heartrate != '0'
-
-
-SELECT MIN(heartrate), MAX(heartrate), MIN(gsr), MAX(gsr), MIN(skin_temp), MAX(skin_temp), MIN(air_temp), MAX(air_temp) FROM `wh_d_basis` WHERE `u_id`=1 AND heartrate != 'None' AND heartrate != '0'
-
-
-SELECT MIN(CAST(heartrate as int)) FROM `wh_d_basis` WHERE `u_id`=1 AND heartrate != 'None' AND heartrate != '0'
-SELECT MIN(CAST(heartrate as Decimal(18,2))) FROM `wh_d_basis` WHERE `u_id`=1 AND heartrate != 'None' AND heartrate != '0'
-
-SELECT AVG(heartrate) FROM `wh_d_basis` WHERE `u_id`=1 AND heartrate != 'None' AND heartrate != '0'
-55.34708077677272
-
-SELECT AVG(CAST(heartrate as Decimal(18,2))) FROM `wh_d_basis` WHERE `u_id`=1 AND heartrate != 'None' AND heartrate != '0'
-MIN(CAST(heartrate as Decimal(18,2)))
-55.347081
-
-
 */
 // First we execute our common code to connection to the database and start the session 
 

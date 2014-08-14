@@ -1,5 +1,21 @@
 <?php
+/*
 
+Expected Parameters
+user_id: <int>
+start_time: <epoc>
+end_time: <epoc>
+
+localhost:8888/api/get_places.php?user_id=1&start_time=1403395200&end_time=1403481600
+
+Query:
+SELECT * FROM `wh_d_moves_places` WHERE `u_id`=1 AND 
+(time_start > 1403395200 AND 
+time_start < 1403481600) OR 
+(time_end > 1403395200 AND 
+time_end < 1403481600)
+ORDER BY time_start ASC
+*/
   // First we execute our common code to connection to the database and start the session 
 require("../common.php"); 
 
@@ -14,7 +30,6 @@ parse_str($parts['query'], $param);
 //$param['user_id'] = 1;
 if (!$param['user_id']) {
   exit();
-
 }
 
 $data = array();
@@ -27,9 +42,14 @@ I think this would be really cool, especially when the user zooms in to a day or
 
 If you do try this, you'll probably want to reduce the marker radius in the map_custom.js file
 */
+$timeQueryString = "";
+if ($param['start_time']  && $param['end_time'])
+{	
+	$timeQueryString = sprintf(" AND (time_start > %u AND time_start < %u) OR (time_end > %u AND time_end < %u)", $param['start_time'], $param['end_time'], $param['start_time'], $param['end_time']);
+}
 
+$myquery = "SELECT * FROM `wh_d_moves_places` WHERE `u_id`=" . $param['user_id'] . $timeQueryString . " ORDER BY time_start ASC";
 
-$myquery = "SELECT * FROM `wh_d_moves_places` WHERE `u_id`=" . $param['user_id'] . " ORDER BY time_start ASC";
 $query = mysql_query($myquery);
 if ( ! $query ) {
   echo mysql_error();
