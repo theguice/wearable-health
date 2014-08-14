@@ -550,13 +550,14 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 
 
 function focusOnLastday(lastDay) {
-	console.log(lastDay);
+//	console.log(lastDay);
 	var extent = [d3.time.day.offset(lastDay,-1),lastDay];
 	
 	d3.selectAll(".brush").call(brush.extent(extent));
 	onBrush();
 	
 	addCompareRangeToTopBar();
+	addTimeRangeToMap();
 }
 
 /* Here we are specifying which lines and barGroups will be zoomed when the brushing is happening
@@ -630,10 +631,10 @@ function onBrush() {
 		brushedRegionGroup.style("display","none");
 
 		var dateRange = brush.extent();
-/*
-		console.log("brush Range:"+dateRange[0]+","+dateRange[1]);
-		console.log("brush range in pixels:"+main_x(dateRange[0])+","+main_x(dateRange[1]));
-*/
+
+//		console.log("brush Range:"+dateRange[0]+","+dateRange[1]);
+//		console.log("brush range in pixels:"+main_x(dateRange[0])+","+main_x(dateRange[1]));
+
 		window.startDateEpoc = (((+dateRange[0])/1000)|0);
 		window.endDateEpoc = (((+dateRange[1])/1000)|0);
 		
@@ -714,4 +715,5 @@ function on_brush_ended() {
 	d3.select(this).transition()
 		.call(brush.extent(extent1))
 		.call(brush.event);
+	addTimeRangeToMap();
 }

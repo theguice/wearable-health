@@ -45,8 +45,8 @@ $.getJSON($base_url + "/api/get_places.php?user_id="+user_id.id, function( data 
   data_places = data;
   /* console.log(data_places); */
 
-  var myLatLng = new google.maps.LatLng( data['center'][0], data['center'][1] );
-  map.setCenter(myLatLng);
+  var latLngCenter = new google.maps.LatLng( data['center'][0], data['center'][1] );
+  map.setCenter(latLngCenter);
 
   $.each(data_places['places'], function(i,val) {
     myLatLng = new google.maps.LatLng( val['lat'], val['lon'] );
@@ -62,11 +62,10 @@ $.getJSON($base_url + "/api/get_places.php?user_id="+user_id.id, function( data 
     latlngbounds.extend(latlng[i]);
   }
   map.fitBounds(latlngbounds);
-
-
-
 });
-  google.maps.event.addDomListener(window, 'load', initialize); 
+
+google.maps.event.addDomListener(window, 'load', initialize); 
+
 function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng(37.8651879418, -122.2823873959),
@@ -76,4 +75,30 @@ function initialize() {
           styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}]
         };
         map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+}
+
+function addTimeRangeToMap() {
+	$.getJSON($base_url + "/api/get_places.php?user_id="+user_id.id+"&start_time="+startDateEpoc+"&end_time="+endDateEpoc, function( data ) {
+		range_latlng = [];
+		data_places = data;
+		/* console.log(data_places); */
+		
+		var latLngCenter = new google.maps.LatLng( data['center'][0], data['center'][1] );
+		map.setCenter(latLngCenter);
+		
+		$.each(data_places['places'], function(i,val) {
+			latLng = new google.maps.LatLng( val['lat'], val['lon'] );
+//			marker = new google.maps.Marker( {position: myLatLng, map: map, icon: icon});
+//			markers.push(marker);
+			range_latlng.push(latLng);
+		});
+		
+		// Adjust map to fit bounds
+		var latlngbounds = new google.maps.LatLngBounds();
+		for (var i = 0; i < range_latlng.length; i++) {
+			latlngbounds.extend(range_latlng[i]);
+		}
+		map.fitBounds(latlngbounds);
+	});
+	
 }
