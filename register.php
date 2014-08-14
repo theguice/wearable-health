@@ -232,7 +232,7 @@ if (!empty($_POST)) {
     <input type="submit" value="Register" class="login login-submit"/> 
 </form>
 <div class="login-help">
-  <a href="login.php">Log-in</a> • <a href="#">Support</a>
+  <a href="login.php">Log-in</a> • <a href="http://my.lumoback.com/static/index.html">Lumo Back API</a>
 </div>
 </div>
   <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
