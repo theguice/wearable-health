@@ -42,55 +42,31 @@ var bar_margin = {top: 0, right: 0, bottom: 30, left: 0},
     bar_height = 128 - bar_margin.top - bar_margin.bottom;
 
 var bar_x = d3.scale.ordinal();
+
 function bar_y(sensor)
 {
 	var bar_scale = d3.scale.linear().range([bar_height, 0]).domain([topBarRanges[sensor][0], topBarRanges[sensor][1]]);
 	return bar_scale;
 }
 
-for (i = 0; i < topBarSensors.length; i++)
-{
-	initBarData[topBarSensors[i]] = new Array();
-	topBarData[topBarSensors[i]] = new Array();
-	initTopBar(topBarSensors[i]);
+function initTopBarAxis() {
+	/* Get data ranges*/
+	d3.json($base_url + "/api/get_parameter_ranges.php?user_id="+user_id.id, function(error, data) {
+	console.log("top bar range data received");
+	console.log(data);
+		topBarRanges = data;
+		initTopBarChart();
+	});
 }
 
-
-
-    /* 
-    This is where we will do the drawing of the compare tool.
-    
-    This api call url is where you'll need to add the start_time and end_time parameters for each time range that should be compared. So it will end up looking something like:
-    
-    /api/parameter_averages.php?"+param+"=1&s_time1=... e_time1=... s_time2=... e_time2=...
-    
-    
-    if one row comes back (which is currently the default), d3 draws one bar
-    if two rows come back, d3 draws the two bars side by side
-    and so on...
-    
-    you'll need to modify parameter_averages.php to understand s_time1, s_time2...
-        I made more comments in that file about this 
-    
-    
-    */
-
-
-function addCompareRangeToTopBar()
-{
+function initTopBarChart() {
 	for (i = 0; i < topBarSensors.length; i++)
 	{
-	    var sensor = topBarSensors[i];
-	    // user_id comes from main_graph.js
-		d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc+"&user_id="+user_id.id, function(error, data)
-		{
-		    topBarData[data[0].name].push(data[0].value);
-		    animateAndUpdateTopbar(data[0].name,false);
-		});
-
+		initBarData[topBarSensors[i]] = new Array();
+		topBarData[topBarSensors[i]] = new Array();
+		initTopBar(topBarSensors[i]);
 	}
 }
-
 
 function initTopBar(sensor)
 {
@@ -105,13 +81,7 @@ function initTopBar(sensor)
 	
 	    bar_x.rangeRoundBands([10, bar_width], .2)
 	    .domain(d3.range(data.length));
-	
-/* 	console.log(sensor+":"+topBarRanges[sensor][0]+","+topBarRanges[sensor][1]); */
-/*
-	    bar_y.range([bar_height, 0])
-	    .domain([topBarRanges[sensor][0], topBarRanges[sensor][1]]);
-*/
-	
+	    	
     var xAxis = d3.svg.axis()
         .scale(bar_x)
         .orient("bottom");
@@ -150,11 +120,26 @@ function initTopBar(sensor)
 
 }
 
+initTopBarAxis();
+
+function addCompareRangeToTopBar()
+{
+	for (i = 0; i < topBarSensors.length; i++)
+	{
+	    var sensor = topBarSensors[i];
+	    // user_id comes from main_graph.js
+		d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&start_time="+startDateEpoc+"&end_time="+endDateEpoc+"&user_id="+user_id.id, function(error, data)
+		{
+		    topBarData[data[0].name].push(data[0].value);
+		    animateAndUpdateTopbar(data[0].name,false);
+		});
+
+	}
+}
+
 
 function animateAndUpdateTopbar(sensor, isFirstRun)
 {
-
-	
 	var data = 0;
 	if(isFirstRun)
 	{
@@ -189,3 +174,21 @@ function animateAndUpdateTopbar(sensor, isFirstRun)
 		
 	
 }
+
+/* 
+This is where we will do the drawing of the compare tool.
+
+This api call url is where you'll need to add the start_time and end_time parameters for each time range that should be compared. So it will end up looking something like:
+
+/api/parameter_averages.php?"+param+"=1&s_time1=... e_time1=... s_time2=... e_time2=...
+
+
+if one row comes back (which is currently the default), d3 draws one bar
+if two rows come back, d3 draws the two bars side by side
+and so on...
+
+you'll need to modify parameter_averages.php to understand s_time1, s_time2...
+    I made more comments in that file about this 
+
+
+*/
