@@ -37,7 +37,7 @@ var sensorName = {"heartrate":"Heart Rate",
 					"skin_temp":"Skin Temp",
 					"air_temp":"Air Temp"};
 
-var bar_margin = {top: 0, right: 0, bottom: 30, left: 0},
+var bar_margin = {top: 10, right: 0, bottom: 30, left: 0},
     bar_width = 90 - bar_margin.left - bar_margin.right,
     bar_height = 128 - bar_margin.top - bar_margin.bottom;
 
@@ -74,7 +74,7 @@ function initTopBar(sensor)
 
     var svg_bar = d3.select("div."+sensor).append("svg")
 		.attr("width", bar_width)
-		.attr("height", bar_height)
+		.attr("height", bar_height+10)
 		.append("g")
 		.attr("class", sensor)
 		.attr("transform", "translate(" + bar_margin.left + "," + bar_margin.top + ")");
@@ -106,7 +106,7 @@ function initTopBar(sensor)
 
 	svg_bar.append("foreignObject")
 		.attr('x', '14')
-		.attr('y', '0')
+		.attr('y', '-12')
 		.attr('width',bar_width)
 		.attr('height',20)
 		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input><span class='icon "+sensor+"'></span>" + sensorName[sensor] + "</label>"; });
