@@ -101,8 +101,8 @@ function initTopBar(sensor)
 		.attr("dy", ".60em")
 		.style("text-anchor", "end");
 	svg_bar.selectAll("g.tick > text")
-		.attr("transform", "translate(8,6)")
-		.attr("font-size","8px");
+		.attr("transform", "translate(-5,5) rotate(90)")
+		.attr("font-size","7px");
 
 	svg_bar.append("foreignObject")
 		.attr('x', '14')
