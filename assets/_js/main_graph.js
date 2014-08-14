@@ -555,6 +555,8 @@ function focusOnLastday(lastDay) {
 	
 	d3.selectAll(".brush").call(brush.extent(extent));
 	onBrush();
+	
+	addCompareRangeToTopBar();
 }
 
 /* Here we are specifying which lines and barGroups will be zoomed when the brushing is happening
