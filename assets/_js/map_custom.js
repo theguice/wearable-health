@@ -2,6 +2,7 @@ var data_places = [];
 var map;
 var latlng = [];
 var markers = [];
+var overAlllatlngbounds = new google.maps.LatLngBounds();
 var icon = {
   path: google.maps.SymbolPath.CIRCLE,
   strokeColor: 'gold',
@@ -57,11 +58,10 @@ $.getJSON($base_url + "/api/get_places.php?user_id="+user_id.id, function( data 
 
 
   // Adjust map to fit bounds
-  var latlngbounds = new google.maps.LatLngBounds();
   for (var i = 0; i < latlng.length; i++) {
-    latlngbounds.extend(latlng[i]);
+    overAlllatlngbounds.extend(latlng[i]);
   }
-  map.fitBounds(latlngbounds);
+  map.fitBounds(overAlllatlngbounds);
 });
 
 google.maps.event.addDomListener(window, 'load', initialize); 
@@ -93,12 +93,17 @@ function addTimeRangeToMap() {
 			range_latlng.push(latLng);
 		});
 		
-		// Adjust map to fit bounds
-		var latlngbounds = new google.maps.LatLngBounds();
-		for (var i = 0; i < range_latlng.length; i++) {
-			latlngbounds.extend(range_latlng[i]);
+		if (range_latlng.length == 0) {
+			map.fitBounds(overAlllatlngbounds);
+		} else {
+			// Adjust map to fit bounds
+			var latlngbounds = new google.maps.LatLngBounds();
+			for (var i = 0; i < range_latlng.length; i++) {
+				latlngbounds.extend(range_latlng[i]);
+			}
+			map.fitBounds(latlngbounds);
 		}
-		map.fitBounds(latlngbounds);
+		
 	});
 	
 }
