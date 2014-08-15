@@ -1,0 +1,8 @@
+- Added the icons (the sizes and design need to be adjusted)
+- Added the "Movement Types" based on the Moves' data type (walking, running, bicycling, transport) [still need to figure out if we could use different colors for these 4 different types, as we are already using a lot of colors]
+- In "sketch4," added the annotation / notes (which could be linked to specific data points in the main "Activity Details" window)
+- In "sketch4," the bar graphs are clustered into different types.
+- In "sketch4," the "Activity Details" and map windows are smaller, but it might be OK
+- In "sketch3," the map is on the left side to form a cluster with "movement types"
+
+There are now a lot more information in the window competing for users' attention. Let's figure out the visual hierarchy. Let me know your thoughts.
