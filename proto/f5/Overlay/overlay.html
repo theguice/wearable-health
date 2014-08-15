@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style type="text/css">
+button {
+    width: 150px;
+    padding: 10px;
+    background-color: #FF8C00;
+    box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#CommentScreen {
+    height: 100%;
+    width: 420px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    display: none;
+    background: white;
+    border: 5px solid #cccccc;
+    border-radius: 10px;
+}
+
+#CommentScreen:target, #CommentScreen:target + #cover {
+    display: block;
+    opacity: 2;
+}
+
+.cancel {
+    display: block;
+    position: absolute;
+    top: 3px;
+    right: 2px;
+    background: rgb(245,245,245);
+    color: black;
+    height: 30px;
+    width: 35px;
+    font-size: 30px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+} 
+    </style>
+
+    <title></title>
+</head>
+
+<body>
+    <div style="text-align: center">
+        <br>
+        <br>
+        <br>
+        <br>
+        <a class="button" href="#CommentScreen">Click here to Log In</a>
+    </div>
+
+    <div id="CommentScreen">
+    	<p>This is a login screen</p>
+        <a class="cancel" href="#">&times;</a>
+        <!-- begin htmlcommentbox.com -->
+         <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
+         <link rel="stylesheet" type="text/css" href="//www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+         <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=(""+window.location).replace(/'/g,"%27") || hcb_user.PAGE, h="//www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&opts=16862&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+        <!-- end htmlcommentbox.com -->
+    </div>
+
+    <div id="cover"></div>
+</body>
+</html>
