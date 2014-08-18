@@ -126,13 +126,13 @@ def download_basis_json(user_id):
     cur.execute("SELECT begin_date,basis_u,basis_p FROM `wh_users` WHERE u_id=" + str(user_id))
     user_details = cur.fetchone()
     date = date_make(user_details[0])
-    #for i in range(30):#Shubham--> shaun: what this for, seems out of place?
-    curdate = date.strftime('%Y-%m-%d')
-    print "\tDownload from Basis: " + str(curdate)
-    cmd = "php /groups/healthstudy/public_html.ssl/control_panel/basis_data_export/basisdataexport.php -u" + \
-          user_details[1] + " -p" + user_details[2] + " -fjson -d" + curdate
-    call(cmd, shell=True)
-    date += datetime.timedelta(days=1)
+    for i in range(30):#Shubham--> shaun: what this for, seems out of place?
+        curdate = date.strftime('%Y-%m-%d')
+        print "\tDownload from Basis: " + str(curdate)
+        cmd = "php /groups/healthstudy/public_html.ssl/control_panel/basis_data_export/basisdataexport.php -u" + \
+              user_details[1] + " -p" + user_details[2] + " -fjson -d" + curdate
+        call(cmd, shell=True)
+        date += datetime.timedelta(days=1)
 
 
 def collect_basis_json(user_id):
