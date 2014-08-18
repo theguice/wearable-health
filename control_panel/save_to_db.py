@@ -33,6 +33,8 @@ def main():
     cur.execute("SELECT u_id,begin_date,basis_u,basis_p,lumo_api,moves_u,moves_p FROM `wh_users`")
     for (u_id, begin_date, basis_u, basis_p, lumo_api, moves_u, moves_p) in cur:
         print u_id, begin_date, basis_u, basis_p, lumo_api, moves_u, moves_p
+        if u_id!=7:
+            continue
         if (begin_date):
             ##### SYNC DATA FROM BASIS CLOUD #####
             if (basis_u and basis_p):
