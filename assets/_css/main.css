@@ -97,6 +97,13 @@ line.axis {
   fill: #008080;
 }
 
+/* activity */
+.bar.activityBar {
+  fill: yellow;
+  opacity: 0.3;
+}
+	
+
 .overlay {
   fill: none;
   pointer-events: all;

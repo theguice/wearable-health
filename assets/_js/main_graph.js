@@ -184,7 +184,7 @@ var svg_mini = d3.select("div#mini").append("svg")
 // I still don't understand what clipPath does, but it seems important. It doesn't bother me so, I don't bother it.
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
-  .append("rect")
+	.append("rect")
     .attr("width", main_width)
     .attr("height", main_height);
 
@@ -211,7 +211,10 @@ var caloriesBarGroup = main.append("g")
 var stepsBarGroup = main.append("g")
     .attr('clip-path', 'url(#clip)');
 
+var activityBarGroup = main.append("g")
+	.attr('clip-path', 'url(#clip)');
 
+var activityMainGraph;
 /* This next line gets the big dataset and opens a new scope
     everything within its scope executes once per line in the dataset
     this is what makes D3 so powerful, but also trips people up, 
@@ -465,13 +468,6 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		.attr("d", mini_line6);
 	
 	
-	mini.append("g")
-		.attr("class", "x brush")
-		.call(brush)
-		.call(brush.event)
-		.selectAll("rect")
-		.attr("y", -6)
-		.attr("height", mini_height + 7);
 	
 	var focus = main.append("g")
 		.attr("class", "focus")
@@ -545,7 +541,58 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		focus.select(".x").attr("transform", "translate(" + main_x(d.Time) + ",0)");
 	}
 	
-	focusOnLastday(data[data.length - 1].Time)
+	console.log("download activity data: "+$base_url + "/api/get_activity.php?user_id="+user_id.id);
+	d3.json($base_url + "/api/get_activity.php?user_id="+user_id.id, function(error, activityData)
+	{
+		/* add bar charts */
+	    activityMainGraph = activityBarGroup.selectAll("rect")
+	    	.data(activityData)
+	    	.enter().append("rect")
+	    	.attr("x", function(d, i) { 
+	    		var utcSeconds = parseInt(d.time_start);
+	    		var t_start = new Date(0);
+	    		t_start.setUTCSeconds(utcSeconds);
+		    	return main_x(t_start); })
+	    	.attr("width", function(d, i) {
+	    		var utcStartSeconds = parseInt(d.time_start),
+	    			utcEndSeconds = parseInt(d.time_end);
+	    			
+	    		var t_start = new Date(0),
+	    			t_end = new Date(0);
+	    		
+	    		t_start.setUTCSeconds(utcStartSeconds);
+	    		t_end.setUTCSeconds(utcEndSeconds);
+	    		
+	    		return main_x(t_end) - main_x(t_start); })
+	    	.attr("y", function(d) { return 0; })
+	    	.attr("height", function(d) { return 315; })
+	    	.attr("class", "bar activityBar");
+	    	
+	    	// .attr("width", function(d) { return main_x(d.time_end)-main_x(d.time_start); })
+	    	
+	    	var utcSeconds = parseInt(1405472316);
+	    	var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+	    	d.setUTCSeconds(utcSeconds);
+	    	
+	    	
+	    	// hide the bars
+	    	$(".bar.activityBar").css("visibility", "hidden");
+	    	
+	    	
+	    	
+	    	mini.append("g")
+	    		.attr("class", "x brush")
+	    		.call(brush)
+	    		.call(brush.event)
+	    		.selectAll("rect")
+	    		.attr("y", -6)
+	    		.attr("height", mini_height + 7);
+	    	
+	});
+	
+	
+	
+//	focusOnLastday(data[data.length - 1].Time)
 });
 
 
@@ -610,12 +657,17 @@ function diableAddRangeButton()
 
 
 function onBrush() {
+	console.log("onBrush");
+	// hide activity data
+	hideActivityData();
 
 	if (brush.empty())
 	{
 		// hide button
 		addComparisonButton.style("display","none");
+    	$(".bar.activityBar").css("visibility", "hidden");
 		brushedRegionGroup.style("display",null);
+		
 		main.selectAll(".line0").style("stroke-width","0.4px");
 		main.selectAll(".line3").style("stroke-width","0.4px");
 		main.selectAll(".line5").style("stroke-width","0.4px");
@@ -628,6 +680,8 @@ function onBrush() {
 	{
 		// show button
 		addComparisonButton.style("display",null);
+		$(".bar.activityBar").css("visibility", "visible");
+		main.selectAll("activityBar").style("display", null);
 		brushedRegionGroup.style("display","none");
 
 		var dateRange = brush.extent();
@@ -696,12 +750,34 @@ function onBrush() {
 	main.select(".base7").attr("d", main_base7);
 	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
+	activityMainGraph.attr("x", function(d, i) { 
+		var utcSeconds = parseInt(d.time_start);
+		var t_start = new Date(0);
+		t_start.setUTCSeconds(utcSeconds);
+		return main_x(t_start); })
+	.attr("width", function(d, i) {
+		var utcStartSeconds = parseInt(d.time_start),
+			utcEndSeconds = parseInt(d.time_end);
+				
+		var t_start = new Date(0),
+			t_end = new Date(0);
+			
+		t_start.setUTCSeconds(utcStartSeconds);
+		t_end.setUTCSeconds(utcEndSeconds);
+			
+		return main_x(t_end) - main_x(t_start); })	
 	
 	main.select(".x.axis").call(main_xAxis);
 }
 
 function on_brush_ended() {
-	if (!d3.event.sourceEvent) return; // only transition after input
+	console.log("on_brush_ended");
+	if (!d3.event.sourceEvent)
+	{
+		addTimeRangeToMap();
+		showActivityData();
+		return;
+	}// only transition after input
 	var extent0 = brush.extent(),
 		extent1 = extent0.map(d3.time.day.round);
 
@@ -715,5 +791,11 @@ function on_brush_ended() {
 	d3.select(this).transition()
 		.call(brush.extent(extent1))
 		.call(brush.event);
-	addTimeRangeToMap();
+}
+
+
+function showActivityData() {
+}
+
+function hideActivityData() {
 }
