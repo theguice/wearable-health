@@ -592,7 +592,7 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 	
 	
 	
-//	focusOnLastday(data[data.length - 1].Time)
+	focusOnLastday(data[data.length - 1].Time)
 });
 
 
