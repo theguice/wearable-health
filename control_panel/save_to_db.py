@@ -44,7 +44,7 @@ def main():
 
             ##### SYNC DATA FROM LUMO CLOUD #####
             if (lumo_api):
-                download_lumo(u_id, lumo_api, begin_date)
+                #download_lumo(u_id, lumo_api, begin_date)
                 print "download lumo stuff"
             else:
                 print "Lumo sync failed for user: " + str(u_id) + " lumo_api string missing"
