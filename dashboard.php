@@ -147,6 +147,9 @@ $userid = ucfirst($_SESSION['user']['u_id']);
       </footer>
 
     </div> <!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/_js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+    
     <!-- setup.js holds global vars and click-handlers -->
     <script src="assets/_js/setup.js" type="text/javascript"></script>
     <!-- main_graph.js holds all d3 logic for the main visualization -->
@@ -155,8 +158,6 @@ $userid = ucfirst($_SESSION['user']['u_id']);
     <script src="assets/_js/top_bars.js" type="text/javascript"></script>
     <!-- map_custom.js is where you specify map style, and setup markers -->
     <script src="assets/_js/map_custom.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="assets/_js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
 
     <script src="assets/_js/plugins.js"></script>
     <script src="assets/_js/main.js"></script>

@@ -66,6 +66,10 @@ function initTopBarChart() {
 		topBarData[topBarSensors[i]] = new Array();
 		initTopBar(topBarSensors[i]);
 	}
+	
+	setTimeout(function() {
+		$(".top").trigger('click');	
+	}, 2000);
 }
 
 function initTopBar(sensor)
@@ -104,12 +108,13 @@ function initTopBar(sensor)
 		.attr("transform", "translate(-5,5) rotate(90)")
 		.attr("font-size","7px");
 
+	var checked = (sensor == 'heartrate')?"checked":"";
 	svg_bar.append("foreignObject")
 		.attr('x', '14')
 		.attr('y', '-12')
 		.attr('width',bar_width)
 		.attr('height',20)
-		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' checked></input><span class='icon "+sensor+"'></span>" + sensorName[sensor] + "</label>"; });
+		.html(function(d,i) { return "<label class='checkbox'><input type='checkbox' id='option_" + sensor + "' "+checked+"></input><span class='icon "+sensor+"'></span>" + sensorName[sensor] + "</label>"; });
     
     // start data dowload> which will update the charts automatically
     d3.json($base_url + "/api/parameter_averages.php?"+sensor+"=1&user_id="+user_id.id, function(error, data) {
