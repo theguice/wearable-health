@@ -215,6 +215,7 @@ var activityBarGroup = main.append("g")
 	.attr('clip-path', 'url(#clip)');
 
 var activityMainGraph;
+var activityText;
 /* This next line gets the big dataset and opens a new scope
     everything within its scope executes once per line in the dataset
     this is what makes D3 so powerful, but also trips people up, 
@@ -570,13 +571,36 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 	    	
 	    	// .attr("width", function(d) { return main_x(d.time_end)-main_x(d.time_start); })
 	    	
-	    	var utcSeconds = parseInt(1405472316);
-	    	var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-	    	d.setUTCSeconds(utcSeconds);
+    	var utcSeconds = parseInt(1405472316);
+    	var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    	d.setUTCSeconds(utcSeconds);
+    	
+    	
+    	// hide the bars
+    	$(".bar.activityBar").css("visibility", "hidden");
+    	
+    	/* add text to activity bar charts */
+    	activityText = activityBarGroup.selectAll(".activityBarText")
+	    	.data(activityData)
+	    	.enter()
+	    	.append("text")
+	    	.attr("class", "activityBarText")
+	    	.attr("text-anchor", "middle")
+	    	.attr("fill", "black")
+	    	.attr("x", function(d, i) { 
+	    		var utcSeconds = parseInt(d.time_start);
+	    		var t_start = new Date(0);
+	    		t_start.setUTCSeconds(utcSeconds);
+	    		return main_x(t_start); })
+	    	.attr("y", 50)
+	    	.text(function(d){
+	    	     return d.act;
+	    	});
+    	
 	    	
 	    	
-	    	// hide the bars
-	    	$(".bar.activityBar").css("visibility", "hidden");
+	    	
+	    	
 	    	
 	    	
 	    	
@@ -765,8 +789,14 @@ function onBrush() {
 		t_start.setUTCSeconds(utcStartSeconds);
 		t_end.setUTCSeconds(utcEndSeconds);
 			
-		return main_x(t_end) - main_x(t_start); })	
-	
+		return main_x(t_end) - main_x(t_start); });
+		
+	activityText.attr("x", function(d, i) { 
+		var utcSeconds = parseInt(d.time_start);
+		var t_start = new Date(0);
+		t_start.setUTCSeconds(utcSeconds);
+		return main_x(t_start); });
+		
 	main.select(".x.axis").call(main_xAxis);
 }
 
