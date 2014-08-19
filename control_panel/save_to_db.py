@@ -33,8 +33,6 @@ def main():
     cur.execute("SELECT u_id,begin_date,basis_u,basis_p,lumo_api,moves_u,moves_p FROM `wh_users`")
     for (u_id, begin_date, basis_u, basis_p, lumo_api, moves_u, moves_p) in cur:
         print u_id, begin_date, basis_u, basis_p, lumo_api, moves_u, moves_p
-        if u_id!=7:
-            continue
         if (begin_date):
             ##### SYNC DATA FROM BASIS CLOUD #####
             if (basis_u and basis_p):
@@ -43,14 +41,12 @@ def main():
                 collect_basis_json(u_id)
             else:
                 print "Basis sync failed for user: " + str(u_id) + " - reason: basis credentials missing"
-
             ##### SYNC DATA FROM LUMO CLOUD #####
             if (lumo_api):
                 #download_lumo(u_id, lumo_api, begin_date)
                 print "download lumo stuff"
             else:
                 print "Lumo sync failed for user: " + str(u_id) + " lumo_api string missing"
-
             ##### Parse Local Moves File ####
             import_moves(u_id)
 
