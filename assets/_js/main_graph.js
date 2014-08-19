@@ -215,7 +215,6 @@ var activityBarGroup = main.append("g")
 	.attr('clip-path', 'url(#clip)');
 
 var activityMainGraph;
-var activityText;
 /* This next line gets the big dataset and opens a new scope
     everything within its scope executes once per line in the dataset
     this is what makes D3 so powerful, but also trips people up, 
@@ -577,40 +576,15 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
     	
     	
     	// hide the bars
-    	$(".bar.activityBar").css("visibility", "hidden");
-    	
-    	/* add text to activity bar charts */
-    	activityText = activityBarGroup.selectAll(".activityBarText")
-	    	.data(activityData)
-	    	.enter()
-	    	.append("text")
-	    	.attr("class", "activityBarText")
-	    	.attr("text-anchor", "middle")
-	    	.attr("fill", "black")
-	    	.attr("x", function(d, i) { 
-	    		var utcSeconds = parseInt(d.time_start);
-	    		var t_start = new Date(0);
-	    		t_start.setUTCSeconds(utcSeconds);
-	    		return main_x(t_start); })
-	    	.attr("y", 50)
-	    	.text(function(d){
-	    	     return d.act;
-	    	});
-    	
+    	$(".bar.activityBar").css("visibility", "hidden");	    	
 	    	
-	    	
-	    	
-	    	
-	    	
-	    	
-	    	
-	    	mini.append("g")
-	    		.attr("class", "x brush")
-	    		.call(brush)
-	    		.call(brush.event)
-	    		.selectAll("rect")
-	    		.attr("y", -6)
-	    		.attr("height", mini_height + 7);
+    	mini.append("g")
+    		.attr("class", "x brush")
+    		.call(brush)
+    		.call(brush.event)
+    		.selectAll("rect")
+    		.attr("y", -6)
+    		.attr("height", mini_height + 7);
 	    	
 	});
 	
@@ -790,12 +764,6 @@ function onBrush() {
 		t_end.setUTCSeconds(utcEndSeconds);
 			
 		return main_x(t_end) - main_x(t_start); });
-		
-	activityText.attr("x", function(d, i) { 
-		var utcSeconds = parseInt(d.time_start);
-		var t_start = new Date(0);
-		t_start.setUTCSeconds(utcSeconds);
-		return main_x(t_start); });
 		
 	main.select(".x.axis").call(main_xAxis);
 }
