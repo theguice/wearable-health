@@ -7,8 +7,8 @@ var icon = {
   path: google.maps.SymbolPath.CIRCLE,
   strokeColor: 'gold',
   fillColor: 'gold',
-  fillOpacity: 1.0,
-  scale: 3
+  fillOpacity: 0.3,
+  scale: 1
 };
 var iconSelected = {
   path: google.maps.SymbolPath.CIRCLE,
@@ -108,15 +108,25 @@ function addTimeRangeToMap() {
 	
 }
 
+// used to keep track of all paths<google.maps.Polyline> added to the map
+var allPaths = new Array();
+
 function addPathsToMap() {
 	// console.log($base_url + "/api/get_paths.php?user_id="+user_id.id);
-	// download path data
-	$.getJSON($base_url + "/api/get_paths.php?user_id="+user_id.id, function( data ) {
-	//console.log(data);
+	
+	/* remove existing paths */
+	for (var i=0; i<allPaths.length; i++) {
+		allPaths[i].setMap(null);
+	}
+	allPaths.length = 0; 
+	
+	/* download path data */
+	$.getJSON($base_url + "/api/get_paths.php?user_id="+user_id.id+"&start_time="+startDateEpoc+"&end_time="+endDateEpoc, function( data ) {
+		// console.log(data);
 		for (var i=0; i<data.length; i++) {
 			var path = data[i];
 			var pathActivity = path['activity'];
-//			 console.log(path['path_id']);
+			// console.log(path['path_id']);
 		    /* path = {path_id:
 		    	activity:
 		    	points:[{
@@ -134,7 +144,7 @@ function addPathsToMap() {
 		    cycling - light brown
 		    transport - grey
 		    */
-		    var pathColor = '#4B4B4B'; //transport
+		    var pathColor = '#4D7DFF'; //transport
 		    if (pathActivity == 'walking') pathColor = '#FFA000';
 		    if (pathActivity == 'cycling') pathColor = '#996734';
 		    
@@ -151,9 +161,9 @@ function addPathsToMap() {
 		    	strokeOpacity: 1.0,
 		    	strokeWeight: 1
 		    });
+		    allPaths.push(pathPolyLine);
 		}
 		
 	});
 }
 
-addPathsToMap();

@@ -776,6 +776,7 @@ function on_brush_ended() {
 	{
 		addTimeRangeToMap();
 		showActivityData();
+		addPathsToMap();
 		return;
 	}// only transition after input
 	var extent0 = brush.extent(),
