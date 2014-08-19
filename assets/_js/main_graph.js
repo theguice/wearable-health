@@ -566,7 +566,7 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 	    		return main_x(t_end) - main_x(t_start); })
 	    	.attr("y", function(d) { return 0; })
 	    	.attr("height", function(d) { return 315; })
-	    	.attr("class", "bar activityBar");
+	    	.attr("class", function(d) {return "bar activityBar " + d.act});
 	    	
 	    	// .attr("width", function(d) { return main_x(d.time_end)-main_x(d.time_start); })
 	    	
@@ -748,6 +748,7 @@ function onBrush() {
 	main.select(".base7").attr("d", main_base7);
 	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
+	
 	activityMainGraph.attr("x", function(d, i) { 
 		var utcSeconds = parseInt(d.time_start);
 		var t_start = new Date(0);

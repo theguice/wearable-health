@@ -98,11 +98,18 @@ line.axis {
 }
 
 /* activity */
-.bar.activityBar {
-  fill: yellow;
+.bar.activityBar.walking {
+  fill: #FFA000;
   opacity: 0.3;
 }
-	
+.bar.activityBar.transport {
+  fill: #4B4B4B;
+  opacity: 0.3;
+}
+.bar.activityBar.cycling {
+  fill: #996734;
+  opacity: 0.3;
+}	
 
 .overlay {
   fill: none;
