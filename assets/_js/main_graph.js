@@ -34,7 +34,7 @@ var heartrate_scale = d3.scale.sqrt()
 	skintemp_scale = d3.scale.sqrt()
 	.range([250, 50]),
 	gsr_scale = d3.scale.sqrt()
-	.range([main_height, 300]),
+	.range([main_height, 200]),
 	step_scale = d3.scale.sqrt()
 	.range([main_height, 200]),
 	calorie_scale = d3.scale.sqrt()
@@ -121,6 +121,7 @@ var main_line0 = d3.svg.line()
 
 
 var main_line3 = d3.svg.line()
+	.interpolate('cardinal')
     .defined(function(d) { return d.gsr != null; })
     .x(function(d) { return main_x(d.Time); })
     .y(function(d) { return gsr_scale(d.gsr); });
