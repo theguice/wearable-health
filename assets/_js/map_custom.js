@@ -115,6 +115,7 @@ function addPathsToMap() {
 	//console.log(data);
 		for (var i=0; i<data.length; i++) {
 			var path = data[i];
+			var pathActivity = path['activity'];
 //			 console.log(path['path_id']);
 		    /* path = {path_id:
 		    	activity:
@@ -125,6 +126,18 @@ function addPathsToMap() {
 		    			
 		    			},...]}
 		    */
+		    
+		    /*
+		    running - red
+		    
+		    walking - orange
+		    cycling - light brown
+		    transport - grey
+		    */
+		    var pathColor = '#4B4B4B'; //transport
+		    if (pathActivity == 'walking') pathColor = '#FFA000';
+		    if (pathActivity == 'cycling') pathColor = '#996734';
+		    
 		    var pathCoordinates = [];
 		    for (var j=0; j<path['points'].length; j++) {
 		    	point = path['points'][j];
@@ -134,7 +147,7 @@ function addPathsToMap() {
 		    	path: pathCoordinates,
 		    	map: map,
 		    	geodesic: true,
-		    	strokeColor: '#FF0000',
+		    	strokeColor: pathColor,
 		    	strokeOpacity: 1.0,
 		    	strokeWeight: 1
 		    });
