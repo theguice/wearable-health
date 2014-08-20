@@ -42,11 +42,11 @@ line.axis {
 
 /* Steps */
 .bar.bar1 {
-  fill: #754B30;
+  fill: #F07F26;
   opacity: 0.9;
 }
 .steps rect.bar {
-  fill: #754B30;
+  fill: #F07F26;
 }
 
 /* Calories */
@@ -75,10 +75,10 @@ line.axis {
 
 /* Skin Temp */
 .line.line5 {
-  stroke: #F07F26;
+  stroke: #754B30;
 }
 .skin_temp rect.bar{
-  fill: #F07F26;
+  fill: #754B30;
 }
 
 /* Air Temp */

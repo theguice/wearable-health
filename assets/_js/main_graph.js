@@ -204,18 +204,19 @@ var brushedRegionGroup = main.append("g")
 var mini = svg_mini.append("g")
     .attr("transform", "translate(" + mini_margin.left + "," + mini_margin.top + ")");
 
-// Calories Bars  --  linked to data below
-var caloriesBarGroup = main.append("g")
-    .attr('clip-path', 'url(#clip)');
+
+var activityBarGroup = main.append("g")
+	.attr('clip-path', 'url(#clip)');
+var activityMainGraph;
 
 // Steps Bars  --  linked to data below
 var stepsBarGroup = main.append("g")
     .attr('clip-path', 'url(#clip)');
 
-var activityBarGroup = main.append("g")
-	.attr('clip-path', 'url(#clip)');
+// Calories Bars  --  linked to data below
+var caloriesBarGroup = main.append("g")
+    .attr('clip-path', 'url(#clip)');
 
-var activityMainGraph;
 /* This next line gets the big dataset and opens a new scope
     everything within its scope executes once per line in the dataset
     this is what makes D3 so powerful, but also trips people up, 
@@ -673,8 +674,8 @@ function onBrush() {
 		main.selectAll(".line6").style("stroke-width","0.4px");
 		main.selectAll(".line7").style("stroke-width","0.4px");
 		main.selectAll(".base").style("stroke-width","0.4px");
-		stepsMainGraph.attr("width", "1");
-		caloriesMainGraph.attr("width", "1");
+		stepsMainGraph.attr("width", "3");
+		caloriesMainGraph.attr("width", "3");
 	}else
 	{
 		// show button
@@ -695,7 +696,8 @@ function onBrush() {
 		//1 day is 86400 secs
 		var oneDay = 86400;
 		
-		var barThickness = (main_width*300)/selectionLength | 0;
+		var barThicknessScale = 3;//1 represents the thickness of 5 mins which is the highest resolution we can go to.
+		var barThickness = barThicknessScale*(main_width*300)/selectionLength | 0;
 
 		barThickness = barThickness>1 ? barThickness: 1;
 /*
