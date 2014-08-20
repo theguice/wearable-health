@@ -81,6 +81,11 @@ var main_xAxis = d3.svg.axis()
     .scale(mini_x)
     .tickFormat(d3.time.format("%m/%d"))
     .orient("bottom")
+    .ticks(14),
+    mini_xAxis_abbreviated_day = d3.svg.axis()
+    .scale(mini_x)
+    .tickFormat(d3.time.format("%a"))
+    .orient("bottom")
     .ticks(14);
 
 var main_yAxisLeft = d3.svg.axis()
@@ -442,10 +447,16 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 	*/
 	mini.append("g")
 		.attr("class", "x axis")
-		.attr("transform", "translate(0," + mini_height + ")")
+		.attr("transform", "translate(0," + (mini_height-2) + ")")
 		.call(mini_xAxis);
+	mini.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + (mini_height+4) + ")")
+		.call(mini_xAxis_abbreviated_day);		
+		
 	mini.selectAll("g.tick > text")
-		.attr("transform", "translate(0,-4)");
+		.attr("transform", "translate(0,-4)")
+		.attr("font-size","7px");
 	mini.selectAll("g.tick > line")
 		.attr("transform", "translate(0,-6)")
 	
