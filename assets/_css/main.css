@@ -98,6 +98,11 @@ line.axis {
 }
 
 /* activity */
+#activity_image {
+	float: right;
+	margin-top: 2px;
+	
+}
 .bar.activityBar.walking {
   fill: #FFA000;
   opacity: 0.3;

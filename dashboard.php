@@ -121,7 +121,7 @@ $userid = ucfirst($_SESSION['user']['u_id']);
     </div>
     
     <div id="main">
-	    <p class="plot title">Activity Details</p>
+	    <p class="plot title">Activity Details<img id="activity_image" src="assets/_img/activity-icons.png"></p>
     </div>
 
     <div id="side">
