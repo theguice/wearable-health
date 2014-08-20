@@ -30,12 +30,12 @@ var topBarRanges = {"heartrate":[0,140],
 					"gsr":[0,2],
 					"skin_temp":[0,200],
 					"air_temp":[0,200]};
-var sensorName = {"heartrate":"Heart Rate",
-					"steps":"Steps",
-					"calories":"Calories",
-					"gsr":"Perspiration",
-					"skin_temp":"Skin Temp",
-					"air_temp":"Air Temp"};
+var sensorName = {"heartrate":'"Heart Rate"<br>"(AVG)"',
+					"steps":"Steps (SUM)",
+					"calories":"Calories (SUM)",
+					"gsr":"Perspiration (AVG)",
+					"skin_temp":"Skin Temp (AVG)",
+					"air_temp":"Air Temp (AVG)"};
 
 var bar_margin = {top: 10, right: 0, bottom: 30, left: 0},
     bar_width = 90 - bar_margin.left - bar_margin.right,

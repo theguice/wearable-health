@@ -146,6 +146,7 @@ function addPathsToMap() {
 		    var pathColor = '#4D7DFF'; //transport
 		    if (pathActivity == 'walking') pathColor = '#FFA000';
 		    if (pathActivity == 'cycling') pathColor = '#996734';
+		    if (pathActivity == 'running') pathColor = '#B20002';
 		    
 		    var pathCoordinates = [];
 		    for (var j=0; j<path['points'].length; j++) {

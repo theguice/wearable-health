@@ -110,7 +110,10 @@ line.axis {
   fill: #996734;
   opacity: 0.3;
 }	
-
+.bar.activityBar.running {
+  fill: #B20002;
+  opacity: 0.3;
+}
 .overlay {
   fill: none;
   pointer-events: all;
