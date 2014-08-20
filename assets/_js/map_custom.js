@@ -159,7 +159,7 @@ function addPathsToMap() {
 		    	geodesic: true,
 		    	strokeColor: pathColor,
 		    	strokeOpacity: 1.0,
-		    	strokeWeight: 1
+		    	strokeWeight: 3
 		    });
 		    allPaths.push(pathPolyLine);
 		}
