@@ -530,7 +530,8 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		.attr("height", main_height)
 		.on("mouseover", function() { focus.style("display", null); })
 		.on("mouseout", function() { focus.style("display", "none"); })
-		.on("mousemove", mousemove);
+		.on("mousemove", mousemove)
+		.on("click",zoomViz);
 
 	function mousemove() {
 	
@@ -668,7 +669,7 @@ function diableAddRangeButton()
 
 
 function onBrush() {
-	console.log("onBrush");
+	// console.log("onBrush");
 	// hide activity data
 	hideActivityData();
 
@@ -812,4 +813,45 @@ function showActivityData() {
 }
 
 function hideActivityData() {
+}
+
+function zoomViz() {
+//	console.log("click");
+    var p = d3.mouse( this);
+	var mouse_x = p[0];
+	var time_range_mid_point = main_x.invert(mouse_x);
+	var extent = [d3.time.hour.offset(time_range_mid_point,-3), d3.time.hour.offset(time_range_mid_point,+3)];
+	
+	main_x.domain(extent);
+	
+	main.select(".line0").attr("d", main_line0);
+	main.select(".base0").attr("d", main_base0);
+	main.select(".line3").attr("d", main_line3);
+	main.select(".line5").attr("d", main_line5);
+	main.select(".base5").attr("d", main_base5);
+	main.select(".line6").attr("d", main_line6);
+	main.select(".base6").attr("d", main_base6);
+	main.select(".line7").attr("d", main_line7);
+	main.select(".base7").attr("d", main_base7);
+	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
+	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
+	
+	activityMainGraph.attr("x", function(d, i) { 
+		var utcSeconds = parseInt(d.time_start);
+		var t_start = new Date(0);
+		t_start.setUTCSeconds(utcSeconds);
+		return main_x(t_start); })
+	.attr("width", function(d, i) {
+		var utcStartSeconds = parseInt(d.time_start),
+			utcEndSeconds = parseInt(d.time_end);
+				
+		var t_start = new Date(0),
+			t_end = new Date(0);
+			
+		t_start.setUTCSeconds(utcStartSeconds);
+		t_end.setUTCSeconds(utcEndSeconds);
+			
+		return main_x(t_end) - main_x(t_start); });
+		
+	main.select(".x.axis").call(main_xAxis);
 }
