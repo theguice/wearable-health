@@ -815,12 +815,22 @@ function showActivityData() {
 function hideActivityData() {
 }
 
+var shouldZoomIn = true;
+
 function zoomViz() {
 //	console.log("click");
     var p = d3.mouse( this);
 	var mouse_x = p[0];
 	var time_range_mid_point = main_x.invert(mouse_x);
-	var extent = [d3.time.hour.offset(time_range_mid_point,-3), d3.time.hour.offset(time_range_mid_point,+3)];
+	if (shouldZoomIn){
+		var extent = [d3.time.hour.offset(time_range_mid_point,-3), d3.time.hour.offset(time_range_mid_point,+3)];
+		shouldZoomIn = false;
+	}else {
+		var startDay = d3.time.day(time_range_mid_point);
+		var extent = [startDay, d3.time.day.offset(startDay,+1)];
+		shouldZoomIn = true;
+	}
+	
 	
 	main_x.domain(extent);
 	
