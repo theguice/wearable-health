@@ -37,8 +37,8 @@ def main():
             ##### SYNC DATA FROM BASIS CLOUD #####
             if (basis_u and basis_p):
                 print "Syncing data for user: " + str(u_id)
-                download_basis_json(u_id)
-                collect_basis_json(u_id)
+                #download_basis_json(u_id)
+                #collect_basis_json(u_id)
             else:
                 print "Basis sync failed for user: " + str(u_id) + " - reason: basis credentials missing"
             ##### SYNC DATA FROM LUMO CLOUD #####
