@@ -815,25 +815,25 @@ function showActivityData() {
 function hideActivityData() {
 }
 
-var shouldZoomIn = true;
+var isZoomed = false;
 
 function zoomViz() {
-//	console.log("click");
+	console.log("click");
     var p = d3.mouse( this);
 	var mouse_x = p[0];
 	var time_range_mid_point = main_x.invert(mouse_x);
-	if (shouldZoomIn){
+	if (!isZoomed){
 		// main_x goes from 0 to main_width
 		var range = main_x.range();
 		var relative_position = mouse_x/range[1];
 		console.log(range);
 		var extent = [d3.time.hour.offset(time_range_mid_point,-6*relative_position), 
 					  d3.time.hour.offset(time_range_mid_point,+6*(1-relative_position))];
-		shouldZoomIn = false;
+		isZoomed = true;
 	}else {
 		var startDay = d3.time.day(time_range_mid_point);
 		var extent = [startDay, d3.time.day.offset(startDay,+1)];
-		shouldZoomIn = true;
+		isZoomed = false;
 	}
 	
 	
