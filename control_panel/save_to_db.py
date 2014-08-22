@@ -235,7 +235,7 @@ def import_moves(user_id):
                 time_end = moves_date_to_epoch(s['endTime'])
 
                 if 'name' in s['place'].keys():
-                    name = s['place']['name']
+                    name = s['place']['name'].encode('utf8')
                 else:
                     name = "None"
 
@@ -247,12 +247,10 @@ def import_moves(user_id):
                         s['place']['id']) + "'")
                 duplicate_check = cur.fetchone()
                 if not duplicate_check:
-                    print s['place']['location']['lat']
-                    print s['place']['location']['lon']
                     sql = "INSERT INTO `wh_d_moves_places` (`u_id`,`time_start`,`time_end`,`type`,`place_id`,`name`,`lat`, `lon`) VALUES (" + str(
                         user_id) + ",'" + str(time_start) + "','" + str(time_end) + "','" + str(
                         s['type']) + "','" + str(s['place']['id']) + "','" + str(name) + "','" + str(
-                        s['place']['location']['lat']).encode('utf8') + "','" + str(s['place']['location']['lon']).encode('utf8')+ "')";
+                        s['place']['location']['lat']) + "','" + str(s['place']['location']['lon'])+ "')";
                     try:
                         x.execute(sql)
                         conn.commit()
