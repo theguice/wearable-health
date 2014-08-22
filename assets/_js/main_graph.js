@@ -823,7 +823,12 @@ function zoomViz() {
 	var mouse_x = p[0];
 	var time_range_mid_point = main_x.invert(mouse_x);
 	if (shouldZoomIn){
-		var extent = [d3.time.hour.offset(time_range_mid_point,-3), d3.time.hour.offset(time_range_mid_point,+3)];
+		// main_x goes from 0 to main_width
+		var range = main_x.range();
+		var relative_position = mouse_x/range[1];
+		console.log(range);
+		var extent = [d3.time.hour.offset(time_range_mid_point,-6*relative_position), 
+					  d3.time.hour.offset(time_range_mid_point,+6*(1-relative_position))];
 		shouldZoomIn = false;
 	}else {
 		var startDay = d3.time.day(time_range_mid_point);
@@ -834,19 +839,19 @@ function zoomViz() {
 	
 	main_x.domain(extent);
 	
-	main.select(".line0").attr("d", main_line0);
-	main.select(".base0").attr("d", main_base0);
-	main.select(".line3").attr("d", main_line3);
-	main.select(".line5").attr("d", main_line5);
-	main.select(".base5").attr("d", main_base5);
-	main.select(".line6").attr("d", main_line6);
-	main.select(".base6").attr("d", main_base6);
-	main.select(".line7").attr("d", main_line7);
-	main.select(".base7").attr("d", main_base7);
-	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
-	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
+	main.transition().select(".line0").attr("d", main_line0);
+	main.transition().select(".base0").attr("d", main_base0);
+	main.transition().select(".line3").attr("d", main_line3);
+	main.transition().select(".line5").attr("d", main_line5);
+	main.transition().select(".base5").attr("d", main_base5);
+	main.transition().select(".line6").attr("d", main_line6);
+	main.transition().select(".base6").attr("d", main_base6);
+	main.transition().select(".line7").attr("d", main_line7);
+	main.transition().select(".base7").attr("d", main_base7);
+	stepsMainGraph.transition().attr("x", function(d, i) { return main_x(d.Time); });
+	caloriesMainGraph.transition().attr("x", function(d, i) { return main_x(d.Time); });
 	
-	activityMainGraph.attr("x", function(d, i) { 
+	activityMainGraph.transition().attr("x", function(d, i) { 
 		var utcSeconds = parseInt(d.time_start);
 		var t_start = new Date(0);
 		t_start.setUTCSeconds(utcSeconds);
