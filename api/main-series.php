@@ -57,12 +57,21 @@ for ($x = 0; $x < mysql_num_rows($all_basis_query); $x++) {
 }
 /* Lumo Back data */
 // Good sitting posture being selected right now. May not be the best choice, EDA could be one way to solve the problem
-$lumo_back_query_url = "SELECT * FROM `wh_d_lumo` WHERE `u_id`=" . $param['user_id'] . " AND act = 'SG' AND date_epoch > 1402012800 AND mod(date_epoch,".$gran.")=0 ORDER BY date_epoch ASC";
+$lumo_back_query_url = "SELECT * FROM `wh_d_lumo` WHERE `u_id`=" . $param['user_id'] . " AND (act = 'SG' OR act = 'STG') AND date_epoch > 1402012800 AND mod(date_epoch,".$gran.")=0 ORDER BY date_epoch ASC";
 $lumo_back_query = mysql_query($lumo_back_query_url);
 $lumo_back_data = array();
 for ($x = 0; $x < mysql_num_rows($lumo_back_query); $x++) {
   $d = mysql_fetch_assoc($lumo_back_query);
   $lumo_back_data[$d['date_epoch']] = $d;
+}
+
+//Lumo Back data for bad posture
+$lumo_back_b_query_url = "SELECT * FROM `wh_d_lumo` WHERE `u_id`=" . $param['user_id'] . " AND (act = 'SBF' OR act = 'SBL' OR act = 'SBR' OR act = 'SBS' OR act = 'STBF' OR act = 'STBL' OR act = 'STBR' OR act = 'STBS' ) AND date_epoch > 1402012800 AND mod(date_epoch,".$gran.")=0 ORDER BY date_epoch ASC";
+$lumo_back_b_query = mysql_query($lumo_back_b_query_url);
+$lumo_back_b_data = array();
+for ($x = 0; $x < mysql_num_rows($lumo_back_b_query); $x++) {
+  $d = mysql_fetch_assoc($lumo_back_b_query);
+  $lumo_back_b_data[$d['date_epoch']] = $d;
 }
 
 /* --------------------------------  */
@@ -79,7 +88,7 @@ if ( ! $query ) {
 
 
 // Here we are looping through the query response and building the CSV reply.
-echo "epoc,Time,heartrate,steps,calories,gsr,skin_temp,air_temp,posture\n";
+echo "epoc,Time,heartrate,steps,calories,gsr,skin_temp,air_temp,posture,posture_b\n";
 $data = array();
 for ($x = 0; $x < mysql_num_rows($query); $x++) {
   $d = mysql_fetch_assoc($query);
@@ -90,6 +99,7 @@ for ($x = 0; $x < mysql_num_rows($query); $x++) {
   $c_hr = 0;// heart rate count
   $c = 0;//count
   $posture = 0;
+  $posture_b = 0;
   $posture_count = 0;
   // count the steps and calories from next GRANULARITY minutes
   for ($y = $d['date_epoch']; $y < ($d['date_epoch'] + $gran); $y++) {
@@ -106,6 +116,8 @@ for ($x = 0; $x < mysql_num_rows($query); $x++) {
     if (isset($lumo_back_data[$y])) {
 	    $posture += $lumo_back_data[$y]['pct'];
 	    $posture_count++;
+      //every good posture has to be associated with the corresponding bad posture
+      $posture_b += $lumo_back_b_data[$y]['pct'];
     }
   }
 /*   echo $c_hr; */
@@ -115,14 +127,16 @@ for ($x = 0; $x < mysql_num_rows($query); $x++) {
   	$heart_rate = floor($hr/$c_hr);
   }
   $posture_aggregate = "null";
+  $posture_aggregate_b = "null";
   if ($posture_count>0)
   {
 	  $posture_aggregate = floor($posture/$posture_count);
+    $posture_aggregate_b = floor($posture_b/$posture_count);
   }
 /*   echo $heart_rate."\n"; */
   // This is the actual data output.  echo == print essentially
   // floor() rounds the value down to nearest whole number
-  echo $d['date_epoch'] . "," .$d['date_human'] . "," . $heart_rate . "," . floor($steps) . "," . floor($calories) . "," . floor($d['gsr']) . "," . floor($d['skin_temp']) . "," . floor($d['air_temp']) . "," .$posture_aggregate . "\n";
+  echo $d['date_epoch'] . "," .$d['date_human'] . "," . $heart_rate . "," . floor($steps) . "," . floor($calories) . "," . floor($d['gsr']) . "," . floor($d['skin_temp']) . "," . floor($d['air_temp']) . "," .$posture_aggregate . "," .$posture_aggregate_b . "\n";
 }
      
 mysql_close($server);

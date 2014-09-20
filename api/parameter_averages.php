@@ -89,7 +89,9 @@ if ($param['heartrate'] == 1) {
   $myquery = "SELECT  AVG(skin_temp) as skin_temp  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND skin_temp != 'None'";
 } else if ($param['air_temp'] == 1) {
   $myquery = "SELECT  AVG(air_temp) as air_temp  FROM  `wh_d_basis` WHERE `u_id`=".$param['user_id']." AND air_temp != 'None'";
-} else {
+} else if ($param['posture'] == 1) {
+  $myquery = "SELECT  AVG(pct) as posture  FROM  `wh_d_lumo` WHERE `u_id`=".$param['user_id']." AND pct != 'None' AND ( act = 'SG' or act = 'STG' )";
+}else {
   // quit
   exit();
 }
@@ -142,6 +144,9 @@ while ($k = current($data[0])) {
     next($data[0]);
   } elseif (key($data[0]) == 'skin_temp') {
     $d[] = array('name' => key($data[0]), 'value' => $data[0][key($data[0])], 'min' => 0, 'max' => 200 );
+    next($data[0]);
+  } elseif (key($data[0]) == 'posture') {
+    $d[] = array('name' => key($data[0]), 'value' => $data[0][key($data[0])], 'min' => 0, 'max' => 100 );
     next($data[0]);
   }
 }

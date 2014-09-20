@@ -54,13 +54,11 @@ $(".top").on('click', function() {
 		$(".line.line6").css("visibility", "hidden");
 		$(".line.base6").css("visibility", "hidden");
 	}
-//	if ($('#option_posture').is(":checked")) {
-//		$(".line.line7").css("visibility", "visible");
-//		$(".line.base7").css("visibility", "visible");
-//	} else {
-//		$(".line.line7").css("visibility", "hidden");
-//		$(".line.base7").css("visibility", "hidden");
-//	}
+	if ($('#option_posture').is(":checked")) {
+		$(".bar.bar3").css("visibility", "visible");
+	} else {
+		$(".bar.bar3").css("visibility", "hidden");
+	}
 	// TODO: Temporarily all lumo back data is hidden till we decide how to make it a part of the interface
 	// and an algorithm to represent good posture based on sitting scores, standing scores, etc
 	$(".line.line7").css("visibility", "hidden");

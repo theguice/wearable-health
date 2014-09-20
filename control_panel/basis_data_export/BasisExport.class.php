@@ -113,13 +113,15 @@ class BasisExport
     * @throws Exception
     */
     function getActivities($export_date = '', $export_format = 'json')
-    {
+    { 
         // Check for YYYY-MM-DD date format, else throw error
         if (!isset($export_date)) {
             // default to yesterday
             $export_date = date('Y-m-d', strtotime('-1 day', time()));
+
         } else {
             $export_date = preg_replace('/[^-a-zA-Z0-9_]/', '', $export_date);
+
         }
         if (!$this->isValidDate($export_date)) {
             throw new Exception('ERROR: Invalid date -  ' . $export_date . "\n");
@@ -157,6 +159,9 @@ class BasisExport
                 . '&skin_temp=true'
                 . '&air_temp=true'
                 . '&bodystates=true';
+        
+        echo "this";
+        print_r($this);
 
         // Initialize the cURL resource and make api request
         $ch = curl_init();
@@ -166,8 +171,11 @@ class BasisExport
             CURLOPT_COOKIEFILE => $this->cookie_jar
         ));
         $result = curl_exec($ch);
+        echo 'results';
+        print_r($result);
         $response_code = curl_getinfo ($ch, CURLINFO_HTTP_CODE);
-
+        echo "response code ";
+        print_r($response_code);
         if ($response_code == '401') {
             throw new Exception("ERROR: Unauthorized!\n");
             return false;
@@ -177,6 +185,11 @@ class BasisExport
 
         // Parse data from JSON response
         $json = json_decode($result, true);
+        echo "print_r json";
+        print_r($json);
+        echo 'json';
+        echo($json);
+
         $report_date = $json['starttime']; // report date, as UNIX timestamp
         $heartrates = $json['metrics']['heartrate']['values'];
         $steps = $json['metrics']['steps']['values'];
