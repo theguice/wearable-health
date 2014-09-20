@@ -107,19 +107,19 @@ $userid = ucfirst($_SESSION['user']['u_id']);
 
         <div class="gsr top"></div>
 
-<!--         <div class="posture top"></div> -->
-
         <div class="skin_temp top"></div>
 
         <div class="air_temp top"></div>
+
+        <div class="posture top"></div> 
     </div><!-- Main visualization is adapted from:
             http://bl.ocks.org/gniemetz/4618602
             http://jsfiddle.net/JGytk/
     -->
-    <div id="healthCoachWindow">
+<!--    <div id="healthCoachWindow">
 	    	<p class="plot title">Health Coach Window</p>
     </div>
-    
+-->    
     <div id="main">
 	    <p class="plot title">Activity Details<img id="activity_image" src="assets/_img/activity-icons.png"></p>
     </div>
@@ -131,7 +131,12 @@ $userid = ucfirst($_SESSION['user']['u_id']);
 
         </div>
     </div>
-        <div id="mini">
+    
+    <div id="posture">
+        <p class="plot title">Posture Data</p>
+    </div>
+
+    <div id="mini">
 	    <p class="plot title">Select Timeline</p>
     </div>
 

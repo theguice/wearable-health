@@ -12,7 +12,7 @@ from HTMLParser import HTMLParser
 import uuid
 
 # Server Connection to MySQL:
-import MySQLdb
+import MySQLdb, sys
 
 conn = MySQLdb.connect(host="localhost",
                        user="healthstudy",
@@ -28,12 +28,17 @@ x = conn.cursor()
 #31,625
 #28799
 
-def main():
+def main(uid):
     cur = conn.cursor()
-    cur.execute("SELECT u_id,begin_date,basis_u,basis_p,lumo_api,moves_u,moves_p FROM `wh_users`")
+    sql = "SELECT u_id,begin_date,basis_u,basis_p,lumo_api,moves_u,moves_p FROM `wh_users`"
+    if (uid >= 0):
+        sql += " WHERE u_id=" + str(uid)
+    cur.execute(sql)
+
     for (u_id, begin_date, basis_u, basis_p, lumo_api, moves_u, moves_p) in cur:
         print u_id, begin_date, basis_u, basis_p, lumo_api, moves_u, moves_p
         if (begin_date):
+            
             ##### SYNC DATA FROM BASIS CLOUD #####
             if (basis_u and basis_p):
                 print "Syncing data for user: " + str(u_id)
@@ -41,19 +46,20 @@ def main():
                 collect_basis_json(u_id)
             else:
                 print "Basis sync failed for user: " + str(u_id) + " - reason: basis credentials missing"
+            
             ##### SYNC DATA FROM LUMO CLOUD #####
             if (lumo_api):
-                #download_lumo(u_id, lumo_api, begin_date)
-                print "download lumo stuff"
+                download_lumo(u_id, lumo_api, begin_date)
             else:
                 print "Lumo sync failed for user: " + str(u_id) + " lumo_api string missing"
+            
             ##### Parse Local Moves File ####
             import_moves(u_id)
 
+            print "Database sync complete for user: " + str(u_id)
 
         else:
             print "All syncing failed for user: " + str(u_id) + " begin_date missing"
-
 
 def download_lumo(user_id, lumo_api, begin_date):
     print "Downloading Lumo data for user: " + str(user_id)
@@ -68,10 +74,19 @@ def download_lumo(user_id, lumo_api, begin_date):
     # http://my.lumoback.com/unuuencode?login=shaun@ischool.berkeley.edu&passwd=fbd5de23e2ee3be9b313e0e28f1560db&granularity=raw&from_t=1401778800&to_t=1404370800
 
     # Get data from LUMO API
+    print "Getting data from Lumo API: " + lumo_api
     r = requests.get(lumo_api)
     #print r.status_code
     #print r.headers
     lumo = json.loads(r.content)
+
+
+    cur = conn.cursor()
+    cur.execute("SELECT u_id,date_epoch,act FROM `wh_d_lumo` WHERE `u_id`=" + str(user_id))
+    existing_datapoints = []
+    existing_table = cur.fetchall()
+    for row in existing_table:
+        existing_datapoints.append(row[1] + '-' + row[2])
 
     cur_time = 0
     for l in lumo['acts']:
@@ -81,29 +96,22 @@ def download_lumo(user_id, lumo_api, begin_date):
             t_human = datetime.datetime.utcfromtimestamp(l['t'])
             #print "-----------------------"
 
-        '''
-        if (l['act'] not in lumo_codes):
-        lumo_codes.append(l['act'])
-        print lumo_codes
-        '''
+        lumo_to_db(user_id, l['t'], t_human, l['pct'], l['act'], l['delta'])
+
+
+
 
         # Lumo DB Table format
         # u_id , date_epoch , date_human , pct , act , delta    
         # Import this to database
         #print user_id, l['t'], t_human, l['pct'], l['act'], l['delta']
-        lumo_to_db(user_id, l['t'], t_human, l['pct'], l['act'], l['delta'])
-
         ##### Lumo Codes #####
         # [u'STG', u'SBF', u'C_WCALS', u'D_STBS_3', u'C_CALS', u'D_STBF_3', u'D_SBF_3', u'C_STEPS', u'W', u'STBF', u'SBS', u'D_STBS_2', u'D_SBS_3', u'STBS', u'D_SBS_2', u'D_SBF_2', u'D_STBF_2', u'C_STU', u'SG', u'C_DIST', u'LF', u'LR', u'STBL', u'STBR', u'SBL', u'C_RCALS', u'R', u'C_RDIST', u'C_RSTEPS', u'LB', u'SBR', u'C', u'LL', u'NW', u'INACT']
 
 
-def lumo_to_db(user_id, date_epoch, date_human, l_pct, l_act, l_delta):
-    cur = conn.cursor()
-    cur.execute("SELECT u_id,date_epoch FROM `wh_d_lumo` WHERE `u_id`=" + str(user_id) + " AND `date_epoch`=" + str(
-        date_epoch) + " AND `act`='" + str(l_act) + "'")
-    duplicate_check = cur.fetchone()
-
-    if not duplicate_check:
+def lumo_to_db(user_id, date_epoch, date_human, l_pct, l_act, l_delta, exsiting_table):
+    mykey = str(date_epoch) + '-' + l_act
+    if (mykey not in existing_table):
         sql = "INSERT INTO `wh_d_lumo` (`u_id`,`date_epoch`,`date_human`,`pct`,`act`,`delta`) VALUES (" + str(
             user_id) + ",'" + str(date_epoch) + "','" + str(date_human) + "'," + str(l_pct) + ",'" + str(
             l_act) + "'," + str(l_delta) + ")";
@@ -117,18 +125,36 @@ def lumo_to_db(user_id, date_epoch, date_human, l_pct, l_act, l_delta):
 
 def download_basis_json(user_id):
     # get user start date string
-
+    date = None
     cur = conn.cursor()
-    cur.execute("SELECT begin_date,basis_u,basis_p FROM `wh_users` WHERE u_id=" + str(user_id))
+    # Get date of latest bit of Basis data
+    sql = "SELECT date_human FROM `wh_d_basis` WHERE u_id=" + str(user_id) + " ORDER BY date_human DESC"
+    cur.execute(sql)
     user_details = cur.fetchone()
-    date = date_make(user_details[0])
-    for i in range(30):#Shubham--> shaun: what this for, seems out of place?
+    if (user_details):
+        date = date_make_basis(user_details[0])
+        days = 10
+    # Get user's basis details
+    sql = "SELECT begin_date,basis_u,basis_p FROM `wh_users` WHERE u_id=" + str(user_id)
+    cur.execute(sql)
+    user_details = cur.fetchone()
+    if (not date):
+        date = date_make_basis(user_details[0])
+        days = 30
+    
+    for i in range(days):#Shubham--> shaun: what this for, seems out of place?
         curdate = date.strftime('%Y-%m-%d')
+
         print "\tDownload from Basis: " + str(curdate)
         cmd = "php /groups/healthstudy/public_html.ssl/control_panel/basis_data_export/basisdataexport.php -u" + \
               user_details[1] + " -p" + user_details[2] + " -fjson -d" + curdate
         call(cmd, shell=True)
-        date += datetime.timedelta(days=1)
+
+        if (str(curdate) == time.strftime('%Y-%m-%d')):
+            print "Reached current day."
+            break
+        else:
+            date += datetime.timedelta(days=1)
 
 
 def collect_basis_json(user_id):
@@ -139,13 +165,12 @@ def collect_basis_json(user_id):
                 data = json.load(data_file)
                 print file
             os.remove(cur_dir + '/' + file)
-            if data['bodystates']:
+            if ('bodystates' in data.keys()):
                 print "\tImporting to database: ", file
                 json_to_db(data, user_id)
-            #print data['starttime']
-            #print time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(data['starttime']))
 
             else:
+                print "\tSkip.  No Basis data found in: ", file
                 continue
 
 
@@ -153,27 +178,34 @@ def collect_basis_json(user_id):
 def json_to_db(d, user_id):
     keys = ['air_temp', 'calories', 'gsr', 'heartrate', 'skin_temp', 'steps']
     number_of_entries = len(d['metrics']['air_temp']['values']) - 1
+
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT u_id,date_epoch FROM `wh_d_basis` WHERE `u_id`=" + str(user_id))
+    existing_table = cur.fetchall()
+
+    # duplicate check
+    existing_datapoints = []
+    for row in existing_table :
+        existing_datapoints.append(row[1])
+
     for i in range(0, number_of_entries):
         values = ''
         for k in keys:
             values += "'" + str(d['metrics'][k]['values'][i]) + "'"
             if not k == 'steps':
                 values += ','
-            date_human = str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(d['starttime'] + (i * 60))))
-            date_epoch = str(d['starttime'] + (i * 60))
-            cur = conn.cursor()
-            cur.execute(
-                "SELECT u_id,date_epoch FROM `wh_d_basis` WHERE `u_id`=" + str(user_id) + " AND `date_epoch`=" + date_epoch)
-            duplicate_check = cur.fetchone()
-
-            if not duplicate_check:
-                sql = "INSERT INTO `wh_d_basis` (`u_id`,`date_epoch`,`date_human`,`air_temp`,`calories`,`gsr`,`heartrate`,`skin_temp`,`steps`) VALUES (" + str(
-                    user_id) + ",'" + date_epoch + "','" + date_human + "'," + values + ")";
-                try:
-                    x.execute(sql)
-                    conn.commit()
-                except:
-                    conn.rollback()
+        date_human = str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(d['starttime'] + (i * 60))))
+        date_epoch = str(d['starttime'] + (i * 60))
+        
+        if (date_epoch not in existing_datapoints):
+            sql = "INSERT INTO `wh_d_basis` (`u_id`,`date_epoch`,`date_human`,`air_temp`,`calories`,`gsr`,`heartrate`,`skin_temp`,`steps`) VALUES (" + str(
+                user_id) + ",'" + date_epoch + "','" + date_human + "'," + values + ")";
+            try:
+                x.execute(sql)
+                conn.commit()
+            except:
+                conn.rollback()
     return
 
 
@@ -265,7 +297,7 @@ def import_moves(user_id):
         print "moves - no storyline.json file for user: ", user_id
         return
     moves = json.loads(f.read())
-    print "moves - importing trackpoints for user: ", user_id
+    print "\tmoves - importing trackpoints for user: ", user_id
 
     for m in moves:
         if (m["segments"]):
@@ -284,9 +316,7 @@ def import_moves(user_id):
                                     t['lat']) + "' AND `lon`='" + str(t['lon']) + "'")
                                 duplicate_check = cur.fetchone()
                                 if not duplicate_check:
-                                    sql = "INSERT INTO `wh_d_moves_trackpoints` (`u_id`,`time`,`lat`, `lon`, `path_id`, `activity_type`) VALUES (" + str(
-                                        user_id) + ",'" + str(time) + "','" + str(t['lat']) + "','" + str(
-                                        t['lon']) + "','" + str(path_unique_id) + "','" + str(activity_type)+ "')";
+                                    sql = "INSERT INTO `wh_d_moves_trackpoints` (`u_id`,`time`,`lat`, `lon`, `path_id`, `activity_type`) VALUES (" + str(user_id) + ",'" + str(time) + "','" + str(t['lat']) + "','" + str(t['lon']) + "','" + str(path_unique_id) + "','" + str(activity_type)+ "')";
                                     try:
                                         x.execute(sql)
                                         conn.commit()
@@ -294,6 +324,7 @@ def import_moves(user_id):
                                         conn.rollback()
                                         ##### WRITE Finished #####
 
+    return
 
 def moves_date_to_epoch(t):
     t = t.replace('T', '').replace('-0700', '')
@@ -306,13 +337,22 @@ def date_make(datestr):
     date = datetime.datetime(int(sdate[0]), int(sdate[1]), int(sdate[2]))
     return date
 
+def date_make_basis(datestr):
+    datestr = datestr.split(' ')
+    sdate = datestr[0].split('-')
+    date = datetime.date(int(sdate[0]), int(sdate[1]), int(sdate[2]))
+    return date
+
 
 def date_to_epoch(d):
     return int(d.strftime("%s"))
 
 
 if __name__ == "__main__":
-    main()
+    uid = -1;
+    if (len(sys.argv) > 1):
+        uid = sys.argv[1];
+    main(uid)
     conn.close()
 
 

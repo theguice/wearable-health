@@ -21,7 +21,7 @@ top_bars("air_temp");
 Judged by Shubham
 
 */
-var topBarSensors = ["heartrate","steps","calories","gsr","skin_temp","air_temp"];
+var topBarSensors = ["heartrate","steps","calories","gsr","skin_temp","air_temp","posture"];
 var initBarData = new Array();
 var topBarData = new Array();
 var topBarRanges = {"heartrate":[0,140],
@@ -29,22 +29,27 @@ var topBarRanges = {"heartrate":[0,140],
 					"calories":[0,5000],
 					"gsr":[0,2],
 					"skin_temp":[0,200],
-					"air_temp":[0,200]};
+					"air_temp":[0,200],
+					"posture":[0,100]};
+
 var sensorName = {"heartrate":'"Heart Rate"<br>"(AVG)"',
 					"steps":"Steps (SUM)",
 					"calories":"Calories (SUM)",
 					"gsr":"Perspiration (AVG)",
 					"skin_temp":"Skin Temp (AVG)",
-					"air_temp":"Air Temp (AVG)"};
+					"air_temp":"Air Temp (AVG)",
+					"posture":"Posture Score (AVG %)"};
 
 var bar_margin = {top: 10, right: 0, bottom: 30, left: 0},
-    bar_width = 90 - bar_margin.left - bar_margin.right,
+    bar_width = 123 - bar_margin.left - bar_margin.right,
     bar_height = 128 - bar_margin.top - bar_margin.bottom;
 
 var bar_x = d3.scale.ordinal();
 
+
 function bar_y(sensor)
 {
+
 	var bar_scale = d3.scale.linear().range([bar_height, 0]).domain([topBarRanges[sensor][0], topBarRanges[sensor][1]]);
 	return bar_scale;
 }
@@ -52,7 +57,7 @@ function bar_y(sensor)
 function initTopBarAxis() {
 	/* Get data ranges*/
 	d3.json($base_url + "/api/get_parameter_ranges.php?user_id="+user_id.id, function(error, data) {
-//	console.log("top bar range data received");
+    console.log("top bar range data received");
 //	console.log(data);
 		topBarRanges = data;
 		initTopBarChart();
@@ -78,7 +83,7 @@ function initTopBar(sensor)
 
     var svg_bar = d3.select("div."+sensor).append("svg")
 		.attr("width", bar_width)
-		.attr("height", bar_height+10)
+		.attr("height", bar_height+12)
 		.append("g")
 		.attr("class", sensor)
 		.attr("transform", "translate(" + bar_margin.left + "," + bar_margin.top + ")");

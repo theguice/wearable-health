@@ -57,6 +57,14 @@ line.axis {
   fill: green;
 }
 
+/*posture*/
+.bar.bar3 {
+  fill: green;
+}
+.posture rect.bar{
+  fill: green;
+}
+
 /* Perspiration */
 .line.line3 {
   stroke: #501C7B;
@@ -65,13 +73,7 @@ line.axis {
   fill: #501C7B;
 }
 
-/* Posture */
-.line.line4 {
-  stroke: #F07F26;
-}
-.posture rect.bar{
-  fill: #F07F26;
-}
+
 
 /* Skin Temp */
 .line.line5 {
@@ -89,19 +91,11 @@ line.axis {
   fill: #1F9DE7;
 }
 
-/* posture */
-.line.line7 {
-  stroke: #008080;
-}
-.posture rect.bar{
-  fill: #008080;
-}
-
 /* activity */
 #activity_image {
 	float: right;
-	margin-top: 2px;
-	
+	margin-top: 1px;
+	height: 18px;
 }
 .bar.activityBar.walking {
   fill: #FFA000;
@@ -175,7 +169,7 @@ margin-top: 1px;
 width: 9px;
 height: 9px;
 margin-left: -2px;
-margin-right: 1px;
+margin-right: -10px;
 /* padding-left: 1px; */
 display: inline-block;
 background-image: url("/healthstudy/assets/_img/icon-metrics.png");
@@ -201,9 +195,9 @@ span.icon.air_temp{
 	background-position: -15px 0px;
 }
 #compare {
-    width: 570px;
+    /*width: 670px;*/
     height: 128px;
-    margin: 20px 0px 0px 20px;
+    margin: 1px 0px 0px 20px;
     outline: 1px solid grey;
     display: inline-block;
     background-color: white;
@@ -214,14 +208,14 @@ p.plot.title{
   font-size: 14px;
 /*   font-family: verdana, helvetica, arial, sans-serif; */
   margin:0px 0px 2px 0px;
-  height: 28px;
+  height: 20px;
   background: #828387;
   text-shadow: none;
   color:white;
   color: 000000;
   text-rendering: optimizelegibility;
   padding: 0px 0px 0px 6px;
-  line-height: 28px;
+  line-height: 18px;
   -webkit-font-smoothing: antialiased;
 -moz-font-smoothing: antialiased;
 -o-font-smoothing: antialiased;
@@ -243,7 +237,7 @@ margin: 0px;
     display: inline;
     width: 290px;
     height:474px;
-    margin: 17px 20px 0px;
+    margin: 5px 20px 0px 5px;
     outline: 1px solid grey;
 	float: right;
 }
@@ -259,14 +253,24 @@ body {
 /* Top Styles */
 #main {
   display: inline-block;
-  margin: 17px 0px 0px 20px;
+  margin: 5px 0px 0px 20px;
   outline: 1px solid grey;
   height:366px;
   background-color: white;
 }
+
+#posture {
+  display: inline-block;
+  margin: 5px 0px 0px 20px;
+  outline: 1px solid grey;
+  height:56px;
+  width: 585px;
+  background-color: white;
+}
+
 #mini {
   display: inline-block;
-  margin: 15px 0px 0px 20px;
+  margin: 5px 0px 0px 20px;
   outline: 1px solid grey;
   height:86px;
   background-color: white;
@@ -596,10 +600,10 @@ width: 940px;
   width: 924px;
   height: 664px;
   margin-top: 0px;
-  border: 1px dotted;
-  border-color: #C7C8CA;
+  /*border: 1px dotted;
+  border-color: #C7C8CA;*/
 	margin-left: -12px;
-	  background-color: #C7C8CA;
+	  background-color: #FFFFF;
 
 }
 /*.span10 {
@@ -5778,7 +5782,7 @@ header#header .navbar .sign-in {
 }
 .container[role=main] {
   position: relative;
-  padding-top: 80px;
+  padding-top: 60px;
   /* 60px to make the container go all the way to the bottom of the topbar */
   
   padding-bottom: 50px;

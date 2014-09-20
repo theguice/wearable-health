@@ -44,7 +44,6 @@ MIN(CAST(air_temp as Decimal(18,2))) AS air_temp_min,
 MAX(CAST(air_temp as Decimal(18,2))) AS air_temp_max 
 FROM `wh_d_basis` WHERE `u_id`=" . $param['user_id'];
 
-//echo $max_min_query;
 
 $query = mysql_query($max_min_query);
 
@@ -68,7 +67,8 @@ $sensor_data_ranges = array(
 "air_temp" => array((float)$data[0]["air_temp_min"],(float)$data[0]["air_temp_max"]),
 "skin_temp" => array((float)$data[0]["skin_temp_min"],(float)$data[0]["skin_temp_max"]),
 "calories" => array(0,6000),
-"steps" => array(0,15000)
+"steps" => array(0,15000),
+"posture" => array(0,100) //added posture range
 );
 //TODO: do calculations to find out the ranges for the sum of the calories and the steps
 

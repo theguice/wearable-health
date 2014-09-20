@@ -1,11 +1,14 @@
 // Main is the viz with time series and the bar charts
 // Min is the viz with the time line for brushing
-var main_margin = {top: 2, right: 35, bottom: 20, left: 25},
+var main_margin = {top: 2, right: 3, bottom: 20, left: 25},
     mini_margin = {top: 0, right: 0, bottom: 18, left: 0},
+    posture_margin = {top: 0, right: 3, bottom: 5, left: 25},
     main_height = 338 - main_margin.top - main_margin.bottom,
-    main_width = 570 - main_margin.left - main_margin.right;
+    main_width = 585 - main_margin.left - main_margin.right;
     mini_height = 58 - mini_margin.top - mini_margin.bottom,
-    mini_width = 570 - mini_margin.left - mini_margin.right;
+    mini_width = 585 - mini_margin.left - mini_margin.right;
+    posture_height = 35 - posture_margin.top - posture_margin.bottom,
+    posture_width = 585 - mini_margin.left - mini_margin.right;
 
  
 // D3 has powerful date formatting engine. 
@@ -24,7 +27,9 @@ var formatDate = d3.time.format("%Y-%m-%d %H:%M:%S"),
 var main_x = d3.time.scale()
     .range([0, main_width]),
     mini_x = d3.time.scale()
-    .range([0, mini_width]);
+    .range([0, mini_width]),
+    posture_x = d3.time.scale()
+    .range([0, posture_width]);
 
 /* main graph scale */
 var heartrate_scale = d3.scale.sqrt()
@@ -39,8 +44,10 @@ var heartrate_scale = d3.scale.sqrt()
 	.range([main_height, 200]),
 	calorie_scale = d3.scale.sqrt()
 	.range([main_height, 300]),
-	posture_scale = d3.scale.sqrt()
-	.range([300,0]);
+
+//posture scale//	
+	posture_scale = d3.scale.linear()
+	.range([posture_height,0]);
 
 /* mini graph scale */
 var heartrate_scale_mini = d3.scale.sqrt()
@@ -95,6 +102,12 @@ var main_yAxisRight = d3.svg.axis()
 	.scale(step_scale)
     .orient("right")
     .tickValues([0, 400, 900, 1600, 2500, 3600, 4900]);
+
+//building posture axis
+var posture_yAxis = d3.svg.axis()
+	.scale(posture_scale)
+	.orient("left")
+	.ticks(3);
 
 // The BRUSH is activated when we click-and-drag on the mini graph, located below the main graph
 var brush = d3.svg.brush()
@@ -187,6 +200,10 @@ var svg_mini = d3.select("div#mini").append("svg")
     .attr("width", mini_width + mini_margin.left + mini_margin.right)
     .attr("height", mini_height + mini_margin.top + mini_margin.bottom);
 
+var svg_posture = d3.select("div#posture").append("svg")
+    .attr("width", posture_width + posture_margin.left + posture_margin.right)
+    .attr("height", posture_height + posture_margin.top + posture_margin.bottom);
+
 // I still don't understand what clipPath does, but it seems important. It doesn't bother me so, I don't bother it.
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -194,10 +211,18 @@ svg.append("defs").append("clipPath")
     .attr("width", main_width)
     .attr("height", main_height);
 
+svg_posture.append("defs").append("clipPath")
+    .attr("id", "clip_posture")
+	.append("rect")
+    .attr("width", posture_width)
+    .attr("height", posture_height);
+
 // Appending these group elements is needed for drawing the bars vertically.
 var main = svg.append("g")
     .attr("transform", "translate(" + main_margin.left + "," + main_margin.top + ")");
-    
+
+var posture = svg_posture.append("g")
+    .attr("transform", "translate(" + posture_margin.left + "," + posture_margin.top + ")");    
 
 var brushedRegionGroup = main.append("g")
 	.attr("id", "brushedRegion")
@@ -222,6 +247,12 @@ var stepsBarGroup = main.append("g")
 var caloriesBarGroup = main.append("g")
     .attr('clip-path', 'url(#clip)');
 
+ // Posture Bars
+ var postureBarGroup = posture.append("g")
+ 	.attr('clip-path', 'url(#clip)');   
+
+ var postureBarGroup_b = posture.append("g")
+ 	.attr('clip-path', 'url(#clip)');   
 /* This next line gets the big dataset and opens a new scope
     everything within its scope executes once per line in the dataset
     this is what makes D3 so powerful, but also trips people up, 
@@ -242,9 +273,11 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 	var skin_temp_base_line = new Array();
 	var air_temp_base_line = new Array();
 	var posture_base_line = new Array();
+
 	
 	data.forEach(function(d) {
 	    d.Time = parseDate(d.Time);
+	    console.log(d);
 	    if(isNaN(d.heartrate))
 	    {
 		    d.heartrate = null;
@@ -276,6 +309,14 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		    d.posture = +d.posture;
 		    posture_base_line.push({"Time":d.Time,"posture":+d.posture});
 	    }
+
+	   	if(isNaN(d.posture_b))
+	    {
+		    d.posture_b = null;
+	    }else
+	    {
+		    d.posture_b = +d.posture_b;
+	    }
 	    d.steps = +d.steps;
 	    d.calories = +d.calories;
 	});
@@ -301,7 +342,10 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 	gsr_scale.domain(d3.extent(data, function(d) { return d.gsr; }));
 	calorie_scale.domain(d3.extent(data, function(d) { return d.calories; }));
 	step_scale.domain([0, d3.max(data, function(d) { return d.steps; })]);
-	posture_scale.domain([0, 100]);
+	
+	//posture x-axis
+	posture_x.domain(main_x.domain());
+	posture_scale.domain([0, 100]); //Max will be 100 since it is percentage
 	
 	// mini just reuses whatever works for the main
 	mini_x.domain(main_x.domain());
@@ -324,6 +368,7 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		.attr("class", "line base0 base")
 		.attr("d", main_base0)
 		.style("stroke-dasharray", ("3, 3"));
+	
 	main.append("path")
 		.datum(data)
 		.attr("clip-path", "url(#clip)")
@@ -400,7 +445,7 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		.data(data)
 		.enter().append("rect")
 		.attr("x", function(d, i) { return main_x(d.Time); })
-		.attr("y", function(d) { return step_scale(d.steps); })
+		.attr("y", function(d) { return step_scale(d.steps); }) 
 		.attr("width", 1)
 		.attr("height", function(d) { return step_scale(d.steps); })
 		.attr("class", "bar bar1");
@@ -410,6 +455,32 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		.attr("transform", "translate(0," + main_height + ")")
 		.call(main_xAxis);
 	
+
+	//posture bar graph
+	postureMainGraph = postureBarGroup.selectAll('rect')
+		.data(data)
+		.enter().append("rect")
+		.attr("x", function(d, i) { return posture_x(d.Time); })
+		.attr("y", function(d) { return posture_scale(d.posture); })
+		.attr("width", 1)
+		.attr("height", function(d) { return posture_height - posture_scale(d.posture); })
+		.attr("class", "bar bar3");
+
+	postureMainGraph_b = postureBarGroup_b.selectAll('rect')
+		.data(data)
+		.enter().append("rect")
+		.attr("x", function(d, i) { return posture_x(d.Time); })
+		.attr("y", function(d) { return posture_scale(d.posture + d.posture_b); })
+		.attr("width", 1)
+		.attr("height", function(d) { return posture_scale(d.posture) - posture_scale(d.posture + d.posture_b); })
+		.attr("class", "bar bar3")
+		.style("fill", "red");
+
+
+	posture.append("g")
+		.attr("class", "y axis axisLeft")
+		.call(posture_yAxis);
+
 	// Positioning axis labels  --   THESE NEED TO BE CHANGED OR REMOVED
 	main.append("g")
 		.attr("class", "y axis axisLeft")
@@ -532,6 +603,15 @@ window.onload = d3.csv($base_url + "/api/main-series.php?user_id="+user_id.id+"&
 		.on("mouseout", function() { focus.style("display", "none"); })
 		.on("mousemove", mousemove)
 		.on("click",zoomViz);
+
+	posture.append("rect")
+		.attr("class", "overlay")
+		.attr("width", posture_width)
+		.attr("height", posture_height)
+		.on("mouseover", function() { focus.style("display", null); })
+		.on("mouseout", function() { focus.style("display", "none"); })
+		.on("mousemove", mousemove)
+		.on("click",zoomViz);		
 
 	function mousemove() {
 	
@@ -688,6 +768,9 @@ function onBrush() {
 		main.selectAll(".base").style("stroke-width","0.4px");
 		stepsMainGraph.attr("width", "3");
 		caloriesMainGraph.attr("width", "3");
+		//posture
+		postureMainGraph.attr("width", "3");
+		postureMainGraph_b.attr("width", "3");
 	}else
 	{
 		// show button
@@ -718,6 +801,9 @@ function onBrush() {
 */
 		stepsMainGraph.attr("width", barThickness);
  		caloriesMainGraph.attr("width", barThickness);
+		//posture graph width extension
+ 		postureMainGraph.attr("width", barThickness);
+ 		postureMainGraph_b.attr("width", barThickness);
 
 		
 		// number of day < 3 -> make line and bar charts thicker
@@ -761,6 +847,7 @@ function onBrush() {
 	main.select(".base6").attr("d", main_base6);
 	main.select(".line7").attr("d", main_line7);
 	main.select(".base7").attr("d", main_base7);
+	
 	stepsMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	caloriesMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
 	
@@ -782,6 +869,11 @@ function onBrush() {
 		return main_x(t_end) - main_x(t_start); });
 		
 	main.select(".x.axis").call(main_xAxis);
+
+// Posture
+	postureMainGraph.attr("x", function(d, i) { return main_x(d.Time); });
+	postureMainGraph_b.attr("x", function(d, i) { return main_x(d.Time); });
+	posture.select(".x.axis").call(main_xAxis);	
 }
 
 function on_brush_ended() {
@@ -869,4 +961,9 @@ function zoomViz() {
 		return main_x(t_end) - main_x(t_start); });
 		
 	main.select(".x.axis").call(main_xAxis);
+
+// Posture
+	postureMainGraph.transition().attr("x", function(d, i) { return main_x(d.Time); });
+	postureMainGraph_b.transition().attr("x", function(d, i) { return main_x(d.Time); });
+	posture.select(".x.axis").call(main_xAxis);
 }
